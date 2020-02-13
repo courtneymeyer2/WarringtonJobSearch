@@ -52,8 +52,8 @@ public class Home extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(871, 536));
 
         student.setBackground(new java.awt.Color(255, 255, 255));
-        userType.add(student);
         student.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        student.setSelected(true);
         student.setText("Student");
         student.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,7 +62,6 @@ public class Home extends javax.swing.JFrame {
         });
 
         company.setBackground(new java.awt.Color(255, 255, 255));
-        userType.add(company);
         company.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         company.setText("Company");
         company.addActionListener(new java.awt.event.ActionListener() {
@@ -79,6 +78,11 @@ public class Home extends javax.swing.JFrame {
 
         loginButton.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         loginButton.setText("Login");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Heavy", 2, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 102, 0));
@@ -190,6 +194,15 @@ public class Home extends javax.swing.JFrame {
     private void loginButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_loginButton1ActionPerformed
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        // TODO add your handling code here:
+        String pw = "";
+        if(student.isSelected()){
+            pw += JobSearchSystem.getStudentPassword(emailTextField.getText());
+            if(JobSearchSystem.getStudentPassword(passwordTextField.getText()))
+        }
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
      * @param args the command line arguments
