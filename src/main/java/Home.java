@@ -1,5 +1,6 @@
 
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
 /*
@@ -197,10 +198,38 @@ public class Home extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        String pw = "";
-        if(student.isSelected()){
-            pw += JobSearchSystem.getStudentPassword(emailTextField.getText());
-            if(JobSearchSystem.getStudentPassword(passwordTextField.getText()))
+        String email = emailTextField.getText();
+        String password = passwordTextField.getText();
+        if(student.isSelected())
+        {
+           boolean credentials = JobSearchSystem.checkCredentials(email, password, "student");
+           if(credentials)
+           {
+               StudentSearchJobGUI ssjg = new StudentSearchJobGUI();
+               ssjg.setVisible(true);
+               setVisible(false);
+           }
+           else
+           {
+               JOptionPane.showMessageDialog(null, "Incorrect email or password");
+           }
+    
+        }
+        
+         if(company.isSelected())
+        {
+           boolean credentials = JobSearchSystem.checkCredentials(email, password, "company");
+           if(credentials)
+           {
+               CompanyPageGUI cpg = new CompanyPageGUI();
+               cpg.setVisible(true);
+               setVisible(false);
+           }
+           else
+           {
+               JOptionPane.showMessageDialog(null, "Incorrect email or password");
+           }
+    
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
