@@ -395,14 +395,14 @@ public class RegisterStudent extends javax.swing.JFrame {
         } 
         else {
             if (jRadioButton1.isSelected()){
-                Undergraduate undergrad = new Undergraduate(Integer.getInteger(jTextField4.getText()), jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), Integer.getInteger(jTextField5.getText()), jComboBox1.getActionCommand(), "Resume", Integer.getInteger(jTextField4.getText()), jTextField6.getText());
+                Undergraduate undergrad = new Undergraduate(Integer.getInteger(jTextField4.getText()), jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), Integer.getInteger(jTextField5.getText()), jComboBox1.getSelectedItem().toString(), "Resume", Integer.getInteger(jTextField4.getText()), jTextField6.getText());
                 JobSearchSystem.addNewStudent(undergrad);
                 StudentSearchJobGUI ssj = new StudentSearchJobGUI(undergrad);
                 ssj.setVisible(true);
                 this.dispose();
             }
             else{
-                Graduate graduate = new Graduate(Integer.getInteger(jTextField4.getText()), jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), Integer.getInteger(jTextField5.getText()), jComboBox1.getActionCommand(), "Resume", Integer.getInteger(jTextField4.getText()), jTextField6.getText(), jTextField8.getText(),Integer.getInteger(jTextField9.getText()));
+                Graduate graduate = new Graduate(Integer.getInteger(jTextField4.getText()), jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), Integer.getInteger(jTextField5.getText()), jComboBox1.getSelectedItem().toString(), "Resume", Integer.getInteger(jTextField4.getText()), jTextField6.getText(), jTextField8.getText(),Integer.getInteger(jTextField9.getText()));
                 JobSearchSystem.addNewStudent(graduate);
                 StudentSearchJobGUI ssj = new StudentSearchJobGUI(graduate);
                 ssj.setVisible(true);
