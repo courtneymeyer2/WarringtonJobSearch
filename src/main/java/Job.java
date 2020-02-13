@@ -13,7 +13,7 @@ import java.util.*;
  * @author Courtney
  */
 public class Job {
-    private static int jobID;
+    private int jobID;
     private int companyID;
     private String jobTitle;
     private String description;
@@ -27,89 +27,89 @@ public class Job {
     private LinkedList <Student> selectedStudents = new LinkedList <Student>();
     
     
-public Job(int jobID, int companyID, String jobTitle, String description, String location, String qualification, String requirement, String degreeRequired, Date deadline)
-{
-    this.jobID = jobID;
-    this.companyID = companyID;
-    this.jobTitle = jobTitle;
-    this.description = description;
-    this.location = location;
-    this.qualification = qualification;
-    this.requirement = requirement;
-    this.degreeRequired = degreeRequired;
-    this.deadline = deadline;
-}
+    public Job(int jobID, int companyID, String jobTitle, String description, String location, String qualification, String requirement, String degreeRequired, Date deadline)
+    {
+        this.jobID = jobID;
+        this.companyID = companyID;
+        this.jobTitle = jobTitle;
+        this.description = description;
+        this.location = location;
+        this.qualification = qualification;
+        this.requirement = requirement;
+        this.degreeRequired = degreeRequired;
+        this.deadline = deadline;
+    }
 
-public Job()
-{
-    
-}
+    public Job()
+    {
 
-public static int getJobID()
-{
-    return jobID;
-}
+    }
 
-public int getCompanyID()
-{
-    return companyID;
-}
+    public int getJobID()
+    {
+        return jobID;
+    }
 
-public String getJobTitle()
-{
-    return jobTitle;
-}
+    public int getCompanyID()
+    {
+        return companyID;
+    }
 
-public String getDescription()
-{
-    return description;
-}
+    public String getJobTitle()
+    {
+        return jobTitle;
+    }
 
-public String getLocation()
-{
-    return location;
-}
+    public String getDescription()
+    {
+        return description;
+    }
 
-public String getQualifications()
-{
-    return qualification;
-    
-}
+    public String getLocation()
+    {
+        return location;
+    }
 
-public String getRequirement()
-{
-    return requirement;
-}
-    
-public String getDegreeRequired()
-{
-    return degreeRequired;
-}
+    public String getQualifications()
+    {
+        return qualification;
 
-public LinkedList <Interview> getInterviewList()
-{
-    return interviews;
-}
+    }
 
-public LinkedList <Student> getAppliedStudents()
-{
-    return appliedStudents;
-}
+    public String getRequirement()
+    {
+        return requirement;
+    }
 
-public LinkedList <Student> getSelectedStudents()
-{
-    return selectedStudents;
-}
+    public String getDegreeRequired()
+    {
+        return degreeRequired;
+    }
 
-public void addAppliedStudent(Student student)
-{
-    appliedStudents.add(student);
-}
+    public LinkedList <Interview> getInterviewList()
+    {
+        return interviews;
+    }
 
-public void addInterview(Interview interview)
-{
-    interviews.add(interview);
-}
+    public LinkedList <Student> getAppliedStudents()
+    {
+        return appliedStudents;
+    }
+
+    public LinkedList <Student> getSelectedStudents()
+    {
+        return selectedStudents;
+    }
+
+    public void addAppliedStudent(Student student)
+    {
+        appliedStudents.add(student);
+    }
+
+    public void addInterview(Interview interview)
+    {
+        interviews.add(interview);
+    }
 
 
 }

@@ -37,6 +37,11 @@ public class Student {
         addedJobs.add(job);
     }
     
+    public void removeFromJobList(Job job)
+    {
+        addedJobs.remove(job);
+    }
+    
     //public exportJobList(){}
     
     public Student(int id, String name, String email, String major, int graduatingYear, String positionType, String resume, double gpa, String password){

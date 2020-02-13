@@ -10,135 +10,135 @@
  */
 import java.util.*;
 public class JobSearchSystem {
-    LinkedList <Student> students = new LinkedList <Student>();
-    LinkedList <Job> jobs = new LinkedList<Job>();
-    LinkedList <Interview> interviews = new LinkedList<Interview>();
-    LinkedList <Company> companies = new LinkedList<Company>();
-    LinkedList <Application> applications = new LinkedList <Application>;
+    private static LinkedList <Student> students = new LinkedList <Student>();
+    private static LinkedList <Job> jobs = new LinkedList<Job>();
+    private static LinkedList <Interview> interviews = new LinkedList<Interview>();
+    private static LinkedList <Company> companies = new LinkedList<Company>();
+    private static LinkedList <Application> applications = new LinkedList <Application>();
     
-    public boolean checkCredentials(String email, String password, int type)
+    public static boolean checkCredentials(String email, String password, String type)
     {
         return true;
     }
     
-    public void addNewCompany(Company company)
+    public static void addNewCompany(Company company)
     {
         companies.add(company);
     }
     
-    public LinkedList <Company> getJobsFromCompany()
+    public static LinkedList <Company> getJobsFromCompany()
     {
         return companies;
     }
     
-    public void addNewJob(Job job)
+    public static void addNewJob(Job job)
     {
         jobs.add(job);
     }
     
-    public Job getJobInfo(int jobID)
+    public static Job getJobInfo(int jobID)
     {
         return Job;
     }
     
-    public LinkedList <Undergraduate> getAppliedUndergraduates(Company company, Job job)
+    public static LinkedList <Undergraduate> getAppliedUndergraduates(Company company, Job job)
     {
         return Undergraduates;
     }
     
-    public LinkedList <Graduate> getAppliedGraduates(Company company, Job job)
+    public static LinkedList <Graduate> getAppliedGraduates(Company company, Job job)
     {
         return Graduates;
     }
     
-    public LinkedList <Interview> getInterviews(Student student, Job job)
+    public static LinkedList <Interview> getInterviews(Student student, Job job)
     {
         return Interview;
     }
     
-    public LinkedList <Interview> getInterviews(Job job)
+    public static LinkedList <Interview> getInterviews(Job job)
     {
         return Interview;
     }
     
-    public LinkedList <Interview> getInterviews(Student student)
+    public static LinkedList <Interview> getInterviews(Student student)
     {
         return Interview;
     }
     
-    public Student getStudentInfo(int studentID)
+    public static Student getStudentInfo(int studentID)
     {
         return Student;
     }
     
-    public boolean checkInterviewTimes(Job job, Interview interview)
+    public static boolean checkInterviewTimes(Job job, Interview interview)
     {
         return true;
     }
     
-   public boolean checkInterviewTimes(Student student, Interview interview)
+   public static boolean checkInterviewTimes(Student student, Interview interview)
     {
         return true;
     }
    
-   public void addInterview(Interview interview)
+   public static void addInterview(Interview interview)
    {
        interviews.add(interview);
    }
    
-   public void removeInterview(Interview interview)
+   public static void removeInterview(Interview interview)
    {
        interviews.remove(interview);
    }
    
-   public void addNewStudent(Student student)
+   public static void addNewStudent(Student student)
    {
        students.add(student);
    }
    
-   public LinkedList <Job> getAllJobs()
+   public static LinkedList <Job> getAllJobs()
    {
        return jobs;
    }
    
-   public LinkedList <Job> filterJobs(String jobTitle, String companyName, String location, int positionType)
+   public static LinkedList <Job> filterJobs(String jobTitle, String companyName, String location, int positionType)
    {
        return jobs;
    }
   
-   public boolean appliedToJob(Student student, Job job)
+   public static boolean appliedToJob(Student student, Job job)
    {
        return true;
    }
    
-   public boolean addedtoJobs(Student student, Job job)
+   public static boolean addedtoJobs(Student student, Job job)
    {
        return true;
    }
    
-   public void applytoJob(Application application)
+   public static void applytoJob(Application application)
    {
        applications.add(application);
    }
-   public void addJob(Job job)
+   public static void addJob(Job job)
    {
        jobs.add(job);
    }
    
-   public LinkedList <Interview> getAvailableInterviews(Job job)
+   public static LinkedList <Interview> getAvailableInterviews(Job job)
    {
        return interviews;
    }
    
-   public void selectInterview(Student student, Interview interview)
+   public static void selectInterview(Student student, Interview interview)
    {
        
    }
    
-   
-   
-    
-    
-    
-    
+   public static void main(String[] args)
+   {
+       JobSearchSystem js = new JobSearchSystem();
+       Home home = new Home();
+       home.setVisible(true);
+   }
 }
