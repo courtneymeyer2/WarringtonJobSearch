@@ -18,6 +18,35 @@ public class JobSearchSystem {
     
     public static boolean checkCredentials(String email, String password, String type)
     {
+        
+        if(type.equals("student"))
+        {
+            for(int i = 0; i < students.size(); i++)
+            {
+                if(students.get(i).getEmail().equals(email) && students.get(i).getStudentPassword().equals(password))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        
+        else
+        {
+             for(int i = 0; i < companies.size(); i++)
+            {
+                if(companies.get(i).equals(email))
+                {
+                    if(students.get(i).getStudentPassword().equals(password))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        }
         return true;
     }
     
