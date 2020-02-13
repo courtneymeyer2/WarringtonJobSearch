@@ -53,6 +53,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(871, 536));
 
         student.setBackground(new java.awt.Color(255, 255, 255));
+        userType.add(student);
         student.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         student.setSelected(true);
         student.setText("Student");
@@ -63,6 +64,7 @@ public class Home extends javax.swing.JFrame {
         });
 
         company.setBackground(new java.awt.Color(255, 255, 255));
+        userType.add(company);
         company.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         company.setText("Company");
         company.addActionListener(new java.awt.event.ActionListener() {

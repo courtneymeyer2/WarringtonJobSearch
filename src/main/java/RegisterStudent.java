@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -28,7 +31,7 @@ public class RegisterStudent extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel4 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        registerButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel10 = new javax.swing.JLabel();
@@ -67,8 +70,13 @@ public class RegisterStudent extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setPreferredSize(new java.awt.Dimension(875, 535));
 
-        jButton2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jButton2.setText("Register");
+        registerButton.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        registerButton.setText("Register");
+        registerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerButtonActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -85,6 +93,12 @@ public class RegisterStudent extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jLabel12.setText("Undergrad-degree");
+
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -130,6 +144,7 @@ public class RegisterStudent extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        jRadioButton1.setSelected(true);
         jRadioButton1.setText(" Undergraduate Student");
 
         jLabel9.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
@@ -308,7 +323,7 @@ public class RegisterStudent extends javax.swing.JFrame {
                 .addGap(352, 352, 352)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(registerButton))
                 .addContainerGap(412, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
@@ -330,7 +345,7 @@ public class RegisterStudent extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(registerButton)
                 .addGap(95, 95, 95))
         );
 
@@ -372,6 +387,34 @@ public class RegisterStudent extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        // TODO add your handling code here:
+        boolean b = JobSearchSystem.checkRegistration(jTextField2.getText(), "student");
+        if (!b){
+            JOptionPane.showMessageDialog(null, "An account with this email already exist.");
+        } 
+        else {
+            if (jRadioButton1.isSelected()){
+                Undergraduate undergrad = new Undergraduate(Integer.getInteger(jTextField4.getText()), jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), Integer.getInteger(jTextField5.getText()), jComboBox1.getActionCommand(), "Resume", Integer.getInteger(jTextField4.getText()), jTextField6.getText());
+                JobSearchSystem.addNewStudent(undergrad);
+                StudentSearchJobGUI ssj = new StudentSearchJobGUI(undergrad);
+                ssj.setVisible(true);
+                this.dispose();
+            }
+            else{
+                Graduate graduate = new Graduate(Integer.getInteger(jTextField4.getText()), jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), Integer.getInteger(jTextField5.getText()), jComboBox1.getActionCommand(), "Resume", Integer.getInteger(jTextField4.getText()), jTextField6.getText(), jTextField8.getText(),Integer.getInteger(jTextField9.getText()));
+                JobSearchSystem.addNewStudent(graduate);
+                StudentSearchJobGUI ssj = new StudentSearchJobGUI(graduate);
+                ssj.setVisible(true);
+                this.dispose();
+            }
+        }    
+    }//GEN-LAST:event_registerButtonActionPerformed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -410,7 +453,6 @@ public class RegisterStudent extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -442,5 +484,6 @@ public class RegisterStudent extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JButton registerButton;
     // End of variables declaration//GEN-END:variables
 }
