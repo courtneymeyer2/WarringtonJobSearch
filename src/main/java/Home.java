@@ -205,9 +205,10 @@ public class Home extends javax.swing.JFrame {
            boolean credentials = JobSearchSystem.checkCredentials(email, password, "student");
            if(credentials)
            {
-               StudentSearchJobGUI ssjg = new StudentSearchJobGUI();
+               Student student =JobSearchSystem.getStudentByEmail(email);
+               StudentSearchJobGUI ssjg = new StudentSearchJobGUI(student);
                ssjg.setVisible(true);
-               setVisible(false);
+               this.dispose();
            }
            else
            {
@@ -221,7 +222,8 @@ public class Home extends javax.swing.JFrame {
            boolean credentials = JobSearchSystem.checkCredentials(email, password, "company");
            if(credentials)
            {
-               CompanyPageGUI cpg = new CompanyPageGUI();
+               Company company = JobSearchSystem.getCompanyByEmail(email);
+               CompanyPageGUI cpg = new CompanyPageGUI(company);
                cpg.setVisible(true);
                setVisible(false);
            }

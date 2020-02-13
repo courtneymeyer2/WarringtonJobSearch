@@ -17,6 +17,11 @@ public class CompanyPageGUI extends javax.swing.JFrame {
         initComponents();
     }
 
+    public CompanyPageGUI(Company company) {
+       this();
+       this.company = company;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -187,7 +192,7 @@ public class CompanyPageGUI extends javax.swing.JFrame {
             }
         });
     }
-
+    private Company company;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

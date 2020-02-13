@@ -18,7 +18,6 @@ public class JobSearchSystem {
     
     public static boolean checkCredentials(String email, String password, String type)
     {
-        
         if(type.equals("student"))
         {
             for(int i = 0; i < students.size(); i++)
@@ -27,18 +26,14 @@ public class JobSearchSystem {
                     {
                         return true;
                     }
-                }
             }
-            return false;
+             return false;
         }
-        
         else
         {
              for(int i = 0; i < companies.size(); i++)
             {
-                if(companies.get(i).equals(email))
-                {
-                    if(students.get(i).getStudentPassword().equals(password))
+                if(companies.get(i).getCompanyEmail().equals(email)&& companies.get(i).getCompanyPassword().equals(password))
                     {
                         return true;
                     }
@@ -46,9 +41,6 @@ public class JobSearchSystem {
             }
             return false;
         }
-        }
-        return true;
-    }
     
     public static void addNewCompany(Company company)
     {
@@ -65,41 +57,41 @@ public class JobSearchSystem {
         jobs.add(job);
     }
     
-    public static Job getJobInfo(int jobID)
-    {
-        return Job;
-    }
-    
-    public static LinkedList <Undergraduate> getAppliedUndergraduates(Company company, Job job)
-    {
-        return Undergraduates;
-    }
-    
-    public static LinkedList <Graduate> getAppliedGraduates(Company company, Job job)
-    {
-        return Graduates;
-    }
-    
-    public static LinkedList <Interview> getInterviews(Student student, Job job)
-    {
-        return Interview;
-    }
-    
-    public static LinkedList <Interview> getInterviews(Job job)
-    {
-        return Interview;
-    }
-    
-    public static LinkedList <Interview> getInterviews(Student student)
-    {
-        return Interview;
-    }
-    
-    public static Student getStudentInfo(int studentID)
-    {
-        return Student;
-    }
-    
+//    public static Job getJobInfo(int jobID)
+//    {
+//        return Job;
+//    }
+//    
+//    public static LinkedList <Undergraduate> getAppliedUndergraduates(Company company, Job job)
+//    {
+//        return Undergraduates;
+//    }
+//    
+//    public static LinkedList <Graduate> getAppliedGraduates(Company company, Job job)
+//    {
+//        return Graduates;
+//    }
+//    
+//    public static LinkedList <Interview> getInterviews(Student student, Job job)
+//    {
+//        return Interview;
+//    }
+//    
+//    public static LinkedList <Interview> getInterviews(Job job)
+//    {
+//        return Interview;
+//    }
+//    
+//    public static LinkedList <Interview> getInterviews(Student student)
+//    {
+//        return Interview;
+//    }
+//    
+//    public static Student getStudentInfo(int studentID)
+//    {
+//        return Student;
+//    }
+//    
     public static boolean checkInterviewTimes(Job job, Interview interview)
     {
         return true;
@@ -162,6 +154,30 @@ public class JobSearchSystem {
    public static void selectInterview(Student student, Interview interview)
    {
        
+   }
+   
+   public static Student getStudentByEmail(String email)
+   {
+       for(int i =0; i < students.size(); i++)
+       {
+           if(students.get(i).getEmail().equals(email))
+           {
+               return students.get(i);
+           }
+       }
+       return null;
+   }
+   
+   public static Company getCompanyByEmail(String email)
+   {
+       for(int i =0; i < companies.size(); i++)
+       {
+           if(companies.get(i).getCompanyEmail().equals(email))
+           {
+               return companies.get(i);
+           }
+       }
+       return null;
    }
    
    public static void main(String[] args)

@@ -16,7 +16,7 @@ public class Student {
     private double gpa;
     private String stuPassword;
     private LinkedList<Job> addedJobs = new LinkedList<Job>();
-    private LinkedList<Interview> stuInterviews = = new LinkedList<Interview>();
+    private LinkedList<Interview> stuInterviews = new LinkedList<Interview>();
     
     public int getId() { return UFId; } 
     public String getName() { return stuName; } 

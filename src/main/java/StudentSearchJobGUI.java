@@ -16,6 +16,11 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
     public StudentSearchJobGUI() {
         initComponents();
     }
+    public StudentSearchJobGUI(Student student)
+    {
+        this();
+        this.student = student;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -286,7 +291,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
             }
         });
     }
-
+    private Student student;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
