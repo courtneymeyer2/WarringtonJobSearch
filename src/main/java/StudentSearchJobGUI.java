@@ -299,32 +299,14 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
-        String[] titles = new String[jobs.size()];
-        
-        for(int i=0; i < jobs.size(); i++){
-            titles[i] = jobs.get(i).getJobTitle();
-        }
-        jComboBox1 = new jComboBox(titles);
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
         // TODO add your handling code here:
-        String[] locations = new String[jobs.size()];
-        
-        for(int i=0; i < jobs.size(); i++){
-            locations[i] = jobs.get(i).getLocation();
-        }
-        jComboBox4 = new jComboBox(locations);
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         // TODO add your handling code here:
-        String[] companies = new String[jobs.size()];
-        
-        for(int i=0; i < jobs.size(); i++){
-            companies[i] = jobs.get(i).getLocation();
-        }
-        jComboBox3 = new jComboBox(companies);
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
