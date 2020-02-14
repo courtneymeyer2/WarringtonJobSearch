@@ -1,4 +1,5 @@
 
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.*;
 
@@ -23,13 +24,13 @@ public class Job {
     private String requirement;
     private String degreeRequired;
     private String positionType;
-    private Date deadline;
+    private String deadline;
     private LinkedList <Interview> interviews = new LinkedList <Interview>();
     private LinkedList <Student> appliedStudents= new LinkedList <Student>();
     private LinkedList <Student> selectedStudents = new LinkedList <Student>();
     
     
-    public Job(int companyID, String jobTitle, String description, String location, String qualification, String requirement, String degreeRequired, String positionType, Date deadline)
+    public Job(int companyID, String jobTitle, String description, String location, String qualification, String requirement, String degreeRequired, String positionType, String deadline)
     {
         
         this.jobID = nextID;
@@ -104,7 +105,7 @@ public class Job {
         return positionType;
     }
     
-    public Date getDeadline()
+    public String getDeadline()
     {
         return deadline;
     }

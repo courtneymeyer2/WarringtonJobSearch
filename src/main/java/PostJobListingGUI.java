@@ -1,6 +1,8 @@
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -286,26 +288,30 @@ public class PostJobListingGUI extends javax.swing.JFrame {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         
-        System.out.println("year" + Integer.parseInt(year.getSelectedItem().toString()));
-        System.out.println("month" + month.getSelectedIndex() +1);
-        System.out.println("day" +  Integer.parseInt(day.getSelectedItem().toString()));
-          String sDate1= day.getSelectedItem().toString() +"/" + (month.getSelectedIndex() +1) + "/" + year.getSelectedItem().toString();  
-            Date date1;  
-        try {
-            date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
-            System.out.println(sDate1+"\t"+date1);
+       // System.out.println("year" + Integer.parseInt(year.getSelectedItem().toString()));
+        //System.out.println("month" + month.getSelectedIndex() +1);
+        //System.out.println("day" +  Integer.parseInt(day.getSelectedItem().toString()));
+          //String sDate1= day.getSelectedItem().toString() +"/" + (month.getSelectedIndex() +1) + "/" + year.getSelectedItem().toString();  
+           // Date date1; 
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Integer.parseInt(year.getSelectedItem().toString()), (month.getSelectedIndex()), Integer.parseInt(day.getSelectedItem().toString()));
+            DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
+            System.out.print(dateFormat2.format(calendar.getTime())); // will print like 2014-02-20 
+//try {
+            //date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+          //  System.out.println(sDate1+"\t"+date1);
             String degreeType = degreetype.getSelectedItem().toString();
         String Type = type.getSelectedItem().toString();
-        Job job = new Job(company.getCompanyID(), title.getText(), description.getText(), location.getText(),qualification.getText(), requirements.getText(), degreeType ,Type, date1);
+        Job job = new Job(company.getCompanyID(), title.getText(), description.getText(), location.getText(),qualification.getText(), requirements.getText(), degreeType ,Type, dateFormat2.format(calendar.getTime()));
         company.addJobs(job);
         //JobSearchSystem.addJob(job);
         CompanyPageGUI cjg = new CompanyPageGUI(company);
         cjg.setVisible(true);
         this.dispose();
             
-        } catch (ParseException ex) {
-            Logger.getLogger(PostJobListingGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //} catch (ParseException ex) {
+          //  Logger.getLogger(PostJobListingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        //}
          
 //        String pattern = "MM/dd/yyyy";
 //        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);

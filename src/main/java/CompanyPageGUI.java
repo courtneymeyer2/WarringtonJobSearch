@@ -33,7 +33,7 @@ public class CompanyPageGUI extends javax.swing.JFrame {
        
        for(int i = 0; i < jobs.size(); i++)
        {
-        model.addRow(new Object[]{"" +jobs.get(i).getJobID(), "" +jobs.get(i).getJobTitle(), "" +jobs.get(i).getDeadline()});
+        model.addRow(new Object[]{"" +jobs.get(i).getJobID(), "" +jobs.get(i).getJobTitle(), "" +jobs.get(i).getDeadline().toString()});
      
        }
            jTable1.setModel(model); 

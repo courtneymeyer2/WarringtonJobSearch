@@ -19,6 +19,14 @@ public class CompanyJobGUI extends javax.swing.JFrame {
     public CompanyJobGUI(Job job, Company company) {
         this();
         CompanyWithPosition.setText(company.getCompanyName() + ": " + job.getJobTitle());
+        deadline.setText(job.getDeadline());
+        description.setText("Description: " + job.getDescription());
+        quali.setText("Qualifications: " + job.getQualifications());
+        require.setText("Requirements: " + job.getRequirement());
+        degree.setText("Degree Required: " + job.getDegreeRequired());
+        position.setText("Position Type: " + job.getPostitonType());
+        location.setText("Location: " +job.getLocation());
+
     }
 
     /**
@@ -37,13 +45,12 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         CompanyWithPosition = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        description = new javax.swing.JLabel();
+        location = new javax.swing.JLabel();
+        quali = new javax.swing.JLabel();
+        require = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        deadline = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
@@ -52,7 +59,8 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
+        degree = new javax.swing.JLabel();
+        position = new javax.swing.JLabel();
 
         jInternalFrame1.setTitle("*** Company - *** Job");
         jInternalFrame1.setVisible(true);
@@ -140,26 +148,23 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         CompanyWithPosition.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
         CompanyWithPosition.setText("*** Company - *** Position");
 
-        jLabel4.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel4.setText("11:59pm");
+        description.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
+        description.setText("Description: ");
 
-        jLabel5.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
-        jLabel5.setText("Description: *** ");
+        location.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        location.setText("Location: ");
 
-        jLabel6.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel6.setText("Location: ***");
+        quali.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        quali.setText("Qualifications: ");
 
-        jLabel7.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel7.setText("Qualifications: ***");
-
-        jLabel8.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel8.setText("Requirements: ***");
+        require.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        require.setText("Requirements:");
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jLabel1.setText("Deadline:");
 
-        jLabel2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel2.setText("Jan 19, 2020");
+        deadline.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        deadline.setText("Jan 19, 2020");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -207,8 +212,11 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         jButton7.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jButton7.setText("Change Applicant's Status");
 
-        jLabel10.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel10.setText("Degree Type:  ");
+        degree.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        degree.setText("Degree Type:  ");
+
+        position.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        position.setText("Position Type:");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -227,18 +235,17 @@ public class CompanyJobGUI extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel5)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4))
+                                .addComponent(deadline, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(CompanyWithPosition)
-                            .addComponent(jLabel10)))
+                            .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 787, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(degree, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(position, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(require, javax.swing.GroupLayout.PREFERRED_SIZE, 1122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(quali, javax.swing.GroupLayout.PREFERRED_SIZE, 798, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -249,7 +256,7 @@ public class CompanyJobGUI extends javax.swing.JFrame {
                         .addComponent(jButton7)
                         .addGap(46, 46, 46)
                         .addComponent(jButton5)))
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(814, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,19 +271,20 @@ public class CompanyJobGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4))
+                    .addComponent(deadline))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel10)
+                .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addComponent(degree)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(location)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
-                .addGap(44, 44, 44)
-                .addComponent(jLabel8)
-                .addGap(46, 46, 46)
+                .addComponent(position)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(quali, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(require, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -341,6 +349,9 @@ public class CompanyJobGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CompanyWithPosition;
+    private javax.swing.JLabel deadline;
+    private javax.swing.JLabel degree;
+    private javax.swing.JLabel description;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
@@ -349,13 +360,6 @@ public class CompanyJobGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -363,5 +367,9 @@ public class CompanyJobGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
+    private javax.swing.JLabel location;
+    private javax.swing.JLabel position;
+    private javax.swing.JLabel quali;
+    private javax.swing.JLabel require;
     // End of variables declaration//GEN-END:variables
 }
