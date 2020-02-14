@@ -1,3 +1,4 @@
+StudentSearchJobGUI$8.class
 Report$4.class
 PostJobListingGUI$1.class
 RegisterNewCompany$2.class
@@ -11,13 +12,16 @@ Home$1.class
 CompanyJobGUI$3.class
 PostJobListingGUI$5.class
 StudentJobGUI$1.class
+RegisterStudent$8.class
 Report$1.class
 RegisterNewCompany.class
 CompanyJobGUI$1.class
 StudentSearchJobGUI$2.class
+jComboBox.class
 Report$3.class
 StudentAccount$3.class
 PostJobListingGUI$7.class
+StudentSearchJobGUI$5.class
 CompanyViewofStudentProfile$4.class
 PostJobListingGUI$4.class
 RegisterStudent$2.class
@@ -32,6 +36,7 @@ Report$6.class
 CompanyJobGUI$2.class
 Home$3.class
 PostJobListingGUI.class
+StudentSearchJobGUI$6.class
 CompanyViewofStudentProfile$3.class
 PostJobListingGUI$6.class
 CompanyViewofStudentProfile$2.class
@@ -42,12 +47,15 @@ StudentAccount.class
 RegisterStudent.class
 StudentJobGUI.class
 Report$5.class
+CompanyPageGUI$4.class
 PostJobListingGUI$2.class
 RegisterStudent$4.class
 Home.class
+StudentSearchJobGUI$7.class
 Home$4.class
 CompanyPageGUI$1.class
 Report.class
 StudentAccount$2.class
 Report$2.class
 CompanyViewofStudentProfile.class
+RegisterStudent$7.class

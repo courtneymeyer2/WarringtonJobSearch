@@ -27,16 +27,16 @@ public class CompanyPageGUI extends javax.swing.JFrame {
        this.company = company;
        jobListLabel.setText(company.getCompanyName() + "'s Job List");
        LinkedList <Job> jobs = JobSearchSystem.getAllJobs();
+       System.out.println(jobs.size());
        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-       LinkedList <String> jobInfo = new LinkedList <String>();
-       for(int i =0; i < jobs.size(); i++)
+       
+       for(int i = 0; i < jobs.size(); i++)
        {
-         jobInfo.add("" +jobs.get(i).getJobID());
-         jobInfo.add(jobs.get(i).getJobTitle());
-         jobInfo.add("" +jobs.get(i).getDeadline());
-         model.addRow(jobInfo.toArray());
+        model.addRow(new Object[]{"" +jobs.get(i).getJobID(), "" +jobs.get(i).getJobTitle(), "" +jobs.get(i).getDeadline()});
+     
        }
-       jTable1.setModel(model);
+           jTable1.setModel(model);
+       
     }
 
     /**
@@ -79,21 +79,20 @@ public class CompanyPageGUI extends javax.swing.JFrame {
         jTable1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Job ID", "Job Title", "Deadline"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.setToolTipText("");
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(jTable1);

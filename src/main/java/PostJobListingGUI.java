@@ -1,6 +1,9 @@
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -282,37 +285,35 @@ public class PostJobListingGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_degreetypeActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-       Date deadline = new Date((month.getSelectedIndex()+1), Integer.parseInt(day.getSelectedItem().toString()), Integer.parseInt(year.getSelectedItem().toString()));
-//        String pattern = "dd/MM/yyyy";
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-//        //Date deadline = simpleDateFormat.format(new Date());
-        String degreeType = degreetype.getSelectedItem().toString();
+        
+        System.out.println("year" + Integer.parseInt(year.getSelectedItem().toString()));
+        System.out.println("month" + month.getSelectedIndex() +1);
+        System.out.println("day" +  Integer.parseInt(day.getSelectedItem().toString()));
+          String sDate1= day.getSelectedItem().toString() +"/" + (month.getSelectedIndex() +1) + "/" + year.getSelectedItem().toString();  
+            Date date1;  
+        try {
+            date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+            System.out.println(sDate1+"\t"+date1);
+            String degreeType = degreetype.getSelectedItem().toString();
         String Type = type.getSelectedItem().toString();
-//        if(degreetype.getSelectedIndex() == 0)
-//        {
-//            degreeType = "Undergraduate";
-//        }
-//        else if(degreetype.getSelectedIndex() == 1)
-//        {
-//            degreeType = "Graduate";
-//        }
-//        
-//        else
-//        {
-//            degreeType = "Both";
-//        }
-//        
-//        
-//        if(type.getSelectedIndex() == 0)
-//        {
-//            Type = "Full-Time";
-//        }
-//        else
-//        {
-//            Type = "Internship";
-//        }
-        Job job = new Job(company.getCompanyID(), title.getText(), description.getText(), location.getText(),qualification.getText(), requirements.getText(), degreeType ,Type, deadline);
+        Job job = new Job(company.getCompanyID(), title.getText(), description.getText(), location.getText(),qualification.getText(), requirements.getText(), degreeType ,Type, date1);
         JobSearchSystem.addJob(job);
+        CompanyPageGUI cjg = new CompanyPageGUI(company);
+        cjg.setVisible(true);
+        this.dispose();
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(PostJobListingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+//        String pattern = "MM/dd/yyyy";
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+//        String date = simpleDateFormat.format(new Date((month.getSelectedIndex()), Integer.parseInt(day.getSelectedItem().toString()), Integer.parseInt(year.getSelectedItem().toString())));
+//        System.out.println(date);
+        
+        //Date deadline = new Date(Integer.parseInt(year.getSelectedItem().toString()),(month.getSelectedIndex()), Integer.parseInt(day.getSelectedItem().toString()));
+        //System.out.println(deadline);
+        
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthActionPerformed
