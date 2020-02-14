@@ -1,5 +1,6 @@
 Report$4.class
 PostJobListingGUI$1.class
+RegisterNewCompany$2.class
 StudentSearchJobGUI$1.class
 RegisterStudent$1.class
 CompanyPageGUI$3.class
@@ -16,6 +17,7 @@ CompanyJobGUI$1.class
 StudentSearchJobGUI$2.class
 Report$3.class
 StudentAccount$3.class
+PostJobListingGUI$7.class
 CompanyViewofStudentProfile$4.class
 PostJobListingGUI$4.class
 RegisterStudent$2.class
@@ -31,6 +33,7 @@ CompanyJobGUI$2.class
 Home$3.class
 PostJobListingGUI.class
 CompanyViewofStudentProfile$3.class
+PostJobListingGUI$6.class
 CompanyViewofStudentProfile$2.class
 RegisterStudent$6.class
 StudentSearchJobGUI.class

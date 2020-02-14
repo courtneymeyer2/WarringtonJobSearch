@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -34,7 +37,7 @@ public class RegisterNewCompany extends javax.swing.JFrame {
         passwordTextField = new javax.swing.JTextField();
         companyNameTextField = new javax.swing.JTextField();
         companyNameLabel = new javax.swing.JLabel();
-        loginButton = new javax.swing.JButton();
+        registerButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,8 +58,13 @@ public class RegisterNewCompany extends javax.swing.JFrame {
         companyNameLabel.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         companyNameLabel.setText("Company Name");
 
-        loginButton.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        loginButton.setText("Register");
+        registerButton.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        registerButton.setText("Register");
+        registerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -65,7 +73,7 @@ public class RegisterNewCompany extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(335, 335, 335)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(loginButton)
+                    .addComponent(registerButton)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -99,7 +107,7 @@ public class RegisterNewCompany extends javax.swing.JFrame {
                     .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passwordLabel))
                 .addGap(30, 30, 30)
-                .addComponent(loginButton)
+                .addComponent(registerButton)
                 .addContainerGap(294, Short.MAX_VALUE))
         );
 
@@ -116,6 +124,25 @@ public class RegisterNewCompany extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        String companyName = companyNameTextField.getText();
+        String email = emailTextField.getText();
+        String password = passwordTextField.getText();
+        boolean check = JobSearchSystem.checkRegistration(email, "company");
+        if(check)
+        {
+            Company company = new Company(companyName, email, password);
+            JobSearchSystem.addNewCompany(company);
+            CompanyPageGUI cpg = new CompanyPageGUI(company);
+            cpg.setVisible(true);
+            this.dispose();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "An account with this email already exists");
+        }
+    }//GEN-LAST:event_registerButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,8 +186,8 @@ public class RegisterNewCompany extends javax.swing.JFrame {
     private javax.swing.JTextField emailTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton loginButton;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JTextField passwordTextField;
+    private javax.swing.JButton registerButton;
     // End of variables declaration//GEN-END:variables
 }

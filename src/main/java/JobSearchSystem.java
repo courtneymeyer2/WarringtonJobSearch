@@ -57,6 +57,31 @@ public class JobSearchSystem {
         jobs.add(job);
     }
     
+    public static boolean checkRegistration(String email, String type)
+    {
+        if(type.equals("student"))
+        {
+            for(int i = 0; i < students.size(); i++)
+            {
+                if(students.get(i).getEmail().equals(email))
+                {
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            for(int i =0; i <companies.size(); i++)
+            {
+                if(companies.get(i).getCompanyEmail().equals(email))
+                {
+                    return false;
+                }
+            }      
+        }
+        return true;
+    }
+    
 //    public static Job getJobInfo(int jobID)
 //    {
 //        return Job;

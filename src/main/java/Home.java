@@ -42,7 +42,7 @@ public class Home extends javax.swing.JFrame {
         loginButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        loginButton1 = new javax.swing.JButton();
+        registerButton = new javax.swing.JButton();
         loginButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,6 +53,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(871, 536));
 
         student.setBackground(new java.awt.Color(255, 255, 255));
+        userType.add(student);
         student.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         student.setSelected(true);
         student.setText("Student");
@@ -63,6 +64,7 @@ public class Home extends javax.swing.JFrame {
         });
 
         company.setBackground(new java.awt.Color(255, 255, 255));
+        userType.add(company);
         company.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         company.setText("Company");
         company.addActionListener(new java.awt.event.ActionListener() {
@@ -93,11 +95,11 @@ public class Home extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 204));
         jLabel3.setText("WARRINGTON");
 
-        loginButton1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        loginButton1.setText("Register");
-        loginButton1.addActionListener(new java.awt.event.ActionListener() {
+        registerButton.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        registerButton.setText("Register");
+        registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginButton1ActionPerformed(evt);
+                registerButtonActionPerformed(evt);
             }
         });
 
@@ -133,7 +135,7 @@ public class Home extends javax.swing.JFrame {
                                 .addGap(33, 33, 33)
                                 .addComponent(loginButton)
                                 .addGap(27, 27, 27)
-                                .addComponent(loginButton1)))))
+                                .addComponent(registerButton)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -162,7 +164,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginButton)
-                    .addComponent(loginButton1))
+                    .addComponent(registerButton))
                 .addGap(18, 18, 18)
                 .addComponent(loginButton2)
                 .addContainerGap(184, Short.MAX_VALUE))
@@ -192,9 +194,20 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_studentActionPerformed
 
-    private void loginButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_loginButton1ActionPerformed
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        if(student.isSelected())
+        {
+            RegisterStudent rs = new RegisterStudent();
+            rs.setVisible(true);
+            this.dispose();
+        }
+        else
+        {
+            RegisterNewCompany rnc = new RegisterNewCompany();
+            rnc.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_registerButtonActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
@@ -279,10 +292,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginButton;
-    private javax.swing.JButton loginButton1;
     private javax.swing.JButton loginButton2;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JTextField passwordTextField;
+    private javax.swing.JButton registerButton;
     private javax.swing.JRadioButton student;
     private javax.swing.ButtonGroup userType;
     // End of variables declaration//GEN-END:variables
