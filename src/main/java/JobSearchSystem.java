@@ -122,15 +122,15 @@ public class JobSearchSystem {
         return true;
     }
     
-   public static boolean checkInterviewTimes(Student student, Interview interview)
+    public static boolean checkInterviewTimes(Student student, Interview interview)
     {
         return true;
     }
    
-   public static void addInterview(Interview interview)
-   {
-       interviews.add(interview);
-   }
+    public static void addInterview(Interview interview)
+    {
+        interviews.add(interview);
+    }
    
    public static void removeInterview(Interview interview)
    {
@@ -149,10 +149,21 @@ public class JobSearchSystem {
    
  
    
-   public static LinkedList <Job> filterJobs(String jobTitle, String companyName, String location, int positionType)
-   {
-       return jobs;
-   }
+    public static LinkedList <Job> filterJobs(String jobTitle, String companyName, String location, String positionType)
+    {
+        LinkedList<Job> j = new LinkedList<Job>();
+       
+        for(int i=0; i < jobs.size(); i++){
+            Boolean b1 = (jobs.get(i).getJobTitle().equals(jobTitle))|| (jobTitle == null);
+            Boolean b2 = (getCompanyById(jobs.get(i).getCompanyID()).getCompanyName().equals(companyName))||(companyName == null );
+            Boolean b3 = (jobs.get(i).getLocation().equals(location))||( location == null);
+            Boolean b4 = jobs.get(i).getPostitonType().equals(positionType);
+            if(b1 && b2 && b3 && b4){
+                j.add(jobs.get(i));
+            }
+        }
+        return j;
+    }
   
    public static boolean appliedToJob(Student student, Job job)
    {
@@ -200,6 +211,18 @@ public class JobSearchSystem {
        for(int i =0; i < companies.size(); i++)
        {
            if(companies.get(i).getCompanyEmail().equals(email))
+           {
+               return companies.get(i);
+           }
+       }
+       return null;
+   }
+   
+   public static Company getCompanyById(int id)
+   {
+       for(int i =0; i < companies.size(); i++)
+       {
+           if(companies.get(i).getCompanyID()==id)
            {
                return companies.get(i);
            }

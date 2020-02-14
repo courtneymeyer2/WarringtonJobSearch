@@ -1,5 +1,7 @@
 
 import java.util.LinkedList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,6 +26,24 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         this();
         this.student = student;
         jobs = JobSearchSystem.getAllJobs();
+        String[] titles = new String[jobs.size()+1];
+        String[] locations = new String[jobs.size()+1];
+        String[] companies = new String[jobs.size()+1];
+        titles[0] = null;
+        locations[0] = null;
+        companies[0] = null;
+        for(int i=1; i <= jobs.size(); i++){           
+            titles[i] = jobs.get(i).getJobTitle();
+            locations[i] = jobs.get(i).getLocation();
+            companies[i] = JobSearchSystem.getCompanyById(jobs.get(i).getCompanyID()).getCompanyName();
+        }
+        final DefaultComboBoxModel model1 = new DefaultComboBoxModel(titles);
+        final DefaultComboBoxModel model2 = new DefaultComboBoxModel(locations);
+        final DefaultComboBoxModel model3 = new DefaultComboBoxModel(companies);
+        jComboBox2.setModel(model1);
+        jComboBox4.setModel(model2);
+        jComboBox3.setModel(model3);
+
     }
 
     /**
@@ -309,7 +329,16 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        filterJobs = JobSearchSystem.filterJobs(jComboBox2.getSelectedItem().toString(), jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString(),Integer.parseInt(jComboBox1.getSelectedItem().toString()));
+        filterJobs = JobSearchSystem.filterJobs(jComboBox2.getSelectedItem().toString(), jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString(),jComboBox1.getSelectedItem().toString());
+        
+        DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
+        for(int i = 0; i < jobs.size(); i++)
+        {
+            model.addRow(new Object[]{""+ filterJobs.get(i).getJobTitle() + "" + JobSearchSystem.getCompanyById(filterJobs.get(i).getCompanyID()).getCompanyName() + "" + filterJobs.get(i).getDeadline()});
+        }
+        jTable3.setModel(model);
+        
+
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
