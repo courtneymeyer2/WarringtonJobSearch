@@ -297,7 +297,8 @@ public class PostJobListingGUI extends javax.swing.JFrame {
             String degreeType = degreetype.getSelectedItem().toString();
         String Type = type.getSelectedItem().toString();
         Job job = new Job(company.getCompanyID(), title.getText(), description.getText(), location.getText(),qualification.getText(), requirements.getText(), degreeType ,Type, date1);
-        JobSearchSystem.addJob(job);
+        company.addJobs(job);
+        //JobSearchSystem.addJob(job);
         CompanyPageGUI cjg = new CompanyPageGUI(company);
         cjg.setVisible(true);
         this.dispose();

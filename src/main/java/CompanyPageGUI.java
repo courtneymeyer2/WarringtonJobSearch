@@ -1,6 +1,7 @@
 
 import java.util.LinkedList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -26,7 +27,7 @@ public class CompanyPageGUI extends javax.swing.JFrame {
        this();
        this.company = company;
        jobListLabel.setText(company.getCompanyName() + "'s Job List");
-       LinkedList <Job> jobs = JobSearchSystem.getAllJobs();
+       jobs = company.getJobs();
        System.out.println(jobs.size());
        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
        
@@ -35,8 +36,7 @@ public class CompanyPageGUI extends javax.swing.JFrame {
         model.addRow(new Object[]{"" +jobs.get(i).getJobID(), "" +jobs.get(i).getJobTitle(), "" +jobs.get(i).getDeadline()});
      
        }
-           jTable1.setModel(model);
-       
+           jTable1.setModel(model); 
     }
 
     /**
@@ -70,6 +70,11 @@ public class CompanyPageGUI extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(875, 535));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
 
         jobListLabel.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jobListLabel.setForeground(new java.awt.Color(51, 0, 255));
@@ -95,6 +100,11 @@ public class CompanyPageGUI extends javax.swing.JFrame {
         });
         jTable1.setToolTipText("");
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
@@ -183,6 +193,31 @@ public class CompanyPageGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_logOutButtonActionPerformed
 
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // int row = jTable1.rowAtPoint(evt.getPoint());
+        int index = jTable1.getSelectedRow();
+        System.out.println(index);
+        TableModel model2 = jTable1.getModel();
+        int jobID = Integer.parseInt(model2.getValueAt(index,0).toString());
+        System.out.println("jobid" +jobID);
+        System.out.println("size"+jobs.size());
+        for(int i = 0; i < jobs.size(); i++)
+        {
+            if(jobs.get(i).getJobID() == jobID)
+            {
+                CompanyJobGUI cjg = new CompanyJobGUI(jobs.get(i), company);
+                cjg.setVisible(true);
+                this.dispose();
+            }
+        }
+        
+        System.out.println();
+    }//GEN-LAST:event_jTable1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -218,6 +253,7 @@ public class CompanyPageGUI extends javax.swing.JFrame {
         });
     }
     private Company company;
+    private LinkedList <Job> jobs;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

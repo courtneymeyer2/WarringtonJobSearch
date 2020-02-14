@@ -28,6 +28,7 @@ RegisterStudent$2.class
 RegisterNewCompany$1.class
 Home$2.class
 StudentJobGUI$2.class
+CompanyPageGUI$6.class
 CompanyViewofStudentProfile$1.class
 CompanyJobGUI.class
 RegisterStudent$3.class
@@ -43,6 +44,7 @@ CompanyViewofStudentProfile$2.class
 RegisterStudent$6.class
 StudentSearchJobGUI.class
 CompanyPageGUI$2.class
+CompanyPageGUI$5.class
 StudentAccount.class
 RegisterStudent.class
 StudentJobGUI.class

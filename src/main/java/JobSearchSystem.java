@@ -147,6 +147,8 @@ public class JobSearchSystem {
        return jobs;
    }
    
+ 
+   
    public static LinkedList <Job> filterJobs(String jobTitle, String companyName, String location, int positionType)
    {
        return jobs;

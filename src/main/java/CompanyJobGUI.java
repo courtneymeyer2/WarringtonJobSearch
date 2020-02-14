@@ -16,6 +16,10 @@ public class CompanyJobGUI extends javax.swing.JFrame {
     public CompanyJobGUI() {
         initComponents();
     }
+    public CompanyJobGUI(Job job, Company company) {
+        this();
+        CompanyWithPosition.setText(company.getCompanyName() + ": " + job.getJobTitle());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,7 +36,7 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        CompanyWithPosition = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -133,8 +137,8 @@ public class CompanyJobGUI extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
-        jLabel3.setText("*** Company - *** Position");
+        CompanyWithPosition.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
+        CompanyWithPosition.setText("*** Company - *** Position");
 
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jLabel4.setText("11:59pm");
@@ -233,7 +237,7 @@ public class CompanyJobGUI extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel4))
-                            .addComponent(jLabel3)
+                            .addComponent(CompanyWithPosition)
                             .addComponent(jLabel10)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(72, 72, 72)
@@ -256,7 +260,7 @@ public class CompanyJobGUI extends javax.swing.JFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton4))
                 .addGap(13, 13, 13)
-                .addComponent(jLabel3)
+                .addComponent(CompanyWithPosition)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -336,6 +340,7 @@ public class CompanyJobGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel CompanyWithPosition;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
@@ -346,7 +351,6 @@ public class CompanyJobGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
