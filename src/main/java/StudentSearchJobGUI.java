@@ -1,3 +1,6 @@
+
+import java.util.LinkedList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -20,6 +23,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
     {
         this();
         this.student = student;
+        jobs = JobSearchSystem.getAllJobs();
     }
 
     /**
@@ -70,7 +74,6 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
 
         jComboBox2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jComboBox2.setForeground(new java.awt.Color(102, 102, 102));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Position1", "Position2", "Position3", "Position4" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -82,7 +85,11 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
 
         jComboBox4.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jComboBox4.setForeground(new java.awt.Color(102, 102, 102));
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Location1", "Location2", "Location3", "Location4" }));
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jLabel5.setText("Company");
@@ -92,14 +99,28 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
 
         jComboBox3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jComboBox3.setForeground(new java.awt.Color(102, 102, 102));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Company1", "Company2", "Company3", "Company4" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(102, 102, 102));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Full-time", "Internship", " " }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -249,13 +270,53 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        Home h = new Home();
+        h.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+        String[] titles = new String[jobs.size()];
+        
+        for(int i=0; i < jobs.size(); i++){
+            titles[i] = jobs.get(i).getJobTitle();
+        }
+        jComboBox1 = new jComboBox(titles);
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        // TODO add your handling code here:
+        String[] locations = new String[jobs.size()];
+        
+        for(int i=0; i < jobs.size(); i++){
+            locations[i] = jobs.get(i).getLocation();
+        }
+        jComboBox4 = new jComboBox(locations);
+    }//GEN-LAST:event_jComboBox4ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+        String[] companies = new String[jobs.size()];
+        
+        for(int i=0; i < jobs.size(); i++){
+            companies[i] = jobs.get(i).getLocation();
+        }
+        jComboBox3 = new jComboBox(companies);
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        filterJobs = JobSearchSystem.filterJobs(jComboBox2.getSelectedItem().toString(), jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString(),Integer.parseInt(jComboBox1.getSelectedItem().toString()));
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,7 +352,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
             }
         });
     }
-    private Student student;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -311,4 +372,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
+    private Student student;
+    private LinkedList<Job> jobs;
+    private LinkedList<Job> filterJobs;
 }
