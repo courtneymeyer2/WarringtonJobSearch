@@ -221,7 +221,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
             },
-            new String [] {"Job ID"," Job Title", "Company", "Deadline"}
+            new String [] {" Job Title", "Company", "Deadline"}
         )
         {
             Class[] types = new Class [] {
@@ -332,7 +332,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
             
             for(int i = 0; i < filterJobs.size(); i++)
             {
-                model.addRow(new Object[]{ ""+filterJobs.get(i).getJobID(), ""+filterJobs.get(i).getJobTitle(), ""+  JobSearchSystem.getCompanyById(filterJobs.get(i).getCompanyID()).getCompanyName(), ""+  filterJobs.get(i).getDeadline()});
+                model.addRow(new Object[]{  ""+filterJobs.get(i).getJobTitle(), ""+  JobSearchSystem.getCompanyById(filterJobs.get(i).getCompanyID()).getCompanyName(), ""+  filterJobs.get(i).getDeadline()});
             }
             jTable3.setModel(model);
         } 
@@ -346,18 +346,10 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         int index = jTable3.getSelectedRow();
-        TableModel model = jTable3.getModel();
-        int jobID = Integer.parseInt(model.getValueAt(index,0).toString());
 
-        for(int i = 0; i < filterJobs.size(); i++)
-        {
-            if(filterJobs.get(i).getJobID() == jobID)
-            {
-                StudentJobGUI sjg = new StudentJobGUI(filterJobs.get(i), student);
-                sjg.setVisible(true);
-                this.dispose();
-            }
-        }
+        StudentJobGUI sjg = new StudentJobGUI(filterJobs.get(index), student);
+        sjg.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
