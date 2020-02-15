@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 public class JobSearchSystem {
     private static LinkedList <Student> students = new LinkedList <Student>();
-    private static LinkedList <Job> jobs = new LinkedList<Job>();
+    //private static LinkedList <Job> jobs = new LinkedList<Job>();
     private static LinkedList <Interview> interviews = new LinkedList<Interview>();
     private static LinkedList <Company> companies = new LinkedList<Company>();
     private static LinkedList <Application> applications = new LinkedList <Application>();
@@ -52,11 +52,6 @@ public class JobSearchSystem {
     public static LinkedList <Company> getJobsFromCompany()
     {
         return companies;
-    }
-    
-    public static void addNewJob(Job job)
-    {
-        jobs.add(job);
     }
     
     public static boolean checkRegistration(String email, String type)
@@ -237,19 +232,26 @@ public class JobSearchSystem {
    
    public static LinkedList <Job> getAllJobs()
    {
-       return jobs;
+       LinkedList<Job> j = new LinkedList<> ();
+       for(int i = 0; i < companies.size(); i++){
+           for (int n = 0; n < companies.get(i).getJobs().size(); n++){
+           j.add(companies.get(i).getJobs().get(n));
+           }
+       }
+       return j;
    }
    
  
    
     public static LinkedList <Job> filterJobs(String jobTitle, String companyName, String location, String positionType)
     {
-        LinkedList<Job> j = new LinkedList<Job>();
-       
+        LinkedList<Job> j = new LinkedList<>();       
+        LinkedList<Job> jobs = getAllJobs();
+        
         for(int i=0; i < jobs.size(); i++){
-            Boolean b1 = (jobs.get(i).getJobTitle().equals(jobTitle))|| (jobTitle == null);
-            Boolean b2 = (getCompanyById(jobs.get(i).getCompanyID()).getCompanyName().equals(companyName))||(companyName == null );
-            Boolean b3 = (jobs.get(i).getLocation().equals(location))||( location == null);
+            Boolean b1 = (jobs.get(i).getJobTitle().equals(jobTitle))|| (jobTitle.equals( " "));
+            Boolean b2 = (getCompanyById(jobs.get(i).getCompanyID()).getCompanyName().equals(companyName))||(companyName.equals( " "));
+            Boolean b3 = (jobs.get(i).getLocation().equals(location))||( location.equals( " "));
             Boolean b4 = jobs.get(i).getPostitonType().equals(positionType);
             if(b1 && b2 && b3 && b4){
                 j.add(jobs.get(i));
@@ -272,11 +274,7 @@ public class JobSearchSystem {
    {
        applications.add(application);
    }
-   public static void addJob(Job job)
-   {
-       jobs.add(job);
-   }
-   
+
    public static LinkedList <Interview> getAvailableInterviews(Job job)
    {
        return interviews;

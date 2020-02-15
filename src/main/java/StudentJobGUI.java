@@ -6,7 +6,7 @@
 
 /**
  *
- * @author Leewy
+ * @author Liwen
  */
 public class StudentJobGUI extends javax.swing.JFrame {
 
@@ -16,6 +16,12 @@ public class StudentJobGUI extends javax.swing.JFrame {
     public StudentJobGUI() {
         initComponents();
         
+    }
+    
+    public StudentJobGUI(Job job, Student student){
+        this();
+        this.student = student;
+        this.job = job;
     }
 
     /**
@@ -223,4 +229,6 @@ public class StudentJobGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+    private Student student;
+    private Job job;
 }

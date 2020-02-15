@@ -1,7 +1,10 @@
 
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Leewy
+ * @author Liwen
  */
 public class StudentSearchJobGUI extends javax.swing.JFrame {
 
@@ -26,23 +29,40 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         this();
         this.student = student;
         jobs = JobSearchSystem.getAllJobs();
-        String[] titles = new String[jobs.size()+1];
-        String[] locations = new String[jobs.size()+1];
-        String[] companies = new String[jobs.size()+1];
-        titles[0] = null;
-        locations[0] = null;
-        companies[0] = null;
-        for(int i=1; i <= jobs.size(); i++){           
+        String[] titles = new String[jobs.size()];
+        String[] locations = new String[jobs.size()];
+        String[] companies = new String[jobs.size()];
+        
+        for(int i=0; i<jobs.size(); i++){
             titles[i] = jobs.get(i).getJobTitle();
             locations[i] = jobs.get(i).getLocation();
             companies[i] = JobSearchSystem.getCompanyById(jobs.get(i).getCompanyID()).getCompanyName();
         }
-        final DefaultComboBoxModel model1 = new DefaultComboBoxModel(titles);
-        final DefaultComboBoxModel model2 = new DefaultComboBoxModel(locations);
-        final DefaultComboBoxModel model3 = new DefaultComboBoxModel(companies);
-        jComboBox2.setModel(model1);
-        jComboBox4.setModel(model2);
-        jComboBox3.setModel(model3);
+        
+        String[] t = removeDuplicates(titles);  
+        String[] l = removeDuplicates(locations);
+        String[] c = removeDuplicates(companies); 
+
+        String[] t1 = new String[jobs.size()+1];
+        String[] l1 = new String[jobs.size()+1];
+        String[] c1 = new String[jobs.size()+1];
+        
+        t1[0] = " ";
+        l1[0] = " ";
+        c1[0] = " ";
+        
+        for (int i=1; i <= jobs.size(); i++){
+            t1[i] = t[i-1];
+            l1[i] = l[i-1];
+            c1[i] = c[i-1];
+        }
+       
+        final DefaultComboBoxModel model1 = new DefaultComboBoxModel(t1);
+        final DefaultComboBoxModel model2 = new DefaultComboBoxModel(l1);
+        final DefaultComboBoxModel model3 = new DefaultComboBoxModel(c1);
+        jobTitle.setModel(model1);
+        location.setModel(model2);
+        companyName.setModel(model3);
 
     }
 
@@ -60,13 +80,13 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jobTitle = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        location = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        companyName = new javax.swing.JComboBox<>();
+        positionType = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -92,22 +112,23 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jLabel2.setText("Job Title");
 
-        jComboBox2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(102, 102, 102));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        jobTitle.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        jobTitle.setForeground(new java.awt.Color(102, 102, 102));
+        jobTitle.setName(""); // NOI18N
+        jobTitle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                jobTitleActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jLabel3.setText("Location");
 
-        jComboBox4.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jComboBox4.setForeground(new java.awt.Color(102, 102, 102));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+        location.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        location.setForeground(new java.awt.Color(102, 102, 102));
+        location.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
+                locationActionPerformed(evt);
             }
         });
 
@@ -117,20 +138,20 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jLabel4.setText("Position Type");
 
-        jComboBox3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jComboBox3.setForeground(new java.awt.Color(102, 102, 102));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        companyName.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        companyName.setForeground(new java.awt.Color(102, 102, 102));
+        companyName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                companyNameActionPerformed(evt);
             }
         });
 
-        jComboBox1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(102, 102, 102));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Full-time", "Internship", " " }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        positionType.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        positionType.setForeground(new java.awt.Color(102, 102, 102));
+        positionType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Full-time", "Internship", " " }));
+        positionType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                positionTypeActionPerformed(evt);
             }
         });
 
@@ -153,18 +174,18 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jobTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(positionType, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(44, 44, 44)
-                        .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(companyName, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -175,46 +196,34 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jobTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(companyName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(positionType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jButton3.setText("View Job Detail");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTable3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
             },
-            new String [] {
-                " Job Title", "Company", "Deadline"
-            }
-        ) {
+            new String [] {"Job ID"," Job Title", "Company", "Deadline"}
+        )
+        {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
@@ -297,41 +306,93 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void jobTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobTitleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_jobTitleActionPerformed
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+    private void locationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+    }//GEN-LAST:event_locationActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void companyNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_companyNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }//GEN-LAST:event_companyNameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        filterJobs = JobSearchSystem.filterJobs(jComboBox2.getSelectedItem().toString(), jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString(),jComboBox1.getSelectedItem().toString());
+        
+        filterJobs = JobSearchSystem.filterJobs(jobTitle.getSelectedItem().toString(), companyName.getSelectedItem().toString(), location.getSelectedItem().toString(),positionType.getSelectedItem().toString());
         
         DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
-        for(int i = 0; i < jobs.size(); i++)
+        
+        model.setRowCount(0);
+        
+        if(filterJobs != null)
         {
-            model.addRow(new Object[]{""+ filterJobs.get(i).getJobTitle() + "" + JobSearchSystem.getCompanyById(filterJobs.get(i).getCompanyID()).getCompanyName() + "" + filterJobs.get(i).getDeadline()});
-        }
-        jTable3.setModel(model);
-        
-
-        
+            
+            for(int i = 0; i < filterJobs.size(); i++)
+            {
+                model.addRow(new Object[]{ ""+filterJobs.get(i).getJobID(), ""+filterJobs.get(i).getJobTitle(), ""+  JobSearchSystem.getCompanyById(filterJobs.get(i).getCompanyID()).getCompanyName(), ""+  filterJobs.get(i).getDeadline()});
+            }
+            jTable3.setModel(model);
+        } 
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void positionTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positionTypeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_positionTypeActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int index = jTable3.getSelectedRow();
+        TableModel model = jTable3.getModel();
+        int jobID = Integer.parseInt(model.getValueAt(index,0).toString());
+
+        for(int i = 0; i < filterJobs.size(); i++)
+        {
+            if(filterJobs.get(i).getJobID() == jobID)
+            {
+                StudentJobGUI sjg = new StudentJobGUI(filterJobs.get(i), student);
+                sjg.setVisible(true);
+                this.dispose();
+            }
+        }
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
-     * @param args the command line arguments
+     * @param arr
+     * @return 
      */
+    public static String[] removeDuplicates(String[] arr){
+        int end = arr.length;
+        String[] str = new String[end];
+        Set<String> set = new HashSet<String>();
+
+        for(int i = 0; i < end; i++){
+            set.add(arr[i]);
+        }
+        
+        set.toArray(str);
+        return str;
+//        if (n==0 || n==1){  
+//            return n;  
+//        }  
+//        String[] temp = new String[n];  
+//        int j = 0;  
+//        for (int i=0; i<n-1; i++){  
+//            if (arr[i] == null ? arr[i+1] != null : !arr[i].equals(arr[i+1])){  
+//                temp[j++] = arr[i];  
+//            }  
+//         }  
+//        temp[j++] = arr[n-1];     
+// 
+//        System.arraycopy(temp, 0, arr, 0, j);  
+//        return j;  
+    }
+                                       
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -365,14 +426,11 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> companyName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -382,6 +440,9 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable3;
+    private javax.swing.JComboBox<String> jobTitle;
+    private javax.swing.JComboBox<String> location;
+    private javax.swing.JComboBox<String> positionType;
     // End of variables declaration//GEN-END:variables
     private Student student;
     private LinkedList<Job> jobs;

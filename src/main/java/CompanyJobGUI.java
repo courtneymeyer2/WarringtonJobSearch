@@ -12,7 +12,7 @@ import javax.swing.table.TableModel;
 
 /**
  *
- * @author Leewy
+ * @author Courtney
  */
 public class CompanyJobGUI extends javax.swing.JFrame {
 

@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Leewy
+ * @author Liwen
  */
 public class AddFeedback extends javax.swing.JFrame {
 

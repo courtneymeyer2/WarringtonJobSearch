@@ -6,7 +6,7 @@
 
 /**
  *
- * @author Leewy
+ * @author Liwen
  */
 public class StudentAccount extends javax.swing.JFrame {
 

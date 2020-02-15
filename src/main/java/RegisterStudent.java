@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Leewy
+ * @author Liwen
  */
 public class RegisterStudent extends javax.swing.JFrame {
 
@@ -389,26 +389,31 @@ public class RegisterStudent extends javax.swing.JFrame {
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         // TODO add your handling code here:
-        boolean b = JobSearchSystem.checkRegistration(email.getText(), "student");
-        if (!b){
-            JOptionPane.showMessageDialog(null, "An account with this email already exist.");
-        } 
-        else {
-            if (undergradStudent.isSelected()){
-                Student undergrad = new Undergraduate(Integer.parseInt(id.getText()), name.getText(),  email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), "Resume", Double.parseDouble(undergradgpa.getText()), password.getText());
-                JobSearchSystem.addNewStudent(undergrad);
-                StudentSearchJobGUI ssj = new StudentSearchJobGUI(undergrad);
-                ssj.setVisible(true);
-                this.dispose();
-            }
-            else{
-                Student graduate = new Graduate(Integer.parseInt(id.getText()), name.getText(), email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), "Resume", Double.parseDouble(gradgpa.getText()), password.getText(), gradundergraddegree.getText(),Double.parseDouble(gradundergradgps.getText()));
-                JobSearchSystem.addNewStudent(graduate);
-                StudentSearchJobGUI ssj = new StudentSearchJobGUI(graduate);
-                ssj.setVisible(true);
-                this.dispose();
-            }
-        }    
+        try{   
+            boolean b = JobSearchSystem.checkRegistration(email.getText(), "student");
+            if (!b){
+                JOptionPane.showMessageDialog(null, "An account with this email already exists.");
+            } 
+            else {
+                if (undergradStudent.isSelected()){
+                    Student undergrad = new Undergraduate(Integer.parseInt(id.getText()), name.getText(),  email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), "Resume", Double.parseDouble(undergradgpa.getText()), password.getText());
+                    JobSearchSystem.addNewStudent(undergrad);
+                    StudentSearchJobGUI ssj = new StudentSearchJobGUI(undergrad);
+                    ssj.setVisible(true);
+                    this.dispose();
+                }
+                else {
+                    Student graduate = new Graduate(Integer.parseInt(id.getText()), name.getText(), email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), "Resume", Double.parseDouble(gradgpa.getText()), password.getText(), gradundergraddegree.getText(),Double.parseDouble(gradundergradgps.getText()));
+                    JobSearchSystem.addNewStudent(graduate);
+                    StudentSearchJobGUI ssj = new StudentSearchJobGUI(graduate);
+                    ssj.setVisible(true);
+                    this.dispose();
+                }
+            }  
+        }
+        catch(NullPointerException ex){
+            JOptionPane.showMessageDialog(null, "Incomplete information!");
+        }
     }//GEN-LAST:event_registerButtonActionPerformed
 
     private void gradundergraddegreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gradundergraddegreeActionPerformed
@@ -439,7 +444,7 @@ public class RegisterStudent extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(RegisterStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(RegisterStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        } 
         //</editor-fold>
 
         /* Create and display the form */

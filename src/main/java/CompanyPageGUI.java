@@ -11,7 +11,7 @@ import javax.swing.table.TableModel;
 
 /**
  *
- * @author Leewy
+ * @author Courtney
  */
 public class CompanyPageGUI extends javax.swing.JFrame {
 
@@ -33,7 +33,7 @@ public class CompanyPageGUI extends javax.swing.JFrame {
        
        for(int i = 0; i < jobs.size(); i++)
        {
-        model.addRow(new Object[]{"" +jobs.get(i).getJobID(), "" +jobs.get(i).getJobTitle(), "" +jobs.get(i).getDeadline().toString()});
+        model.addRow(new Object[]{"" +jobs.get(i).getJobID(), "" +jobs.get(i).getJobTitle(), "" +jobs.get(i).getDeadline()});
      
        }
            jTable1.setModel(model); 

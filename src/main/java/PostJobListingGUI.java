@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Leewy
+ * @author Liwen
  */
 public class PostJobListingGUI extends javax.swing.JFrame {
 
