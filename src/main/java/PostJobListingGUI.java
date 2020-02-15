@@ -297,12 +297,13 @@ public class PostJobListingGUI extends javax.swing.JFrame {
             calendar.set(Integer.parseInt(year.getSelectedItem().toString()), (month.getSelectedIndex()), Integer.parseInt(day.getSelectedItem().toString()));
             DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
             System.out.print(dateFormat2.format(calendar.getTime())); // will print like 2014-02-20 
+            String date = dateFormat2.format(calendar.getTime());
 //try {
             //date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
           //  System.out.println(sDate1+"\t"+date1);
             String degreeType = degreetype.getSelectedItem().toString();
         String Type = type.getSelectedItem().toString();
-        Job job = new Job(company.getCompanyID(), title.getText(), description.getText(), location.getText(),qualification.getText(), requirements.getText(), degreeType ,Type, dateFormat2.format(calendar.getTime()));
+        Job job = new Job(company.getCompanyID(), title.getText(), description.getText(), location.getText(),qualification.getText(), requirements.getText(), degreeType ,Type, date);
         company.addJobs(job);
         //JobSearchSystem.addJob(job);
         CompanyPageGUI cjg = new CompanyPageGUI(company);

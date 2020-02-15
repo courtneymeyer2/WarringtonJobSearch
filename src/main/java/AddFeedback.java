@@ -1,3 +1,8 @@
+
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,6 +22,24 @@ public class AddFeedback extends javax.swing.JFrame {
         initComponents();
     }
 
+    public AddFeedback(Application applicant, Company company, Job job) {
+        this();
+        this.applicant = applicant;
+        this.company = company;
+        this.job = job;
+        name.setText(applicant.getStudent().getName());
+        status.setSelectedIndex(JobSearchSystem.statusIndex(applicant));
+         try
+           {
+            feedback.setText(applicant.getInterview().getFeedback());
+           }
+         catch(NullPointerException e)
+         {
+             feedback.setText("");
+         }
+    }
+ 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,16 +51,16 @@ public class AddFeedback extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        add = new javax.swing.JButton();
+        back = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        name = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        feedback = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
+        status = new javax.swing.JComboBox<>();
+        selectButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -48,34 +71,54 @@ public class AddFeedback extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(51, 51, 255));
         jLabel1.setText("Change Status & Add Interview Feedback");
 
-        jButton1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jButton1.setText("Add");
+        add.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        add.setText("Add");
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jButton2.setText("Back");
+        back.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jLabel2.setText("Applicant:");
 
-        jLabel3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jLabel3.setText("Applicant1");
+        name.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        name.setText("Applicant1");
 
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jLabel4.setText("Feedback");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        feedback.setColumns(20);
+        feedback.setRows(5);
+        jScrollPane1.setViewportView(feedback);
 
         jLabel5.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jLabel5.setText("Status");
 
-        jComboBox1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(51, 51, 51));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Interview Requested", "Rejected", "Pending", "Offer" }));
+        status.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        status.setForeground(new java.awt.Color(51, 51, 51));
+        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Interview Requested", "Rejected", "Pending", "Offer" }));
+        status.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statusActionPerformed(evt);
+            }
+        });
 
-        jButton3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jButton3.setText("Select");
+        selectButton.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        selectButton.setText("Select");
+        selectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -91,28 +134,28 @@ public class AddFeedback extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1))))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(add))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 589, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)))
-                .addGap(142, 142, 142))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(88, 88, 88))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3)
+                    .addComponent(selectButton)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(back)
                         .addGap(194, 194, 194)
                         .addComponent(jLabel1)
-                        .addGap(42, 42, 42)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(42, 42, 42))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(256, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,21 +163,21 @@ public class AddFeedback extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(add))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
+                            .addComponent(back)
                             .addComponent(jLabel1))
                         .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(name))
                         .addGap(64, 64, 64)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3))
+                            .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(selectButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,6 +198,51 @@ public class AddFeedback extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statusActionPerformed
+
+    private void selectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectButtonActionPerformed
+        if(applicant.getInterview() == null)
+        {
+            if(status.getSelectedItem().toString().equals("Offer") || status.getSelectedItem().toString().equals("Rejected") )
+            {
+                        JOptionPane.showMessageDialog(null, "An interview must be created first");
+            }
+            else
+            {
+                applicant.setStatus(status.getSelectedItem().toString());
+                JOptionPane.showMessageDialog(null, "Status Changed");
+            }
+        }
+        else
+        {
+            applicant.setStatus(status.getSelectedItem().toString());
+            JOptionPane.showMessageDialog(null, "Status Changed");
+        }
+        
+        
+    }//GEN-LAST:event_selectButtonActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        CompanyJobGUI cjg = new CompanyJobGUI(job,company);
+        cjg.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backActionPerformed
+
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        try
+           {
+            applicant.getInterview().setFeeback(feedback.toString());
+            JOptionPane.showMessageDialog(null, "Feedback has been added");
+            
+           }
+         catch(NullPointerException e)
+         {
+             JOptionPane.showMessageDialog(null, "An interview has not been created");
+         }
+    }//GEN-LAST:event_addActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,19 +278,21 @@ public class AddFeedback extends javax.swing.JFrame {
             }
         });
     }
-
+    private Job job;
+    private Application applicant;
+    private Company company;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton add;
+    private javax.swing.JButton back;
+    private javax.swing.JTextArea feedback;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel name;
+    private javax.swing.JButton selectButton;
+    private javax.swing.JComboBox<String> status;
     // End of variables declaration//GEN-END:variables
 }

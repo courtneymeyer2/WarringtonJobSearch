@@ -1,3 +1,14 @@
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,6 +27,35 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
     public CreateInterviewTimesGUI() {
         initComponents();
     }
+    
+     public CreateInterviewTimesGUI(Company company, Job job, int numOfInterviews) {
+        this();
+        this.company = company;
+        this.job = job;
+        this.numOfInterviews = numOfInterviews;
+        job.addInterview(new Interview("05/01/2020 10.30 PM", 30, "", "Interview Requested"));
+
+        DefaultListModel lm2 = new DefaultListModel();
+        for(int i =0; i <job.getInterviewList().size(); i ++)
+        {
+            lm2.addElement(job.getInterviewList().get(i).getDate() + "                   " +job.getInterviewList().get(i).getDuration() + " minutes");
+        }
+        jList1.setModel(lm2);
+//          if(lm2 == null)
+//            {
+//            lm2 = new DefaultListModel();
+//            jList1.setModel(lm2);
+//            }
+//          lm2.addElement("Text");
+        //jList1.add(ampm)
+                // DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        //DefaultListModel interviewList = (DefaultListModel) jList1.getModel();
+        //JList list = new JList(interviewList);
+//        listModel.a
+//        interviewList.addElement("addElements");
+//        JList listd = new JList(demoList);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,23 +70,21 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        duration = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        add = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        jButton3 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        month = new javax.swing.JComboBox<>();
+        day = new javax.swing.JComboBox<>();
+        year = new javax.swing.JComboBox<>();
+        hour = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox6 = new javax.swing.JComboBox<>();
-        jComboBox7 = new javax.swing.JComboBox<>();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        minute = new javax.swing.JComboBox<>();
+        ampm = new javax.swing.JComboBox<>();
+        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -60,7 +98,7 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jLabel3.setText("Set Interview Duration");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "15 mins", "30 mins", "45 mins", "60 mins" }));
+        duration.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "15 mins", "30 mins", "45 mins", "60 mins" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -70,7 +108,7 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
                 .addGap(73, 73, 73)
                 .addComponent(jLabel3)
                 .addGap(56, 56, 56)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(duration, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -79,7 +117,7 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
                 .addContainerGap(40, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(duration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32))
         );
 
@@ -89,32 +127,29 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jLabel5.setText("Interview Time");
 
-        jButton2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jButton2.setText("Add");
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Jan 23, 2020                          9:00 AM", "Jan 23, 2020                          10:00 AM", "Jan 23, 2020                          11:00 AM", "Jan 23, 2020                          1:00 PM", "Jan 23, 2020                          2:00 PM" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        add.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        add.setText("Add");
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
         });
+
         jScrollPane1.setViewportView(jList1);
 
-        jButton3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jButton3.setText("Delete");
+        month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }));
+        day.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2020", "2021", "2022", "2023", "2024" }));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2020", "2021", "2022", "2023", "2024" }));
-
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        hour.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 
         jLabel6.setText(":");
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45" }));
+        minute.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45" }));
 
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
+        ampm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -126,26 +161,24 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(hour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(minute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ampm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(88, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -155,26 +188,26 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(minute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ampm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(jButton2))
+                    .addComponent(add))
                 .addGap(40, 40, 40)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        jButton4.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jButton4.setText("Back");
-
-        jButton5.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jButton5.setText("Submit");
+        back.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -184,16 +217,12 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(back)
                         .addGap(288, 288, 288)
                         .addComponent(jLabel1))
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(44, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addGap(391, 391, 391))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,14 +230,12 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton4))
+                    .addComponent(back))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(jButton5)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -224,6 +251,90 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+       if(numOfInterviews > 0)
+       {
+        int durIndex = duration.getSelectedIndex();
+        int dur;
+        if(durIndex == 0)
+        {
+            dur = 15;
+        }
+        else if(durIndex == 1)
+        {
+            dur = 30;
+        }
+        
+        else if(durIndex == 2)
+        {
+            dur = 45;
+        }
+        else
+        {
+            dur = 60;
+        }
+        
+        Calendar calendar = Calendar.getInstance();
+        System.out.println(Integer.parseInt(year.getSelectedItem().toString()));
+        System.out.println(month.getSelectedIndex());
+        System.out.println(Integer.parseInt(day.getSelectedItem().toString()));
+        System.out.println(hour.getSelectedIndex());
+        System.out.println(Integer.parseInt(minute.getSelectedItem().toString()));
+        calendar.set(Integer.parseInt(year.getSelectedItem().toString()), (month.getSelectedIndex()), Integer.parseInt(day.getSelectedItem().toString()), (hour.getSelectedIndex())+1, Integer.parseInt(minute.getSelectedItem().toString()));
+        calendar.set(Calendar.HOUR, (hour.getSelectedIndex()+1));
+        if(ampm.getSelectedIndex() == 0)
+        {
+            calendar.set(Calendar.AM_PM, Calendar.AM);
+        }
+        else
+        {
+            calendar.set(Calendar.AM_PM, Calendar.PM);
+        }
+        DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy hh.mm aa");
+        System.out.print(dateFormat2.format(calendar.getTime())); // will print like 2014-02-20 
+        String date = dateFormat2.format(calendar.getTime());
+
+        Interview interview = new Interview(date, dur, "", "Interview Requested");
+        try {
+            boolean check = JobSearchSystem.checkInterviewTimes(job, interview);
+             if(check)
+             {
+             job.addInterview(interview);
+             numOfInterviews --;
+             CreateInterviewTimesGUI c = new CreateInterviewTimesGUI(company, job, numOfInterviews);
+             c.setVisible(true);
+             this.dispose();
+
+             JOptionPane.showMessageDialog(null, "Interview time added successfully");
+             }
+             else
+             {
+                 JOptionPane.showMessageDialog(null,"You have a conflicting interview time");
+             }
+            
+        }
+        catch (ParseException ex) {
+            Logger.getLogger(CreateInterviewTimesGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       
+       }
+        
+       else 
+       {
+           JOptionPane.showMessageDialog(null, "You have already added interview times for all applicants with status Interview Requested");
+       }
+       
+
+    }//GEN-LAST:event_addActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        CompanyJobGUI cjg = new CompanyJobGUI(job, company);
+        cjg.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,19 +370,16 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
             }
         });
     }
-
+    private Company company;
+    private Job job;
+    private int numOfInterviews;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
-    private javax.swing.JComboBox<String> jComboBox7;
+    private javax.swing.JButton add;
+    private javax.swing.JComboBox<String> ampm;
+    private javax.swing.JButton back;
+    private javax.swing.JComboBox<String> day;
+    private javax.swing.JComboBox<String> duration;
+    private javax.swing.JComboBox<String> hour;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -282,5 +390,8 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> minute;
+    private javax.swing.JComboBox<String> month;
+    private javax.swing.JComboBox<String> year;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,3 +1,9 @@
+
+import java.util.LinkedList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,6 +24,8 @@ public class CompanyJobGUI extends javax.swing.JFrame {
     }
     public CompanyJobGUI(Job job, Company company) {
         this();
+        this.company = company;
+        this.job = job;
         CompanyWithPosition.setText(company.getCompanyName() + ": " + job.getJobTitle());
         deadline.setText(job.getDeadline());
         description.setText("Description: " + job.getDescription());
@@ -26,6 +34,25 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         degree.setText("Degree Required: " + job.getDegreeRequired());
         position.setText("Position Type: " + job.getPostitonType());
         location.setText("Location: " +job.getLocation());
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+       Student student = new Graduate(3, "Courtney", "Courtneymeyer2@gmail.com", "info", 2019, "Internship", "resume", 3.19, "password", "Isom", 3.7);
+       Application application = new Application(student, job, null, "Pending");
+       JobSearchSystem.applytoJob(application);
+       applicants = JobSearchSystem.getApplicants(job);
+       for(int i = 0; i < applicants.size(); i++)
+       {
+           try
+           {
+               model.addRow(new Object[]{"" +applicants.get(i).getStudent().getName(), "" +applicants.get(i).getStatus(), "" +applicants.get(i).getInterview().getDate(), "" + applicants.get(i).getInterview().getFeedback()});
+           }
+           catch(NullPointerException e)
+           {
+               model.addRow(new Object[]{"" +applicants.get(i).getStudent().getName(), "" +applicants.get(i).getStatus(), "" , ""});
+           }
+        
+     
+       }
+           jTable2.setModel(model); 
 
     }
 
@@ -53,12 +80,12 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         deadline = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
+        interviewTimes = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        addFeedback = new javax.swing.JButton();
+        viewProfile = new javax.swing.JButton();
+        applicantStatus = new javax.swing.JButton();
         degree = new javax.swing.JLabel();
         position = new javax.swing.JLabel();
 
@@ -141,9 +168,11 @@ public class CompanyJobGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(871, 536));
         setResizable(false);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setPreferredSize(new java.awt.Dimension(871, 536));
 
         CompanyWithPosition.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
         CompanyWithPosition.setText("*** Company - *** Position");
@@ -168,16 +197,7 @@ public class CompanyJobGUI extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Applicant Name ", "Status", "Interview Time", "Feedback"
@@ -186,31 +206,63 @@ public class CompanyJobGUI extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane2.setViewportView(jTable2);
 
-        jButton2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jButton2.setText("Back");
+        backButton.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
-        jButton4.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jButton4.setText("Create Interview Times");
+        interviewTimes.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        interviewTimes.setText("Create Interview Times");
+        interviewTimes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                interviewTimesActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 51, 255));
         jLabel9.setText("View Job Listing");
 
-        jButton5.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jButton5.setText("Add Feedback");
+        addFeedback.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        addFeedback.setText("Add Feedback");
+        addFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addFeedbackActionPerformed(evt);
+            }
+        });
 
-        jButton6.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jButton6.setText("View Applicant's Profile");
+        viewProfile.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        viewProfile.setText("View Applicant's Profile");
+        viewProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProfileActionPerformed(evt);
+            }
+        });
 
-        jButton7.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jButton7.setText("Change Applicant's Status");
+        applicantStatus.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        applicantStatus.setText("Change Applicant's Status");
+        applicantStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applicantStatusActionPerformed(evt);
+            }
+        });
 
         degree.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         degree.setText("Degree Type:  ");
@@ -223,40 +275,44 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jButton2)
-                .addGap(278, 278, 278)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(79, 79, 79))
-            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deadline, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(CompanyWithPosition)
-                            .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 787, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(degree, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(position, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(require, javax.swing.GroupLayout.PREFERRED_SIZE, 1122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(quali, javax.swing.GroupLayout.PREFERRED_SIZE, 798, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(backButton)
+                                        .addGap(278, 278, 278)
+                                        .addComponent(jLabel9))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(deadline, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 787, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(degree, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(position, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(require, javax.swing.GroupLayout.PREFERRED_SIZE, 1122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(quali, javax.swing.GroupLayout.PREFERRED_SIZE, 798, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(CompanyWithPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(interviewTimes)
+                                .addGap(416, 416, 416))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(117, 117, 117)
-                        .addComponent(jButton6)
+                        .addComponent(viewProfile)
                         .addGap(55, 55, 55)
-                        .addComponent(jButton7)
+                        .addComponent(applicantStatus)
                         .addGap(46, 46, 46)
-                        .addComponent(jButton5)))
-                .addContainerGap(814, Short.MAX_VALUE))
+                        .addComponent(addFeedback)))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,10 +320,11 @@ public class CompanyJobGUI extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4))
+                    .addComponent(backButton))
                 .addGap(13, 13, 13)
-                .addComponent(CompanyWithPosition)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CompanyWithPosition)
+                    .addComponent(interviewTimes))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -280,29 +337,32 @@ public class CompanyJobGUI extends javax.swing.JFrame {
                 .addComponent(location)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(position)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(quali, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(require, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
-                .addContainerGap(52, Short.MAX_VALUE))
+                    .addComponent(addFeedback)
+                    .addComponent(viewProfile)
+                    .addComponent(applicantStatus))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -311,6 +371,102 @@ public class CompanyJobGUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void applicantStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applicantStatusActionPerformed
+        int index = jTable2.getSelectedRow();
+        if(index == -1)
+        {
+            JOptionPane.showMessageDialog(null, "You must select an applicant");
+        }
+        else
+        {
+            //TableModel model2 = jTable2.getModel();
+            Student student = applicants.get(index).getStudent();
+            AddFeedback af = new AddFeedback(applicants.get(index), company, job);
+            af.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_applicantStatusActionPerformed
+
+    private void viewProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProfileActionPerformed
+        int index = jTable2.getSelectedRow();
+        if(index == -1)
+        {
+            JOptionPane.showMessageDialog(null, "You must select an applicant");
+        }
+        else
+        {
+            //TableModel model2 = jTable2.getModel();
+            Student student = applicants.get(index).getStudent();
+            CompanyViewofStudentProfile cvosp= new CompanyViewofStudentProfile(student, company, job);
+            cvosp.setVisible(true);
+            this.dispose();
+        }
+
+    }//GEN-LAST:event_viewProfileActionPerformed
+
+    private void addFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFeedbackActionPerformed
+        int index = jTable2.getSelectedRow();
+
+        if(index == -1)
+        {
+            JOptionPane.showMessageDialog(null, "You must select an applicant");
+        }
+        else if(!applicants.get(index).getStatus().equals("Offer") ||!applicants.get(index).getStatus().equals("Rejected"))
+        {
+            JOptionPane.showMessageDialog(null, "You must first change the applicant's status to Offer or Rejected");
+        }
+
+        else
+        {
+            //TableModel model2 = jTable2.getModel();
+            //Student student = applicants.get(index).getStudent();
+            AddFeedback af = new AddFeedback(applicants.get(index), company, job);
+            af.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_addFeedbackActionPerformed
+
+    private void interviewTimesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interviewTimesActionPerformed
+        int numOfInterviews = 0;
+        int alreadyMadeInterviews = 0;
+        for(int i = 0; i < applicants.size(); i++)
+        {
+            if(applicants.get(i).getStatus().equals("Interview Requested") && applicants.get(i).getInterview()== null)
+            {
+                numOfInterviews ++;
+            }
+            else if(applicants.get(i).getStatus().equals("Interview Requested"))
+            {
+                alreadyMadeInterviews ++;
+            }
+        }
+
+        if(alreadyMadeInterviews > 0 && numOfInterviews == 0)
+        {
+            JOptionPane.showMessageDialog(null, "You have already created interviews for your applicants with Interview Requested status");
+        }
+        else if( numOfInterviews == 0)
+        {
+            JOptionPane.showMessageDialog(null, "There are no applicants with Interview Requested status");
+        }
+        else
+        {
+            System.out.println("num of interviews" +numOfInterviews);
+            System.out.println("already made" +alreadyMadeInterviews);
+
+            CreateInterviewTimesGUI citg = new CreateInterviewTimesGUI(company, job, numOfInterviews);
+            citg.setVisible(true);
+            this.dispose();
+
+        }
+    }//GEN-LAST:event_interviewTimesActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        CompanyPageGUI cpg = new CompanyPageGUI(company);
+        cpg.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,18 +502,19 @@ public class CompanyJobGUI extends javax.swing.JFrame {
             }
         });
     }
-
+    private LinkedList <Application> applicants = new LinkedList <Application>();
+    private Job job;
+    private Company company;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CompanyWithPosition;
+    private javax.swing.JButton addFeedback;
+    private javax.swing.JButton applicantStatus;
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel deadline;
     private javax.swing.JLabel degree;
     private javax.swing.JLabel description;
+    private javax.swing.JButton interviewTimes;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel9;
@@ -371,5 +528,6 @@ public class CompanyJobGUI extends javax.swing.JFrame {
     private javax.swing.JLabel position;
     private javax.swing.JLabel quali;
     private javax.swing.JLabel require;
+    private javax.swing.JButton viewProfile;
     // End of variables declaration//GEN-END:variables
 }

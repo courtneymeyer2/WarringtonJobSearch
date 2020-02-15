@@ -16,25 +16,26 @@ import java.util.LinkedList;
 public class Interview 
 {
     private int interviewID;
-    private Date date;
-    private double duration;
+    private String date;
+    private int duration;
     private String feedback;
-    private int studentID;
     private String status;
     private boolean selected;
+    private static int nextID = 1;
     
 public Interview()
 {
         
 }
-public Interview(int interviewID, Date date, double duration, String feedback, int studentID, String status)
+public Interview(String date, int duration, String feedback, String status)
 { 
-    this.interviewID = interviewID;
+    this.interviewID = nextID;
+    nextID ++;
     this.date = date;
     this.duration = duration;
     this.feedback = feedback;
-    this.studentID = studentID;
     this.status = status;
+    
 }
 public void setFeeback(String feedback)
 {
@@ -60,11 +61,11 @@ public int getInterviewID()
 {
     return interviewID;
 }
-public Date getDate()
+public String getDate()
 {
     return date;
 }
-public double getDuration()
+public int getDuration()
 {
     return duration;
 }

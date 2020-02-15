@@ -25,6 +25,7 @@ public class Student {
     public int getGraduatingYear() { return graduatingYear; }
     public String getPositionType() { return positionType; }
     public String getResume() { return resume; }
+    public double getGPA(){return gpa; }
     public String getStudentPassword() { return stuPassword; }
     public LinkedList<Job> getAddedJobs() { return addedJobs; }
     public LinkedList<Interview> getInterview() { return stuInterviews; }

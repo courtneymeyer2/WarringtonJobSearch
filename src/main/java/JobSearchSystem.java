@@ -8,6 +8,8 @@
  *
  * @author Courtney
  */
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 public class JobSearchSystem {
     private static LinkedList <Student> students = new LinkedList <Student>();
@@ -82,6 +84,39 @@ public class JobSearchSystem {
         return true;
     }
     
+    public static LinkedList <Application> getApplicants(Job job)
+    {
+        LinkedList <Application> applicants = new LinkedList();
+       for(int i =0; i < applications.size(); i++)
+       {
+           if(applications.get(i).getJob().equals(job))
+           {
+               applicants.add(applications.get(i));
+           }
+       }
+       return applicants;
+    }
+    
+    public static int statusIndex(Application applicant)
+    {
+        if(applicant.getStatus().equals("Pending"))
+        {
+            return 2;
+        }
+        else if(applicant.getStatus().equals("Interview Requested"))
+        {
+            return 0;
+        }
+        else if(applicant.getStatus().equals("Rejected"))
+        {
+            return 1;
+        }
+        else 
+        {
+            return 3;
+        }
+    }
+    
 //    public static Job getJobInfo(int jobID)
 //    {
 //        return Job;
@@ -117,8 +152,66 @@ public class JobSearchSystem {
 //        return Student;
 //    }
 //    
-    public static boolean checkInterviewTimes(Job job, Interview interview)
+    public static boolean checkInterviewTimes(Job job, Interview interview) throws ParseException
     {
+        String date;
+        int duration;
+        String interviewDate = interview.getDate();
+        System.out.println("interviewDate" +interviewDate);
+        int interviewDuration = interview.getDuration();
+        System.out.println("interviewDuration" +interviewDuration);
+        Date interviewD = new SimpleDateFormat("MM/dd/yyyy hh.mm aa").parse(interviewDate);
+        Calendar interviewCal = Calendar.getInstance();
+        interviewCal.setTime(interviewD);
+        System.out.println("interviewCal" +interviewCal.getTime());
+        Calendar interviewCal2 = Calendar.getInstance();
+        interviewCal2.setTime(interviewD);
+        interviewCal2.add(Calendar.MINUTE, interviewDuration);
+        System.out.println("interviewCal2" +interviewCal2.getTime());
+        
+        LinkedList <Interview> inters = new LinkedList <Interview>();
+        System.out.println(job.getInterviewList().size());
+        for(int i = 0 ; i < job.getInterviewList().size(); i++)
+        {
+            duration = job.getInterviewList().get(i).getDuration();
+            System.out.println("duration" +duration);
+            date = job.getInterviewList().get(i).getDate();
+            System.out.println("date" +date);
+            Date date1 = new SimpleDateFormat("MM/dd/yyyy hh.mm aa").parse(date); 
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date1);
+            System.out.println("cal" +cal.getTime());
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(date1);
+            cal2.add(Calendar.MINUTE, duration);
+            System.out.println("cal2" +cal2.getTime());
+            
+           
+            if(interviewCal.before(cal) && interviewCal2.after(cal))
+            {
+                                System.out.println("1");
+
+                return false;
+                    
+            }
+            
+            else if(interviewCal.after(cal) && interviewCal.before(cal2))
+            {
+                                System.out.println("2");
+
+                return false;
+            }
+            
+           
+            else if(interviewCal.equals(cal))
+            {
+                                System.out.println("4");
+
+                return false;
+            }  
+        }      
+                        System.out.println("5");
+
         return true;
     }
     
