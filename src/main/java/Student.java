@@ -38,6 +38,18 @@ public class Student {
         addedJobs.add(job);
     }
     
+    public boolean jobInList(Job job)
+    {
+        for(int i = 0; i < addedJobs.size(); i++)
+        {
+            if(addedJobs.get(i).equals(job))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public void removeFromJobList(Job job)
     {
         addedJobs.remove(job);

@@ -35,14 +35,15 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         position.setText("Position Type: " + job.getPostitonType());
         location.setText("Location: " +job.getLocation());
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-       Student student = new Graduate(3, "Courtney", "Courtneymeyer2@gmail.com", "info", 2019, "Internship", "resume", 3.19, "password", "Isom", 3.7);
-       Application application = new Application(student, job, null, "Pending");
-       JobSearchSystem.applytoJob(application);
+      // Student student = new Graduate(3, "Courtney", "Courtneymeyer2@gmail.com", "info", 2019, "Internship", "resume", 3.19, "password", "Isom", 3.7);
+      // Application application = new Application(student, job, null, "Pending");
+       //JobSearchSystem.applytoJob(application);
        applicants = JobSearchSystem.getApplicants(job);
        for(int i = 0; i < applicants.size(); i++)
        {
            try
            {
+               System.out.println("status" +applicants.get(i).getStatus());
                model.addRow(new Object[]{"" +applicants.get(i).getStudent().getName(), "" +applicants.get(i).getStatus(), "" +applicants.get(i).getInterview().getDate(), "" + applicants.get(i).getInterview().getFeedback()});
            }
            catch(NullPointerException e)
@@ -412,18 +413,20 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null, "You must select an applicant");
         }
-        else if(!applicants.get(index).getStatus().equals("Offer") ||!applicants.get(index).getStatus().equals("Rejected"))
+        else if(applicants.get(index).getStatus().equals("Offer") ||applicants.get(index).getStatus().equals("Rejected"))
         {
-            JOptionPane.showMessageDialog(null, "You must first change the applicant's status to Offer or Rejected");
+            AddFeedback af = new AddFeedback(applicants.get(index), company, job);
+            af.setVisible(true);
+            this.dispose();
         }
 
         else
         {
+            JOptionPane.showMessageDialog(null, "You must first change the applicant's status to Offer or Rejected");
+
             //TableModel model2 = jTable2.getModel();
             //Student student = applicants.get(index).getStudent();
-            AddFeedback af = new AddFeedback(applicants.get(index), company, job);
-            af.setVisible(true);
-            this.dispose();
+            
         }
     }//GEN-LAST:event_addFeedbackActionPerformed
 

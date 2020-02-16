@@ -1,3 +1,8 @@
+
+import java.util.LinkedList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,6 +21,66 @@ public class StudentAccount extends javax.swing.JFrame {
     public StudentAccount() {
         initComponents();
     }
+    
+    public StudentAccount(Student student) {
+        this();
+        this.student = student;
+        n.setText(student.getName() );
+        e.setText(student.getEmail());
+        m.setText(student.getMajor());
+        g.setText(student.getGraduatingYear()+ "");
+        i.setText(student.getId() + "");
+        r.setText(student.getResume());
+        if(student.getPositionType().equals("Internship"))
+        {
+            t.setSelectedIndex(1);
+        }
+        else
+        {
+            t.setSelectedIndex(0);
+        }
+        t.setEditable(false);
+            
+        
+        if(student instanceof Undergraduate)
+        {
+            ug.setText(student.getGPA() +"");
+        }
+        else
+        {
+           gg.setText(((Graduate)student).getGPA()+"");
+           gug.setText(((Graduate)student).getUndergradGPA()+"");
+           ud.setText(((Graduate)student).getUndergradMajor());
+         //  System.out.println(((Graduate)student).getUndergradMajor());
+        }
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+       applicants = JobSearchSystem.getApplicants(student);
+       for(int i = 0; i < applicants.size(); i++)
+       {
+           try
+           {
+             model.addRow(new Object[]{"" +applicants.get(i).getJob().getJobTitle() , ""+ JobSearchSystem.getCompanyByJob(applicants.get(i).getJob()).getCompanyName() , "" + applicants.get(i).getJob().getDeadline() , "" + applicants.get(i).getStatus() ,"" + applicants.get(i).getInterview().getDate() , "" +applicants.get(i).getInterview().getFeedback()});
+
+           }
+           catch (NullPointerException e)
+           {
+            model.addRow(new Object[]{"" +applicants.get(i).getJob().getJobTitle() , ""+ JobSearchSystem.getCompanyByJob(applicants.get(i).getJob()).getCompanyName() , "" + applicants.get(i).getJob().getDeadline() , "" + applicants.get(i).getStatus() , "" , "" });
+ 
+           }
+       }
+           jTable2.setModel(model); 
+           
+           
+       DefaultTableModel model2 = (DefaultTableModel) jTable3.getModel();
+       
+       for(int i = 0; i < student.getAddedJobs().size(); i++)
+       {
+             model2.addRow(new Object[]{"" +student.getAddedJobs().get(i).getJobTitle() , ""+ JobSearchSystem.getCompanyByJob(student.getAddedJobs().get(i)).getCompanyName() , "" + student.getAddedJobs().get(i).getDeadline()});
+
+       }
+           jTable3.setModel(model2); 
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,44 +93,46 @@ public class StudentAccount extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        back = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        jLabel78 = new javax.swing.JLabel();
+        jLabel79 = new javax.swing.JLabel();
+        jLabel80 = new javax.swing.JLabel();
+        jLabel81 = new javax.swing.JLabel();
+        n = new javax.swing.JLabel();
+        e = new javax.swing.JLabel();
+        m = new javax.swing.JLabel();
+        g = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
+        r = new javax.swing.JLabel();
+        i = new javax.swing.JLabel();
+        t = new javax.swing.JComboBox<>();
+        jButton19 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
+        gg = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
+        gug = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
+        ud = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
+        ug = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel31 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        intJobDetail = new javax.swing.JButton();
+        interviewTimes = new javax.swing.JButton();
         jLabel32 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        apply = new javax.swing.JButton();
+        jobDetail = new javax.swing.JButton();
+        export = new javax.swing.JButton();
+        viewFeedback = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,35 +142,40 @@ public class StudentAccount extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(51, 51, 255));
         jLabel9.setText("My Account");
 
-        jButton2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jButton2.setText("Back");
+        back.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jLabel10.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel10.setText("Name");
+        jLabel78.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        jLabel78.setText("Name");
 
-        jLabel11.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel11.setText("Email");
+        jLabel79.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        jLabel79.setText("Email");
 
-        jLabel12.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel12.setText("Major");
+        jLabel80.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        jLabel80.setText("Major");
 
-        jLabel13.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel13.setText("Graduating Year");
+        jLabel81.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        jLabel81.setText("Graduating Year");
 
-        jLabel14.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel14.setText("***");
+        n.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        n.setText("***");
 
-        jLabel15.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel15.setText("***");
+        e.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        e.setText("***");
 
-        jLabel16.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel16.setText("***");
+        m.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        m.setText("***");
 
-        jLabel17.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel17.setText("2020");
+        g.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        g.setText("2020");
 
         jLabel18.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jLabel18.setText("UF ID");
@@ -114,17 +186,18 @@ public class StudentAccount extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jLabel20.setText("Resume");
 
-        jLabel23.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel23.setText("***.pdf");
+        r.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        r.setText("***.pdf");
 
-        jLabel25.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel25.setText("***");
+        i.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        i.setText("***");
 
-        jComboBox1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Full-time", "Internship" }));
+        t.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        t.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Full-time", "Internship" }));
+        t.setEnabled(false);
 
-        jButton3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jButton3.setText("Download");
+        jButton19.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        jButton19.setText("Download");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -133,30 +206,30 @@ public class StudentAccount extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13))
+                    .addComponent(jLabel78)
+                    .addComponent(jLabel79)
+                    .addComponent(jLabel80)
+                    .addComponent(jLabel81))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 306, Short.MAX_VALUE)
+                    .addComponent(n)
+                    .addComponent(e)
+                    .addComponent(m)
+                    .addComponent(g))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 334, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18)
                     .addComponent(jLabel19)
                     .addComponent(jLabel20))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel25)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(i)
+                    .addComponent(t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel23)
-                        .addGap(40, 40, 40)
-                        .addComponent(jButton3)))
-                .addGap(86, 86, 86))
+                        .addComponent(r)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton19)))
+                .addGap(80, 80, 80))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,34 +239,34 @@ public class StudentAccount extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18)
-                            .addComponent(jLabel25))
+                            .addComponent(i))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel20)
-                            .addComponent(jLabel23)
-                            .addComponent(jButton3)))
+                            .addComponent(r)
+                            .addComponent(jButton19)))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel10)
+                            .addComponent(jLabel78)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel11)
+                            .addComponent(jLabel79)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel12)
+                            .addComponent(jLabel80)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel13))
+                            .addComponent(jLabel81))
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel14)
+                            .addComponent(n)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel15)
+                            .addComponent(e)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel16)
+                            .addComponent(m)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel17))))
-                .addGap(12, 12, 12))
+                            .addComponent(g))))
+                .addGap(16, 16, 16))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -203,20 +276,20 @@ public class StudentAccount extends javax.swing.JFrame {
         jLabel24.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jLabel24.setText("Grad-GPA");
 
-        jLabel26.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel26.setText("3.50");
+        gg.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        gg.setText(" ");
 
         jLabel27.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jLabel27.setText("Undergrad-GPA");
 
-        jLabel28.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel28.setText("3.50");
+        gug.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        gug.setText(" ");
 
         jLabel29.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jLabel29.setText("Undergrad-degree");
 
-        jLabel30.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel30.setText("***");
+        ud.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        ud.setText(" ");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -224,20 +297,23 @@ public class StudentAccount extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel29)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel30))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel24)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel26))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel29)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ud, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(gg, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(188, 188, 188))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel27)
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel28)))
-                .addContainerGap(218, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(gug, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(206, 206, 206))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,15 +321,15 @@ public class StudentAccount extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(jLabel26))
+                    .addComponent(gg))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
-                    .addComponent(jLabel28))
+                    .addComponent(gug))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
-                    .addComponent(jLabel30))
+                    .addComponent(ud))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -266,38 +342,40 @@ public class StudentAccount extends javax.swing.JFrame {
 
         jLabel22.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
 
+        ug.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        ug.setText(" ");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jLabel21)
-                .addGap(18, 18, 18)
+                .addGap(181, 181, 181)
                 .addComponent(jLabel22)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jLabel21)
+                .addGap(30, 30, 30)
+                .addComponent(ug, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ug))
                     .addComponent(jLabel22))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTable2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 " Job Title", "Company", "Deadline", "Status", "Interview Time", "Feedback"
@@ -306,9 +384,16 @@ public class StudentAccount extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane2.setViewportView(jTable2);
@@ -316,11 +401,21 @@ public class StudentAccount extends javax.swing.JFrame {
         jLabel31.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jLabel31.setText("Applied Jobs");
 
-        jButton4.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jButton4.setText("View Job Detail");
+        intJobDetail.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        intJobDetail.setText("View Job Detail");
+        intJobDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                intJobDetailActionPerformed(evt);
+            }
+        });
 
-        jButton5.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jButton5.setText("Select Interview Time");
+        interviewTimes.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        interviewTimes.setText("Select Interview Time");
+        interviewTimes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                interviewTimesActionPerformed(evt);
+            }
+        });
 
         jLabel32.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jLabel32.setText("Interested Jobs");
@@ -328,14 +423,7 @@ public class StudentAccount extends javax.swing.JFrame {
         jTable3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 " Job Title", "Company", "Deadline"
@@ -344,55 +432,80 @@ public class StudentAccount extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane3.setViewportView(jTable3);
 
-        jButton6.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jButton6.setText("Delete");
+        apply.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        apply.setText("Apply");
+        apply.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applyActionPerformed(evt);
+            }
+        });
 
-        jButton7.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jButton7.setText("View Job Detail");
+        jobDetail.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        jobDetail.setText("View Job Detail");
+        jobDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jobDetailActionPerformed(evt);
+            }
+        });
 
-        jButton8.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jButton8.setText("Export");
+        export.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        export.setText("Export");
+
+        viewFeedback.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        viewFeedback.setText("View Feedback");
+        viewFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewFeedbackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jobDetail)
+                        .addGap(41, 41, 41)
+                        .addComponent(interviewTimes)
+                        .addGap(42, 42, 42)
+                        .addComponent(export)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(viewFeedback))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(jButton7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton8))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addComponent(jButton4)
+                        .addComponent(intJobDetail)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton6)
+                        .addComponent(apply)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(60, 60, 60)
-                            .addComponent(jButton2)
+                            .addComponent(back)
                             .addGap(293, 293, 293)
                             .addComponent(jLabel9))
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -419,7 +532,7 @@ public class StudentAccount extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jButton2))
+                    .addComponent(back))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -436,23 +549,26 @@ public class StudentAccount extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton7)
-                            .addComponent(jButton5)
-                            .addComponent(jButton8)))
+                            .addComponent(jobDetail)
+                            .addComponent(interviewTimes)
+                            .addComponent(export)
+                            .addComponent(viewFeedback)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4)
-                            .addComponent(jButton6))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                            .addComponent(intJobDetail)
+                            .addComponent(apply))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -461,6 +577,123 @@ public class StudentAccount extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jobDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobDetailActionPerformed
+               int index = jTable2.getSelectedRow();
+               
+               if(index == -1)
+                {
+                     JOptionPane.showMessageDialog(null, "You must select a job");
+                }
+               else
+               {
+                   StudentJobGUI sjg = new StudentJobGUI(applicants.get(index).getJob(), student, 1);
+                   sjg.setVisible(true);
+                   this.dispose();
+               }
+               
+
+    }//GEN-LAST:event_jobDetailActionPerformed
+
+    private void interviewTimesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interviewTimesActionPerformed
+               int index = jTable2.getSelectedRow();
+               if(index == -1)
+               {
+                   JOptionPane.showMessageDialog(null, "You must select a job");
+               }
+               else
+               {
+                   // LinkedList <Interview> interviews = new LinkedList <Interview>();
+                    if(applicants.get(index).getInterview() == null)
+                    {
+                          if(applicants.get(index).getStatus().equals("Interview Requested"))
+                        {
+                       // interviews = applicants.get(index).getJob().getInterviewList();
+
+                        SelectInterviewTimeGUI sit = new SelectInterviewTimeGUI(applicants.get(index), applicants.get(index).getJob());
+                        sit.setVisible(true);
+                        this.dispose();
+
+                        }
+                    else
+                        {
+                        JOptionPane.showMessageDialog(null,"An interview has not been requested");
+                        }
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "An interview time has already been selected");
+                    }
+             
+               }
+              
+
+    }//GEN-LAST:event_interviewTimesActionPerformed
+
+    private void intJobDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_intJobDetailActionPerformed
+       int index = jTable3.getSelectedRow();
+       if(index == -1)
+       {
+           JOptionPane.showMessageDialog(null, "You must select a job");
+       }
+       else
+       {
+            Job j = student.getAddedJobs().get(index);
+            StudentJobGUI sjg = new StudentJobGUI(j, student, 1);
+            // StudentAccount sa = new StudentAccount(student);
+            sjg.setVisible(true);
+            this.dispose();
+       }
+      
+
+    }//GEN-LAST:event_intJobDetailActionPerformed
+
+    private void applyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyActionPerformed
+       int index = jTable3.getSelectedRow();
+       if(index == -1)
+       {
+           JOptionPane.showMessageDialog(null, "You must select a job");
+       }
+       else
+       {
+           Job j = student.getAddedJobs().get(index);
+            JobSearchSystem.applytoJob(new Application(student, j, "Pending"));
+            JOptionPane.showMessageDialog(null, "Applied Successfully");
+            StudentAccount sa = new StudentAccount(student);
+            sa.setVisible(true);
+            this.dispose();
+       }
+       
+               
+
+    }//GEN-LAST:event_applyActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        StudentSearchJobGUI sa = new StudentSearchJobGUI(student);
+        sa.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backActionPerformed
+
+    private void viewFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewFeedbackActionPerformed
+        int index = jTable2.getSelectedRow();
+        if(index == -1)
+        {
+          JOptionPane.showMessageDialog(null, "You must select a job");
+        }
+        else if(applicants.get(index).getInterview() == null)
+        {
+           JOptionPane.showMessageDialog(null,"An interview has not been created" );
+        }
+        else if(applicants.get(index).getStatus().equals("Offer") ||applicants.get(index).getStatus().equals("Rejected") )
+        {
+           JOptionPane.showMessageDialog(null,applicants.get(index).getInterview().getFeedback());
+        }
+        else
+        {
+           JOptionPane.showMessageDialog(null, "Feedback has not been created");
+        }
+        
+    }//GEN-LAST:event_viewFeedbackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -496,40 +729,156 @@ public class StudentAccount extends javax.swing.JFrame {
             }
         });
     }
-
+    private Student student;
+    private LinkedList <Application> applicants;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton apply;
+    private javax.swing.JButton back;
+    private javax.swing.JLabel e;
+    private javax.swing.JLabel email;
+    private javax.swing.JLabel email1;
+    private javax.swing.JLabel email10;
+    private javax.swing.JLabel email2;
+    private javax.swing.JLabel email3;
+    private javax.swing.JLabel email4;
+    private javax.swing.JLabel email5;
+    private javax.swing.JLabel email6;
+    private javax.swing.JLabel email7;
+    private javax.swing.JLabel email8;
+    private javax.swing.JLabel email9;
+    private javax.swing.JButton export;
+    private javax.swing.JLabel g;
+    private javax.swing.JLabel gg;
+    private javax.swing.JLabel grad;
+    private javax.swing.JLabel grad1;
+    private javax.swing.JLabel grad10;
+    private javax.swing.JLabel grad2;
+    private javax.swing.JLabel grad3;
+    private javax.swing.JLabel grad4;
+    private javax.swing.JLabel grad5;
+    private javax.swing.JLabel grad6;
+    private javax.swing.JLabel grad7;
+    private javax.swing.JLabel grad8;
+    private javax.swing.JLabel grad9;
+    private javax.swing.JPanel gradYear;
+    private javax.swing.JPanel gradYear1;
+    private javax.swing.JPanel gradYear10;
+    private javax.swing.JPanel gradYear2;
+    private javax.swing.JPanel gradYear3;
+    private javax.swing.JPanel gradYear4;
+    private javax.swing.JPanel gradYear5;
+    private javax.swing.JPanel gradYear6;
+    private javax.swing.JPanel gradYear7;
+    private javax.swing.JPanel gradYear8;
+    private javax.swing.JPanel gradYear9;
+    private javax.swing.JLabel gug;
+    private javax.swing.JLabel i;
+    private javax.swing.JButton intJobDetail;
+    private javax.swing.JButton interviewTimes;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel100;
+    private javax.swing.JLabel jLabel101;
+    private javax.swing.JLabel jLabel102;
+    private javax.swing.JLabel jLabel103;
+    private javax.swing.JLabel jLabel104;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel70;
+    private javax.swing.JLabel jLabel71;
+    private javax.swing.JLabel jLabel72;
+    private javax.swing.JLabel jLabel73;
+    private javax.swing.JLabel jLabel74;
+    private javax.swing.JLabel jLabel75;
+    private javax.swing.JLabel jLabel76;
+    private javax.swing.JLabel jLabel77;
+    private javax.swing.JLabel jLabel78;
+    private javax.swing.JLabel jLabel79;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel80;
+    private javax.swing.JLabel jLabel81;
+    private javax.swing.JLabel jLabel84;
+    private javax.swing.JLabel jLabel85;
+    private javax.swing.JLabel jLabel86;
+    private javax.swing.JLabel jLabel87;
+    private javax.swing.JLabel jLabel88;
+    private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel90;
+    private javax.swing.JLabel jLabel91;
+    private javax.swing.JLabel jLabel92;
+    private javax.swing.JLabel jLabel93;
+    private javax.swing.JLabel jLabel94;
+    private javax.swing.JLabel jLabel95;
+    private javax.swing.JLabel jLabel96;
+    private javax.swing.JLabel jLabel97;
+    private javax.swing.JLabel jLabel98;
+    private javax.swing.JLabel jLabel99;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -538,5 +887,68 @@ public class StudentAccount extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JButton jobDetail;
+    private javax.swing.JLabel m;
+    private javax.swing.JLabel major;
+    private javax.swing.JLabel major1;
+    private javax.swing.JLabel major10;
+    private javax.swing.JLabel major2;
+    private javax.swing.JLabel major3;
+    private javax.swing.JLabel major4;
+    private javax.swing.JLabel major5;
+    private javax.swing.JLabel major6;
+    private javax.swing.JLabel major7;
+    private javax.swing.JLabel major8;
+    private javax.swing.JLabel major9;
+    private javax.swing.JLabel n;
+    private javax.swing.JLabel name;
+    private javax.swing.JLabel name1;
+    private javax.swing.JLabel name10;
+    private javax.swing.JLabel name2;
+    private javax.swing.JLabel name3;
+    private javax.swing.JLabel name4;
+    private javax.swing.JLabel name5;
+    private javax.swing.JLabel name6;
+    private javax.swing.JLabel name7;
+    private javax.swing.JLabel name8;
+    private javax.swing.JLabel name9;
+    private javax.swing.JComboBox<String> positionType;
+    private javax.swing.JComboBox<String> positionType1;
+    private javax.swing.JComboBox<String> positionType10;
+    private javax.swing.JComboBox<String> positionType2;
+    private javax.swing.JComboBox<String> positionType3;
+    private javax.swing.JComboBox<String> positionType4;
+    private javax.swing.JComboBox<String> positionType5;
+    private javax.swing.JComboBox<String> positionType6;
+    private javax.swing.JComboBox<String> positionType7;
+    private javax.swing.JComboBox<String> positionType8;
+    private javax.swing.JComboBox<String> positionType9;
+    private javax.swing.JLabel r;
+    private javax.swing.JLabel resume;
+    private javax.swing.JLabel resume1;
+    private javax.swing.JLabel resume10;
+    private javax.swing.JLabel resume2;
+    private javax.swing.JLabel resume3;
+    private javax.swing.JLabel resume4;
+    private javax.swing.JLabel resume5;
+    private javax.swing.JLabel resume6;
+    private javax.swing.JLabel resume7;
+    private javax.swing.JLabel resume8;
+    private javax.swing.JLabel resume9;
+    private javax.swing.JComboBox<String> t;
+    private javax.swing.JLabel ud;
+    private javax.swing.JLabel ufID;
+    private javax.swing.JLabel ufID1;
+    private javax.swing.JLabel ufID10;
+    private javax.swing.JLabel ufID2;
+    private javax.swing.JLabel ufID3;
+    private javax.swing.JLabel ufID4;
+    private javax.swing.JLabel ufID5;
+    private javax.swing.JLabel ufID6;
+    private javax.swing.JLabel ufID7;
+    private javax.swing.JLabel ufID8;
+    private javax.swing.JLabel ufID9;
+    private javax.swing.JLabel ug;
+    private javax.swing.JButton viewFeedback;
     // End of variables declaration//GEN-END:variables
 }

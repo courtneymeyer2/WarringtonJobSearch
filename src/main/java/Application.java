@@ -16,11 +16,16 @@ public class Application {
     public void setStatus(String status){
         this.status = status;
     }
+    
+    public void setInterview(Interview interview)
+    {
+        this.interview = interview;
+    }
             
-    public Application(Student student, Job job, Interview interview, String status){
+    public Application(Student student, Job job, String status){
         this.student = student; 
         this.job = job;
-        this.interview = interview;
+        //this.interview = interview;
         this.status = status;
     }
     

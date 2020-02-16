@@ -3,6 +3,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -77,7 +78,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        account = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jobTitle = new javax.swing.JComboBox<>();
@@ -87,8 +88,8 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         companyName = new javax.swing.JComboBox<>();
         positionType = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
+        viewJobButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
@@ -103,8 +104,13 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(51, 51, 255));
         jLabel1.setText("Search Job Listing");
 
-        jButton2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jButton2.setText("My Account");
+        account.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        account.setText("My Account");
+        account.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accountActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -155,11 +161,11 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jButton1.setText("Search");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
             }
         });
 
@@ -187,7 +193,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
                         .addGap(44, 44, 44)
                         .addComponent(companyName, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -205,31 +211,33 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
                     .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(positionType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(searchButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jButton3.setText("View Job Detail");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        viewJobButton.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        viewJobButton.setText("View Job Detail");
+        viewJobButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                viewJobButtonActionPerformed(evt);
             }
         });
 
         jTable3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+
             },
-            new String [] {" Job Title", "Company", "Deadline"}
-        )
-        {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            new String [] {
+                "Job Title", "Company", "Deadline"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true
             };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane3.setViewportView(jTable3);
@@ -252,7 +260,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
                 .addGap(254, 254, 254)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(account, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -262,7 +270,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(378, 378, 378)
-                        .addComponent(jButton3))
+                        .addComponent(viewJobButton))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -274,14 +282,14 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton2)
+                    .addComponent(account)
                     .addComponent(jButton4))
                 .addGap(33, 33, 33)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(jButton3)
+                .addComponent(viewJobButton)
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
@@ -318,40 +326,60 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_companyNameActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
         
         filterJobs = JobSearchSystem.filterJobs(jobTitle.getSelectedItem().toString(), companyName.getSelectedItem().toString(), location.getSelectedItem().toString(),positionType.getSelectedItem().toString());
-        
         DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
         
         model.setRowCount(0);
-        
         if(filterJobs != null)
         {
-            
-            for(int i = 0; i < filterJobs.size(); i++)
+            if(filterJobs.size() == 0)
             {
-                model.addRow(new Object[]{  ""+filterJobs.get(i).getJobTitle(), ""+  JobSearchSystem.getCompanyById(filterJobs.get(i).getCompanyID()).getCompanyName(), ""+  filterJobs.get(i).getDeadline()});
+                JOptionPane.showMessageDialog(null, "No jobs with this criteria exist");
             }
+            else
+            {
+                 for(int i = 0; i < filterJobs.size(); i++)
+                {
+                model.addRow(new Object[]{  ""+filterJobs.get(i).getJobTitle(), ""+  JobSearchSystem.getCompanyById(filterJobs.get(i).getCompanyID()).getCompanyName(), ""+  filterJobs.get(i).getDeadline()});
+                 }
             jTable3.setModel(model);
+            }
+           
         } 
+      
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     private void positionTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positionTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_positionTypeActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void viewJobButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewJobButtonActionPerformed
         // TODO add your handling code here:
         int index = jTable3.getSelectedRow();
+        if(index == -1)
+        {
+            JOptionPane.showMessageDialog(null, "A job must be selected");
+        }
+        else
+        {
+             StudentJobGUI sjg = new StudentJobGUI(filterJobs.get(index), student, 0);
+            sjg.setVisible(true);
+            this.dispose();
 
-        StudentJobGUI sjg = new StudentJobGUI(filterJobs.get(index), student);
-        sjg.setVisible(true);
+        }
+
+       
+    }//GEN-LAST:event_viewJobButtonActionPerformed
+
+    private void accountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountActionPerformed
+        StudentAccount sa = new StudentAccount(student);
+        sa.setVisible(true);
         this.dispose();
-
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_accountActionPerformed
 
     /**
      * @param arr
@@ -418,10 +446,8 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton account;
     private javax.swing.JComboBox<String> companyName;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -435,6 +461,8 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jobTitle;
     private javax.swing.JComboBox<String> location;
     private javax.swing.JComboBox<String> positionType;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JButton viewJobButton;
     // End of variables declaration//GEN-END:variables
     private Student student;
     private LinkedList<Job> jobs;

@@ -213,13 +213,22 @@ public class AddFeedback extends javax.swing.JFrame {
             else
             {
                 applicant.setStatus(status.getSelectedItem().toString());
+                System.out.println(status.getSelectedItem().toString());
                 JOptionPane.showMessageDialog(null, "Status Changed");
+                CompanyJobGUI cjg = new CompanyJobGUI(job, company);
+                cjg.setVisible(true);
+                this.dispose();
             }
         }
         else
         {
+            System.out.println("testing");
             applicant.setStatus(status.getSelectedItem().toString());
+            System.out.println(status.getSelectedItem().toString());
             JOptionPane.showMessageDialog(null, "Status Changed");
+            CompanyJobGUI cjg = new CompanyJobGUI(job, company);
+             cjg.setVisible(true);
+                this.dispose();
         }
         
         
@@ -234,8 +243,11 @@ public class AddFeedback extends javax.swing.JFrame {
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         try
            {
-            applicant.getInterview().setFeeback(feedback.toString());
+            applicant.getInterview().setFeeback(feedback.getText().toString());
             JOptionPane.showMessageDialog(null, "Feedback has been added");
+            CompanyJobGUI cjg = new CompanyJobGUI(job, company);
+            cjg.setVisible(true);
+            this.dispose();
             
            }
          catch(NullPointerException e)

@@ -18,6 +18,21 @@ public class JobSearchSystem {
     private static LinkedList <Company> companies = new LinkedList<Company>();
     private static LinkedList <Application> applications = new LinkedList <Application>();
     
+    
+    public static Company getCompanyByJob(Job job)
+    {
+        for(int i = 0; i < companies.size(); i++)
+        {
+            for(int j =0; j < companies.get(i).getJobs().size(); j++)
+            {
+                if(companies.get(i).getJobs().get(j).equals(job))
+                {
+                    return companies.get(i);
+                }
+            }
+        }
+        return null;
+    }
     public static boolean checkCredentials(String email, String password, String type)
     {
         if(type.equals("student"))
@@ -92,6 +107,19 @@ public class JobSearchSystem {
        return applicants;
     }
     
+       public static LinkedList <Application> getApplicants(Student student)
+    {
+        LinkedList <Application> applicants = new LinkedList();
+       for(int i =0; i < applications.size(); i++)
+       {
+           if(applications.get(i).getStudent().equals(student))
+           {
+               applicants.add(applications.get(i));
+           }
+       }
+       return applicants;
+    }
+    
     public static int statusIndex(Application applicant)
     {
         if(applicant.getStatus().equals("Pending"))
@@ -146,40 +174,52 @@ public class JobSearchSystem {
 //    {
 //        return Student;
 //    }
+    
+    public static boolean applicationExists(Job job, Student student)
+    {
+        for(int i = 0; i < applications.size(); i++)
+        {
+            if(applications.get(i).getJob().equals(job) && applications.get(i).getStudent().equals(student))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 //    
     public static boolean checkInterviewTimes(Job job, Interview interview) throws ParseException
     {
         String date;
         int duration;
         String interviewDate = interview.getDate();
-        System.out.println("interviewDate" +interviewDate);
+       // System.out.println("interviewDate" +interviewDate);
         int interviewDuration = interview.getDuration();
-        System.out.println("interviewDuration" +interviewDuration);
+        //System.out.println("interviewDuration" +interviewDuration);
         Date interviewD = new SimpleDateFormat("MM/dd/yyyy hh.mm aa").parse(interviewDate);
         Calendar interviewCal = Calendar.getInstance();
         interviewCal.setTime(interviewD);
-        System.out.println("interviewCal" +interviewCal.getTime());
+        //System.out.println("interviewCal" +interviewCal.getTime());
         Calendar interviewCal2 = Calendar.getInstance();
         interviewCal2.setTime(interviewD);
         interviewCal2.add(Calendar.MINUTE, interviewDuration);
-        System.out.println("interviewCal2" +interviewCal2.getTime());
+        //System.out.println("interviewCal2" +interviewCal2.getTime());
         
         LinkedList <Interview> inters = new LinkedList <Interview>();
-        System.out.println(job.getInterviewList().size());
+        //System.out.println(job.getInterviewList().size());
         for(int i = 0 ; i < job.getInterviewList().size(); i++)
         {
             duration = job.getInterviewList().get(i).getDuration();
-            System.out.println("duration" +duration);
+            //System.out.println("duration" +duration);
             date = job.getInterviewList().get(i).getDate();
-            System.out.println("date" +date);
+            //System.out.println("date" +date);
             Date date1 = new SimpleDateFormat("MM/dd/yyyy hh.mm aa").parse(date); 
             Calendar cal = Calendar.getInstance();
             cal.setTime(date1);
-            System.out.println("cal" +cal.getTime());
+            //System.out.println("cal" +cal.getTime());
             Calendar cal2 = Calendar.getInstance();
             cal2.setTime(date1);
             cal2.add(Calendar.MINUTE, duration);
-            System.out.println("cal2" +cal2.getTime());
+            //System.out.println("cal2" +cal2.getTime());
             
            
             if(interviewCal.before(cal) && interviewCal2.after(cal))
@@ -192,7 +232,7 @@ public class JobSearchSystem {
             
             else if(interviewCal.after(cal) && interviewCal.before(cal2))
             {
-                                System.out.println("2");
+                                //System.out.println("2");
 
                 return false;
             }
@@ -200,19 +240,90 @@ public class JobSearchSystem {
            
             else if(interviewCal.equals(cal))
             {
-                                System.out.println("4");
+                                //System.out.println("4");
 
                 return false;
             }  
         }      
-                        System.out.println("5");
+                        //System.out.println("5");
 
         return true;
     }
     
-    public static boolean checkInterviewTimes(Student student, Interview interview)
+    public static boolean checkInterviewTimes(Student student, Interview interview) throws ParseException
     {
+        LinkedList <Application> applications = new LinkedList <Application>();
+        applications = getApplicants(student);
+        String date;
+        int duration;
+        String interviewDate = interview.getDate();
+       // System.out.println("interviewDate" +interviewDate);
+        int interviewDuration = interview.getDuration();
+        //System.out.println("interviewDuration" +interviewDuration);
+        Date interviewD = new SimpleDateFormat("MM/dd/yyyy hh.mm aa").parse(interviewDate);
+        Calendar interviewCal = Calendar.getInstance();
+        interviewCal.setTime(interviewD);
+        //System.out.println("interviewCal" +interviewCal.getTime());
+        Calendar interviewCal2 = Calendar.getInstance();
+        interviewCal2.setTime(interviewD);
+        interviewCal2.add(Calendar.MINUTE, interviewDuration);
+        //System.out.println("interviewCal2" +interviewCal2.getTime());
+        
+        LinkedList <Interview> inters = new LinkedList <Interview>();
+        //System.out.println(job.getInterviewList().size());
+        for(int j = 0; j < applications.size(); j++)
+        {
+             if(applications.get(j).getInterview() == null)
+             {
+                 
+             }
+             else
+             {
+                    duration = applications.get(j).getInterview().getDuration();
+                    //System.out.println("duration" +duration);
+                    date = applications.get(j).getInterview().getDate();
+                    //System.out.println("date" +date);
+                    Date date1 = new SimpleDateFormat("MM/dd/yyyy hh.mm aa").parse(date); 
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(date1);
+                    //System.out.println("cal" +cal.getTime());
+                    Calendar cal2 = Calendar.getInstance();
+                    cal2.setTime(date1);
+                    cal2.add(Calendar.MINUTE, duration);
+                    //System.out.println("cal2" +cal2.getTime());
+
+
+                    if(interviewCal.before(cal) && interviewCal2.after(cal))
+                    {
+                                        //System.out.println("1");
+
+                        return false;
+
+                    }
+
+                    else if(interviewCal.after(cal) && interviewCal.before(cal2))
+                    {
+                                        //System.out.println("2");
+
+                        return false;
+                    }
+
+
+                    else if(interviewCal.equals(cal))
+                    {
+                                        //System.out.println("4");
+
+                        return false;
+                    }  
+        
+             }
+                    
+        }
+         
+                        //System.out.println("5");
+
         return true;
+        
     }
    
     public static void addInterview(Interview interview)
@@ -273,10 +384,29 @@ public class JobSearchSystem {
    public static void applytoJob(Application application)
    {
        applications.add(application);
+       
+       if(application.getStudent().getAddedJobs().contains(application.getJob()))
+       {
+           application.getStudent().removeFromJobList(application.getJob());
+           
+       }
    }
 
    public static LinkedList <Interview> getAvailableInterviews(Job job)
    {
+       
+       LinkedList <Interview> interviews = new LinkedList <Interview>();
+       for(int i = 0; i < job.getInterviewList().size(); i++)
+       {
+           if(job.getInterviewList().get(i).getSelected())
+           {
+               
+           }
+           else
+           {
+               interviews.add(job.getInterviewList().get(i));
+           }
+       }
        return interviews;
    }
    

@@ -33,7 +33,7 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
         this.company = company;
         this.job = job;
         this.numOfInterviews = numOfInterviews;
-        job.addInterview(new Interview("05/01/2020 10.30 PM", 30, "", "Interview Requested"));
+       // job.addInterview(new Interview("05/01/2020 10.30 PM", 30, "", "Interview Requested"));
 
         DefaultListModel lm2 = new DefaultListModel();
         for(int i =0; i <job.getInterviewList().size(); i ++)
@@ -41,6 +41,11 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
             lm2.addElement(job.getInterviewList().get(i).getDate() + "                   " +job.getInterviewList().get(i).getDuration() + " minutes");
         }
         jList1.setModel(lm2);
+        
+        if(job.getInterviewList().size() > 0)
+        {
+            duration.setEditable(false);
+        }
 //          if(lm2 == null)
 //            {
 //            lm2 = new DefaultListModel();
@@ -295,7 +300,7 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
         System.out.print(dateFormat2.format(calendar.getTime())); // will print like 2014-02-20 
         String date = dateFormat2.format(calendar.getTime());
 
-        Interview interview = new Interview(date, dur, "", "Interview Requested");
+        Interview interview = new Interview(date, dur);
         try {
             boolean check = JobSearchSystem.checkInterviewTimes(job, interview);
              if(check)

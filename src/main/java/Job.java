@@ -26,8 +26,8 @@ public class Job {
     private String positionType;
     private String deadline;
     private LinkedList <Interview> interviews = new LinkedList <Interview>();
-    private LinkedList <Student> appliedStudents= new LinkedList <Student>();
-    private LinkedList <Student> selectedStudents = new LinkedList <Student>();
+    //private LinkedList <Student> appliedStudents= new LinkedList <Student>();
+    //private LinkedList <Student> selectedStudents = new LinkedList <Student>();
     
     
     public Job(int companyID, String jobTitle, String description, String location, String qualification, String requirement, String degreeRequired, String positionType, String deadline)
@@ -115,20 +115,20 @@ public class Job {
         return interviews;
     }
 
-    public LinkedList <Student> getAppliedStudents()
-    {
-        return appliedStudents;
-    }
-
-    public LinkedList <Student> getSelectedStudents()
-    {
-        return selectedStudents;
-    }
-
-    public void addAppliedStudent(Student student)
-    {
-        appliedStudents.add(student);
-    }
+//    public LinkedList <Student> getAppliedStudents()
+//    {
+//        return appliedStudents;
+//    }
+//
+//    public LinkedList <Student> getSelectedStudents()
+//    {
+//        return selectedStudents;
+//    }
+//
+//    public void addAppliedStudent(Student student)
+//    {
+//        appliedStudents.add(student);
+//    }
 
     public void addInterview(Interview interview)
     {

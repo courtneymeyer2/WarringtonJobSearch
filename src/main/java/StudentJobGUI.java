@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,10 +21,31 @@ public class StudentJobGUI extends javax.swing.JFrame {
         
     }
     
-    public StudentJobGUI(Job job, Student student){
+    public StudentJobGUI(Job job, Student student, int page){
         this();
+        this.page = page;
         this.student = student;
         this.job = job;
+        companyAndPosition.setText(JobSearchSystem.getCompanyByJob(job).getCompanyName() + ": " + job.getJobTitle());
+        deadline.setText(job.getDeadline());
+        description.setText("Description: " + job.getDescription());
+        quali.setText("Qualifications: " + job.getQualifications());
+        require.setText("Requirements: " + job.getRequirement());
+        degree.setText("Degree Required: " + job.getDegreeRequired());
+        position.setText("Position Type: " + job.getPostitonType());
+        location.setText("Location: " +job.getLocation());
+        applied = JobSearchSystem.applicationExists(job, student);
+        if(applied)
+        {
+            apply.setEnabled(false);
+            apply.setText("Applied");
+            Added.setEnabled(false);
+        }
+        added = student.jobInList(job);
+        if(added)
+        {
+            Added.setText("Remove from List");
+        }
     }
 
     /**
@@ -34,66 +58,81 @@ public class StudentJobGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
+        companyAndPosition = new javax.swing.JLabel();
+        apply = new javax.swing.JButton();
+        back = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        deadline = new javax.swing.JLabel();
+        description = new javax.swing.JLabel();
+        degree = new javax.swing.JLabel();
+        location = new javax.swing.JLabel();
+        position = new javax.swing.JLabel();
+        quali = new javax.swing.JLabel();
+        require = new javax.swing.JLabel();
+        Added = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(871, 535));
 
-        jLabel3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel3.setText("Company and Position");
+        companyAndPosition.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        companyAndPosition.setForeground(new java.awt.Color(0, 0, 255));
+        companyAndPosition.setText("Company and Position");
+
+        apply.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        apply.setText("Apply");
+        apply.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applyActionPerformed(evt);
+            }
+        });
+
+        back.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+
+        jButton3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        jButton3.setText("Add to List");
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jLabel1.setText("Deadline:");
 
-        jLabel2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel2.setText("Jan 19, 2020");
+        deadline.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        deadline.setText("Jan 19, 2020");
 
-        jLabel4.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel4.setText("11:59pm");
+        description.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
+        description.setText("Description: ");
 
-        jLabel5.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
-        jLabel5.setText("Description: *** ");
+        degree.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        degree.setText("Degree Type:  ");
 
-        jButton1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jButton1.setText("Apply");
+        location.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        location.setText("Location: ");
 
-        jLabel6.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel6.setText("Location: ***");
+        position.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        position.setText("Position Type:");
 
-        jLabel7.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel7.setText("Qualifications: ***");
+        quali.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        quali.setText("Qualifications: ");
 
-        jLabel8.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel8.setText("Requirements: ***");
+        require.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        require.setText("Requirements:");
 
-        jButton2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jButton2.setText("Back");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Added.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        Added.setText("Add to List");
+        Added.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                AddedActionPerformed(evt);
             }
         });
-
-        jLabel10.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
-        jLabel10.setText("Position Type: *** ");
-
-        jButton3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jButton3.setText("Add to List");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -101,81 +140,143 @@ public class StudentJobGUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(231, 231, 231)
-                        .addComponent(jLabel3)
-                        .addGap(0, 391, Short.MAX_VALUE))
+                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(231, 231, 231)
+                .addComponent(companyAndPosition)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(degree, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(position, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(require, javax.swing.GroupLayout.PREFERRED_SIZE, 1122, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1))
+                                .addGap(18, 18, 18)
+                                .addComponent(deadline, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(60, 60, 60))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addGap(40, 40, 40))))
+                                .addComponent(Added, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3))
+                            .addComponent(apply))))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(quali, javax.swing.GroupLayout.PREFERRED_SIZE, 798, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel3))
-                .addGap(51, 51, 51)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jButton1))
-                .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
-                .addGap(11, 11, 11)
-                .addComponent(jLabel5)
-                .addGap(83, 83, 83)
-                .addComponent(jLabel6)
+                    .addComponent(back)
+                    .addComponent(companyAndPosition))
+                .addGap(48, 48, 48)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(deadline))
+                    .addComponent(apply))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Added))))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(124, 124, 124))
+                .addComponent(degree)
+                .addGap(34, 34, 34)
+                .addComponent(location)
+                .addGap(36, 36, 36)
+                .addComponent(position)
+                .addGap(62, 62, 62)
+                .addComponent(quali, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(require, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        if(page == 0)
+        {
+        StudentSearchJobGUI sj = new StudentSearchJobGUI(student);
+        sj.setVisible(true);
+        this.dispose();
+        }
+        else
+        {
+            StudentAccount sa = new StudentAccount(student);
+            sa.setVisible(true);
+            this.dispose();
+        }
+       
+    }//GEN-LAST:event_backActionPerformed
+
+    private void applyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyActionPerformed
+        
+        if(apply.getText().equals("Apply"))
+        {
+            Application applicant = new Application(student, job, "Pending");
+            JobSearchSystem.applytoJob(applicant);
+            JOptionPane.showMessageDialog(null, "Application Successful!");
+            apply.setEnabled(false);
+            apply.setText("Applied");
+//            if(added)
+//            {
+//                student.removeFromJobList(job);
+//            }
+
+        }
+        StudentJobGUI s = new StudentJobGUI(job, student, 0);
+        s.setVisible(true);
+        this.dispose();
+   
+       
+    }//GEN-LAST:event_applyActionPerformed
+
+    private void AddedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddedActionPerformed
+        if(added == false)
+        {
+            student.addJob(job);
+            JOptionPane.showMessageDialog(null, "Added to Interested Job List!");
+            Added.setText("Remove from List");
+        }
+        else
+        {
+
+            student.removeFromJobList(job);
+            JOptionPane.showMessageDialog(null, "Removed from Interested Job List");
+             Added.setText("Add to List");
+        }
+        StudentJobGUI s = new StudentJobGUI(job, student, 0);
+        s.setVisible(true);
+        this.dispose();
+     
+    }//GEN-LAST:event_AddedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,20 +316,24 @@ public class StudentJobGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Added;
+    private javax.swing.JButton apply;
+    private javax.swing.JButton back;
+    private javax.swing.JLabel companyAndPosition;
+    private javax.swing.JLabel deadline;
+    private javax.swing.JLabel degree;
+    private javax.swing.JLabel description;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel location;
+    private javax.swing.JLabel position;
+    private javax.swing.JLabel quali;
+    private javax.swing.JLabel require;
     // End of variables declaration//GEN-END:variables
     private Student student;
     private Job job;
+    private boolean applied;
+    private boolean added;
+    private int page;
 }

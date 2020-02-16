@@ -18,41 +18,41 @@ public class Interview
     private int interviewID;
     private String date;
     private int duration;
-    private String feedback;
-    private String status;
-    private boolean selected;
+    private String feedback = "";
+   // private String status;
+    private boolean selected = false;
     private static int nextID = 1;
     
 public Interview()
 {
         
 }
-public Interview(String date, int duration, String feedback, String status)
+public Interview(String date, int duration)
 { 
     this.interviewID = nextID;
     nextID ++;
     this.date = date;
     this.duration = duration;
-    this.feedback = feedback;
-    this.status = status;
+    //this.feedback = feedback;
+    //this.status = status;
     
 }
 public void setFeeback(String feedback)
 {
    this.feedback = feedback;
 }
-public void setStatus(String status)
-{
-   this.status = status;
-}
+//public void setStatus(String status)
+//{
+//   this.status = status;
+//}
 public void setSelected(boolean selected)
 {
    this.selected = selected;
 }
-public String getStatus()
-{
-    return status;
-}
+//public String getStatus()
+//{
+//    return status;
+//}
 public String getFeedback()
 {
     return feedback;
