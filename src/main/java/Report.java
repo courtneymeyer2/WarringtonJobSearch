@@ -47,6 +47,24 @@ public class Report extends javax.swing.JFrame {
         for(int i=0; i < jobs.size(); i++) {
             m3.addElement( jobs.get(i).toString() );
         }
+        
+        DefaultListModel m4 = (DefaultListModel)(application.getModel());
+        m4.clear();
+        String header4 = String.format("%-8d, %-8d, %-20s", "Student ID", "Job ID", "Status");
+        m4.addElement(header4);
+        LinkedList<Application> applications = JobSearchSystem.getApplication();
+        for(int i=0; i < applications.size(); i++) {
+            m4.addElement( applications.get(i).toString() );
+        }
+        
+        DefaultListModel m5 = (DefaultListModel)(interview.getModel());
+        m5.clear();
+        String header5 = String.format("%-8d, %-8d, %-20s", "Student ID", "Job ID", "Status");
+        m4.addElement(header5);
+        LinkedList<Interview> interviews = JobSearchSystem.getInterview();
+        for(int i=0; i < interviews.size(); i++) {
+            m4.addElement( interviews.get(i).toString() );
+        }
     }
     
     /**
@@ -90,40 +108,20 @@ public class Report extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
-        student.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(student);
 
         jLabel1.setText("Students");
 
-        company.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(company);
 
         jLabel2.setText("Companies");
 
-        job.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane4.setViewportView(job);
 
         jLabel3.setText("Jobs");
 
         jLabel4.setText("Applications");
 
-        interview.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane5.setViewportView(interview);
 
         jLabel5.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
@@ -132,11 +130,6 @@ public class Report extends javax.swing.JFrame {
 
         jLabel6.setText("Interviews");
 
-        application.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane6.setViewportView(application);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

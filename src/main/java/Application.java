@@ -13,8 +13,15 @@ public class Application {
     public String getStatus() {return status;} 
     public Interview getInterview(){return interview;}
     
+    @Override
+    public String toString()
+    {
+        String str = String.format("%-8d, %-8d, %-20s", student.getId(), job.getJobID(), status);
+        return str;
+    }
     
-    public void setStatus(String status){
+    public void setStatus(String status)
+    {
         this.status = status;
     }
     
@@ -23,7 +30,8 @@ public class Application {
         this.interview = interview;
     }
             
-    public Application(Student student, Job job, String status){
+    public Application(Student student, Job job, String status)
+    {
         this.student = student; 
         this.job = job;
         //this.interview = interview;

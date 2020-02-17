@@ -185,6 +185,11 @@ public class JobSearchSystem {
         return companies;
     }
     
+    public static LinkedList<Interview> getInterview()
+    {
+        return interviews;
+    }
+    
     public static boolean applicationExists(Job job, Student student)
     {
         for(int i = 0; i < applications.size(); i++)
