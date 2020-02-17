@@ -59,11 +59,11 @@ public class Report extends javax.swing.JFrame {
         
         DefaultListModel m5 = (DefaultListModel)(interview.getModel());
         m5.clear();
-        String header5 = String.format("%-8d, %-8d, %-20s", "Student ID", "Job ID", "Status");
-        m4.addElement(header5);
+        String header5 = String.format("%-8d, %-20s, %-20s", "ID", "Date", "Selected");
+        m5.addElement(header5);
         LinkedList<Interview> interviews = JobSearchSystem.getInterview();
         for(int i=0; i < interviews.size(); i++) {
-            m4.addElement( interviews.get(i).toString() );
+            m5.addElement( interviews.get(i).toString() );
         }
     }
     

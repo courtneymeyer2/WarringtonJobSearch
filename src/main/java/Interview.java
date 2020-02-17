@@ -44,7 +44,8 @@ public void setFeeback(String feedback)
 
 public String toString()
 {
-    String str = "";
+    
+    String str = String.format("%-8d, %-20s, %-20s", interviewID, date, selected);
     return str;
 }
 //public void setStatus(String status)
