@@ -25,8 +25,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
     public StudentSearchJobGUI() {
         initComponents();
     }
-    public StudentSearchJobGUI(Student student)
-    {
+    public StudentSearchJobGUI(Student student) {
         this();
         this.student = student;
         jobs = JobSearchSystem.getAllJobs();
@@ -329,13 +328,13 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
         
-        filterJobs = JobSearchSystem.filterJobs(jobTitle.getSelectedItem().toString(), companyName.getSelectedItem().toString(), location.getSelectedItem().toString(),positionType.getSelectedItem().toString());
+        filterJobs = JobSearchSystem.filterJobs(jobTitle.getSelectedItem().toString(), companyName.getSelectedItem().toString(), location.getSelectedItem().toString(),positionType.getSelectedItem().toString(), student);
         DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
         
         model.setRowCount(0);
-        if(filterJobs != null)
-        {
-            if(filterJobs.size() == 0)
+        
+        if(filterJobs != null) {
+            if(filterJobs.isEmpty())
             {
                 JOptionPane.showMessageDialog(null, "No jobs with this criteria exist");
             }
@@ -366,7 +365,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         }
         else
         {
-             StudentJobGUI sjg = new StudentJobGUI(filterJobs.get(index), student, 0);
+            StudentJobGUI sjg = new StudentJobGUI(filterJobs.get(index), student, 0);
             sjg.setVisible(true);
             this.dispose();
 

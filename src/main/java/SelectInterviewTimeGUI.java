@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Leewy
+ * @author Courtney
  */
 public class SelectInterviewTimeGUI extends javax.swing.JFrame {
 

@@ -31,6 +31,23 @@ public class Company
         this.companyEmail = companyEmail;
         this.companyPassword = companyPassword;
     }
+    
+    public String toString()
+    {
+        String j = "";
+        if(jobs == null)
+        {
+            j = "No jobs posted.";
+        }
+        else
+        {
+            for(int i=0; i< jobs.size();i++)
+                j += jobs.get(i).getJobID();
+        }
+        
+        String str = String.format("%-8d, %-20s, %-20s", companyID, companyName, j);
+        return str;
+    }
 
 
     public static int getNextId()

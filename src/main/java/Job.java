@@ -29,6 +29,26 @@ public class Job {
     //private LinkedList <Student> appliedStudents= new LinkedList <Student>();
     //private LinkedList <Student> selectedStudents = new LinkedList <Student>();
     
+    public String toString()
+    {
+        String applicants = "";
+        for(int i=0; i < JobSearchSystem.getApplication().size(); i++)
+        {
+            if(JobSearchSystem.getApplication().get(i).getJob().getJobID() == jobID)
+            {
+                applicants += JobSearchSystem.getApplication().get(i).getStudent().getId();
+            }
+        }
+        if (applicants.equals(""))
+        {
+            applicants = "No applicants";
+        }
+        
+        String company = JobSearchSystem.getCompanyById(companyID).getCompanyName();
+        
+        String str = String.format("%-8d,%-20s, %-20s, %-20s", jobID, jobTitle, company, applicants);
+        return str;
+    }
     
     public Job(int companyID, String jobTitle, String description, String location, String qualification, String requirement, String degreeRequired, String positionType, String deadline)
     {

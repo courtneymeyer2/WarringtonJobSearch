@@ -10,6 +10,7 @@ SelectInterviewTimeGUI$1.class
 Report$1.class
 StudentSearchJobGUI$2.class
 CompanyJobGUI$8.class
+Report$7.class
 StudentAccount$3.class
 StudentSearchJobGUI$5.class
 CompanyViewofStudentProfile$4.class
@@ -27,6 +28,7 @@ PostJobListingGUI.class
 StudentSearchJobGUI$6.class
 CompanyViewofStudentProfile$3.class
 PostJobListingGUI$6.class
+StudentAccount$10.class
 CompanyViewofStudentProfile$2.class
 RegisterStudent$6.class
 StudentAccount$9.class
@@ -74,6 +76,7 @@ CompanyJobGUI$5.class
 CompanyPageGUI$5.class
 StudentAccount.class
 AddFeedback$5.class
+Home$6.class
 StudentJobGUI.class
 CompanyPageGUI$4.class
 CompanyJobGUI$6.class

@@ -365,9 +365,8 @@ public class StudentAccount extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ug))
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ug)
                     .addComponent(jLabel22))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -464,6 +463,11 @@ public class StudentAccount extends javax.swing.JFrame {
 
         export.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         export.setText("Export");
+        export.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportActionPerformed(evt);
+            }
+        });
 
         viewFeedback.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         viewFeedback.setText("View Feedback");
@@ -695,6 +699,10 @@ public class StudentAccount extends javax.swing.JFrame {
         
     }//GEN-LAST:event_viewFeedbackActionPerformed
 
+    private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_exportActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -735,69 +743,14 @@ public class StudentAccount extends javax.swing.JFrame {
     private javax.swing.JButton apply;
     private javax.swing.JButton back;
     private javax.swing.JLabel e;
-    private javax.swing.JLabel email;
-    private javax.swing.JLabel email1;
-    private javax.swing.JLabel email10;
-    private javax.swing.JLabel email2;
-    private javax.swing.JLabel email3;
-    private javax.swing.JLabel email4;
-    private javax.swing.JLabel email5;
-    private javax.swing.JLabel email6;
-    private javax.swing.JLabel email7;
-    private javax.swing.JLabel email8;
-    private javax.swing.JLabel email9;
     private javax.swing.JButton export;
     private javax.swing.JLabel g;
     private javax.swing.JLabel gg;
-    private javax.swing.JLabel grad;
-    private javax.swing.JLabel grad1;
-    private javax.swing.JLabel grad10;
-    private javax.swing.JLabel grad2;
-    private javax.swing.JLabel grad3;
-    private javax.swing.JLabel grad4;
-    private javax.swing.JLabel grad5;
-    private javax.swing.JLabel grad6;
-    private javax.swing.JLabel grad7;
-    private javax.swing.JLabel grad8;
-    private javax.swing.JLabel grad9;
-    private javax.swing.JPanel gradYear;
-    private javax.swing.JPanel gradYear1;
-    private javax.swing.JPanel gradYear10;
-    private javax.swing.JPanel gradYear2;
-    private javax.swing.JPanel gradYear3;
-    private javax.swing.JPanel gradYear4;
-    private javax.swing.JPanel gradYear5;
-    private javax.swing.JPanel gradYear6;
-    private javax.swing.JPanel gradYear7;
-    private javax.swing.JPanel gradYear8;
-    private javax.swing.JPanel gradYear9;
     private javax.swing.JLabel gug;
     private javax.swing.JLabel i;
     private javax.swing.JButton intJobDetail;
     private javax.swing.JButton interviewTimes;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel100;
-    private javax.swing.JLabel jLabel101;
-    private javax.swing.JLabel jLabel102;
-    private javax.swing.JLabel jLabel103;
-    private javax.swing.JLabel jLabel104;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
@@ -808,77 +761,11 @@ public class StudentAccount extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel54;
-    private javax.swing.JLabel jLabel55;
-    private javax.swing.JLabel jLabel56;
-    private javax.swing.JLabel jLabel57;
-    private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel59;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel60;
-    private javax.swing.JLabel jLabel61;
-    private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel65;
-    private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
-    private javax.swing.JLabel jLabel68;
-    private javax.swing.JLabel jLabel69;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel70;
-    private javax.swing.JLabel jLabel71;
-    private javax.swing.JLabel jLabel72;
-    private javax.swing.JLabel jLabel73;
-    private javax.swing.JLabel jLabel74;
-    private javax.swing.JLabel jLabel75;
-    private javax.swing.JLabel jLabel76;
-    private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel79;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel81;
-    private javax.swing.JLabel jLabel84;
-    private javax.swing.JLabel jLabel85;
-    private javax.swing.JLabel jLabel86;
-    private javax.swing.JLabel jLabel87;
-    private javax.swing.JLabel jLabel88;
-    private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabel90;
-    private javax.swing.JLabel jLabel91;
-    private javax.swing.JLabel jLabel92;
-    private javax.swing.JLabel jLabel93;
-    private javax.swing.JLabel jLabel94;
-    private javax.swing.JLabel jLabel95;
-    private javax.swing.JLabel jLabel96;
-    private javax.swing.JLabel jLabel97;
-    private javax.swing.JLabel jLabel98;
-    private javax.swing.JLabel jLabel99;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -889,65 +776,10 @@ public class StudentAccount extends javax.swing.JFrame {
     private javax.swing.JTable jTable3;
     private javax.swing.JButton jobDetail;
     private javax.swing.JLabel m;
-    private javax.swing.JLabel major;
-    private javax.swing.JLabel major1;
-    private javax.swing.JLabel major10;
-    private javax.swing.JLabel major2;
-    private javax.swing.JLabel major3;
-    private javax.swing.JLabel major4;
-    private javax.swing.JLabel major5;
-    private javax.swing.JLabel major6;
-    private javax.swing.JLabel major7;
-    private javax.swing.JLabel major8;
-    private javax.swing.JLabel major9;
     private javax.swing.JLabel n;
-    private javax.swing.JLabel name;
-    private javax.swing.JLabel name1;
-    private javax.swing.JLabel name10;
-    private javax.swing.JLabel name2;
-    private javax.swing.JLabel name3;
-    private javax.swing.JLabel name4;
-    private javax.swing.JLabel name5;
-    private javax.swing.JLabel name6;
-    private javax.swing.JLabel name7;
-    private javax.swing.JLabel name8;
-    private javax.swing.JLabel name9;
-    private javax.swing.JComboBox<String> positionType;
-    private javax.swing.JComboBox<String> positionType1;
-    private javax.swing.JComboBox<String> positionType10;
-    private javax.swing.JComboBox<String> positionType2;
-    private javax.swing.JComboBox<String> positionType3;
-    private javax.swing.JComboBox<String> positionType4;
-    private javax.swing.JComboBox<String> positionType5;
-    private javax.swing.JComboBox<String> positionType6;
-    private javax.swing.JComboBox<String> positionType7;
-    private javax.swing.JComboBox<String> positionType8;
-    private javax.swing.JComboBox<String> positionType9;
     private javax.swing.JLabel r;
-    private javax.swing.JLabel resume;
-    private javax.swing.JLabel resume1;
-    private javax.swing.JLabel resume10;
-    private javax.swing.JLabel resume2;
-    private javax.swing.JLabel resume3;
-    private javax.swing.JLabel resume4;
-    private javax.swing.JLabel resume5;
-    private javax.swing.JLabel resume6;
-    private javax.swing.JLabel resume7;
-    private javax.swing.JLabel resume8;
-    private javax.swing.JLabel resume9;
     private javax.swing.JComboBox<String> t;
     private javax.swing.JLabel ud;
-    private javax.swing.JLabel ufID;
-    private javax.swing.JLabel ufID1;
-    private javax.swing.JLabel ufID10;
-    private javax.swing.JLabel ufID2;
-    private javax.swing.JLabel ufID3;
-    private javax.swing.JLabel ufID4;
-    private javax.swing.JLabel ufID5;
-    private javax.swing.JLabel ufID6;
-    private javax.swing.JLabel ufID7;
-    private javax.swing.JLabel ufID8;
-    private javax.swing.JLabel ufID9;
     private javax.swing.JLabel ug;
     private javax.swing.JButton viewFeedback;
     // End of variables declaration//GEN-END:variables

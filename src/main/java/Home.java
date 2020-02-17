@@ -105,6 +105,11 @@ public class Home extends javax.swing.JFrame {
 
         loginButton2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         loginButton2.setText("Report");
+        loginButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -247,6 +252,12 @@ public class Home extends javax.swing.JFrame {
     
         }
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void loginButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButton2ActionPerformed
+        // TODO add your handling code here:
+        Report g = new Report();
+        g.setVisible(true);
+    }//GEN-LAST:event_loginButton2ActionPerformed
 
     /**
      * @param args the command line arguments

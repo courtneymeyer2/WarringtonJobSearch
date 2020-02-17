@@ -569,10 +569,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel21" alignment="1" min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="ug" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel21" alignment="1" min="-2" pref="14" max="-2" attributes="0"/>
+                          <Component id="ug" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -789,6 +787,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Export"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="viewFeedback">
           <Properties>

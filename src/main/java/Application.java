@@ -7,6 +7,7 @@ public class Application {
     private Job job;
     private String status;
     private Interview interview;
+    
     public Student getStudent() {return student;}
     public Job getJob() {return job;}
     public String getStatus() {return status;} 
@@ -29,4 +30,5 @@ public class Application {
         this.status = status;
     }
     
+    public Application(){}
 }

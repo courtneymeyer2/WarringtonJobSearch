@@ -56,6 +56,21 @@ public class Student {
     }
     
     //public exportJobList(){}
+    @Override
+    public String toString() {
+
+        String jobId = "";        
+        for(int i=0; i<JobSearchSystem.getApplication().size(); i++){
+            if(JobSearchSystem.getApplication().get(i).getStudent().getId() == UFId)
+                jobId += JobSearchSystem.getApplication().get(i).getJob().getJobID() + " ";
+        }        
+        if(jobId.equals(""))
+            jobId = "No jobs applied.";
+        
+        String str = String.format("%-8d,%-12s,%-15s,%-12s,%-20s",UFId,stuName,major, positionType,jobId);
+
+        return str;
+    }
     
     public Student(int id, String name, String email, String major, int graduatingYear, String positionType, String resume, double gpa, String password){
         this.UFId = id; this.stuName = name; this.stuEmail = email; this.major = major; this.graduatingYear = graduatingYear;
@@ -64,4 +79,6 @@ public class Student {
     
     public Student(){}
     
-}
+    }
+    
+

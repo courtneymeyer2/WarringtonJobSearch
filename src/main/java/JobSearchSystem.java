@@ -170,10 +170,20 @@ public class JobSearchSystem {
 //        return Interview;
 //    }
 //    
-//    public static Student getStudentInfo(int studentID)
-//    {
-//        return Student;
-//    }
+    public static LinkedList<Student> getStudent()
+    {
+        return students;
+    }
+    
+    public static LinkedList<Application> getApplication()
+    {
+        return applications;
+    }
+    
+    public static LinkedList<Company> getCompany()
+    {
+        return companies;
+    }
     
     public static boolean applicationExists(Job job, Student student)
     {
@@ -331,130 +341,147 @@ public class JobSearchSystem {
         interviews.add(interview);
     }
    
-   public static void removeInterview(Interview interview)
-   {
-       interviews.remove(interview);
-   }
-   
-   public static void addNewStudent(Student student)
-   {
-       students.add(student);
-   }
-   
-   public static LinkedList <Job> getAllJobs()
-   {
-       LinkedList<Job> j = new LinkedList<> ();
-       for(int i = 0; i < companies.size(); i++){
-           for (int n = 0; n < companies.get(i).getJobs().size(); n++){
-           j.add(companies.get(i).getJobs().get(n));
-           }
-       }
-       return j;
-   }
-   
- 
-   
-    public static LinkedList <Job> filterJobs(String jobTitle, String companyName, String location, String positionType)
+    public static void removeInterview(Interview interview)
     {
-        LinkedList<Job> j = new LinkedList<>();       
-        LinkedList<Job> jobs = getAllJobs();
-        
-        for(int i=0; i < jobs.size(); i++){
-            Boolean b1 = (jobs.get(i).getJobTitle().equals(jobTitle))|| (jobTitle.equals( " "));
-            Boolean b2 = (getCompanyById(jobs.get(i).getCompanyID()).getCompanyName().equals(companyName))||(companyName.equals( " "));
-            Boolean b3 = (jobs.get(i).getLocation().equals(location))||( location.equals( " "));
-            Boolean b4 = jobs.get(i).getPostitonType().equals(positionType);
-            if(b1 && b2 && b3 && b4){
-                j.add(jobs.get(i));
+        interviews.remove(interview);
+    }
+   
+    public static void addNewStudent(Student student)
+    {
+        students.add(student);
+    }
+   
+    public static LinkedList <Job> getAllJobs()
+    {
+        LinkedList<Job> j = new LinkedList<> ();
+        for(int i = 0; i < companies.size(); i++){
+            for (int n = 0; n < companies.get(i).getJobs().size(); n++){
+            j.add(companies.get(i).getJobs().get(n));
             }
         }
         return j;
     }
-  
-   public static boolean appliedToJob(Student student, Job job)
-   {
-       return true;
-   }
    
-   public static boolean addedtoJobs(Student student, Job job)
-   {
-       return true;
-   }
-   
-   public static void applytoJob(Application application)
-   {
-       applications.add(application);
-       
-       if(application.getStudent().getAddedJobs().contains(application.getJob()))
-       {
-           application.getStudent().removeFromJobList(application.getJob());
-           
-       }
-   }
-
-   public static LinkedList <Interview> getAvailableInterviews(Job job)
-   {
-       
-       LinkedList <Interview> interviews = new LinkedList <Interview>();
-       for(int i = 0; i < job.getInterviewList().size(); i++)
-       {
-           if(job.getInterviewList().get(i).getSelected())
-           {
+    public static LinkedList <Job> filterJobs(String jobTitle, String companyName, String location, String positionType, Student student)
+    {
+        LinkedList<Job> j = new LinkedList<>();
+        LinkedList<Job> allJobs = getAllJobs();
+        LinkedList<Job> jobs = new LinkedList<>();
+        
+        if(student instanceof Undergraduate)
+        {
+            for (int i=0; i < allJobs.size(); i++)
+            {
+                if (allJobs.get(i).getDegreeRequired().equals("Undergraduate") || allJobs.get(i).getDegreeRequired().equals("Both Undergraduate and Graduate"))
+                    jobs.add(allJobs.get(i));
+            }               
+        } 
+        else
+        {
+            for (int i=0; i < allJobs.size(); i++)
+            {
+                if (allJobs.get(i).getDegreeRequired().equals("Graduate") || allJobs.get(i).getDegreeRequired().equals("Both Undergraduate and Graduate"))
+                    jobs.add(allJobs.get(i));
+            }
+        }
                
-           }
-           else
-           {
-               interviews.add(job.getInterviewList().get(i));
-           }
-       }
-       return interviews;
-   }
+        for(int i=0; i < jobs.size(); i++)
+        {
+            Boolean b1 = (jobs.get(i).getJobTitle().equals(jobTitle))|| (jobTitle.equals( " "));
+            Boolean b2 = (getCompanyById(jobs.get(i).getCompanyID()).getCompanyName().equals(companyName))||(companyName.equals( " "));
+            Boolean b3 = (jobs.get(i).getLocation().equals(location))||( location.equals( " "));
+            Boolean b4 = jobs.get(i).getPostitonType().equals(positionType);
+            if(b1 && b2 && b3 && b4)
+                j.add(jobs.get(i));
+            
+        }
+        return j;
+    }
+  
+    public static boolean appliedToJob(Student student, Job job)
+    {
+        return true;
+    }
    
-   public static void selectInterview(Student student, Interview interview)
-   {
+    public static boolean addedtoJobs(Student student, Job job)
+    {
+        return true;
+    }
+   
+    public static void applytoJob(Application application)
+    {
+        applications.add(application);
        
-   }
+        if(application.getStudent().getAddedJobs().contains(application.getJob()))
+        {
+            application.getStudent().removeFromJobList(application.getJob());
+           
+        }
+    }
+
+    public static LinkedList <Interview> getAvailableInterviews(Job job)
+    {
+       
+        LinkedList <Interview> interviews = new LinkedList <Interview>();
+        for(int i = 0; i < job.getInterviewList().size(); i++)
+        {
+            if(job.getInterviewList().get(i).getSelected())
+            {
+               
+            }
+            else
+            {
+                interviews.add(job.getInterviewList().get(i));
+            }
+        }
+        return interviews;
+    }
    
-   public static Student getStudentByEmail(String email)
-   {
-       for(int i =0; i < students.size(); i++)
-       {
-           if(students.get(i).getEmail().equals(email))
-           {
-               return students.get(i);
-           }
-       }
-       return null;
-   }
+    public static void selectInterview(Student student, Interview interview)
+    {
+       
+    }
    
-   public static Company getCompanyByEmail(String email)
-   {
-       for(int i =0; i < companies.size(); i++)
-       {
-           if(companies.get(i).getCompanyEmail().equals(email))
-           {
-               return companies.get(i);
-           }
-       }
-       return null;
-   }
+    public static Student getStudentByEmail(String email)
+    {
+        for(int i =0; i < students.size(); i++)
+        {
+            if(students.get(i).getEmail().equals(email))
+            {
+                return students.get(i);
+            }
+        }
+        return null;
+    }
    
-   public static Company getCompanyById(int id)
-   {
-       for(int i =0; i < companies.size(); i++)
-       {
-           if(companies.get(i).getCompanyID()==id)
-           {
-               return companies.get(i);
-           }
-       }
-       return null;
-   }
+    public static Company getCompanyByEmail(String email)
+    {
+        for(int i =0; i < companies.size(); i++)
+        {
+            if(companies.get(i).getCompanyEmail().equals(email))
+            {
+                return companies.get(i);
+            }
+        }
+        return null;
+    }
    
-   public static void main(String[] args)
-   {
-       JobSearchSystem js = new JobSearchSystem();
-       Home home = new Home();
-       home.setVisible(true);
-   }
-}
+    public static Company getCompanyById(int id)
+    {
+        for(int i =0; i < companies.size(); i++)
+        {
+            if(companies.get(i).getCompanyID()==id)
+            {
+                return companies.get(i);
+            }
+        }
+        return null;
+    }
+   
+    public static void main(String[] args)
+    {
+        JobSearchSystem js = new JobSearchSystem();
+        Home home = new Home();
+        home.setVisible(true);
+    }
+ }
