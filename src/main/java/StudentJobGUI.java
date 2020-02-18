@@ -237,9 +237,15 @@ public class StudentJobGUI extends javax.swing.JFrame {
         }
         else
         {
-            StudentAccount sa = new StudentAccount(student);
-            sa.setVisible(true);
+            StudentAccount sa;
+            try {
+                sa = new StudentAccount(student);
+                           sa.setVisible(true);
             this.dispose();
+            } catch (ParseException ex) {
+                Logger.getLogger(StudentJobGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+ 
         }
        
     }//GEN-LAST:event_backActionPerformed

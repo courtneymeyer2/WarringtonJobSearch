@@ -189,9 +189,15 @@ public class SelectInterviewTimeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_selectActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        StudentAccount sa = new StudentAccount(applicant.getStudent());
-        sa.setVisible(true);
+        StudentAccount sa;
+        try {
+            sa = new StudentAccount(applicant.getStudent());
+                 sa.setVisible(true);
         this.dispose();
+        } catch (ParseException ex) {
+            Logger.getLogger(SelectInterviewTimeGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
     }//GEN-LAST:event_backActionPerformed
 
     /**

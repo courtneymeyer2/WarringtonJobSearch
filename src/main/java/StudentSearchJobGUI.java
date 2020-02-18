@@ -384,9 +384,15 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_viewJobButtonActionPerformed
 
     private void accountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountActionPerformed
-        StudentAccount sa = new StudentAccount(student);
-        sa.setVisible(true);
+        StudentAccount sa;
+        try {
+            sa = new StudentAccount(student);
+              sa.setVisible(true);
         this.dispose();
+        } catch (ParseException ex) {
+            Logger.getLogger(StudentSearchJobGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
     }//GEN-LAST:event_accountActionPerformed
 
     /**
