@@ -1,6 +1,9 @@
 
 import java.io.File;
+import java.text.ParseException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,7 +27,7 @@ public class StudentAccount extends javax.swing.JFrame {
         initComponents();
     }
     
-    public StudentAccount(Student student) {
+    public StudentAccount(Student student) throws ParseException {
         this();
         this.student = student;
         n.setText(student.getName() );
@@ -75,11 +78,17 @@ public class StudentAccount extends javax.swing.JFrame {
            
            
        DefaultTableModel model2 = (DefaultTableModel) jTable3.getModel();
+       LinkedList <Integer> jobIDS = new LinkedList <Integer>();
        
        for(int i = 0; i < student.getAddedJobs().size(); i++)
        {
              model2.addRow(new Object[]{"" +student.getAddedJobs().get(i).getJobTitle() , ""+ JobSearchSystem.getCompanyByJob(student.getAddedJobs().get(i)).getCompanyName() , "" + student.getAddedJobs().get(i).getDeadline()});
+            if(student.getAddedJobs().get(i).checkTime())
+            {
+                jobIDS.add(student.getAddedJobs().get(i).getJobID());
+                                JOptionPane.showMessageDialog(null, "Job " +student.getAddedJobs().get(i).getJobID() +" 's deadline is in less than 24 hours");
 
+            }
        }
            jTable3.setModel(model2); 
         
@@ -597,9 +606,15 @@ public class StudentAccount extends javax.swing.JFrame {
                 }
                else
                {
-                   StudentJobGUI sjg = new StudentJobGUI(applicants.get(index).getJob(), student, 1);
-                   sjg.setVisible(true);
+                   StudentJobGUI sjg;
+                   try {
+                       sjg = new StudentJobGUI(applicants.get(index).getJob(), student, 1);
+                        sjg.setVisible(true);
                    this.dispose();
+                   } catch (ParseException ex) {
+                       Logger.getLogger(StudentAccount.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+                  
                }
                
 
@@ -649,10 +664,16 @@ public class StudentAccount extends javax.swing.JFrame {
        else
        {
             Job j = student.getAddedJobs().get(index);
-            StudentJobGUI sjg = new StudentJobGUI(j, student, 1);
-            // StudentAccount sa = new StudentAccount(student);
-            sjg.setVisible(true);
+            StudentJobGUI sjg;
+           try {
+               sjg = new StudentJobGUI(j, student, 1);
+                sjg.setVisible(true);
             this.dispose();
+           } catch (ParseException ex) {
+               Logger.getLogger(StudentAccount.class.getName()).log(Level.SEVERE, null, ex);
+           }
+            // StudentAccount sa = new StudentAccount(student);
+           
        }
       
 
@@ -669,9 +690,15 @@ public class StudentAccount extends javax.swing.JFrame {
            Job j = student.getAddedJobs().get(index);
             JobSearchSystem.applytoJob(new Application(student, j, "Pending"));
             JOptionPane.showMessageDialog(null, "Applied Successfully");
-            StudentAccount sa = new StudentAccount(student);
-            sa.setVisible(true);
+            StudentAccount sa;
+           try {
+               sa = new StudentAccount(student);
+               sa.setVisible(true);
             this.dispose();
+           } catch (ParseException ex) {
+               Logger.getLogger(StudentAccount.class.getName()).log(Level.SEVERE, null, ex);
+           }
+            
        }
        
                

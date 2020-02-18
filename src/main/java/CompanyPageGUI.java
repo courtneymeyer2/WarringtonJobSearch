@@ -1,5 +1,8 @@
 
+import java.text.ParseException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -209,9 +212,15 @@ public class CompanyPageGUI extends javax.swing.JFrame {
         {
             if(jobs.get(i).getJobID() == jobID)
             {
-                CompanyJobGUI cjg = new CompanyJobGUI(jobs.get(i), company);
-                cjg.setVisible(true);
+                CompanyJobGUI cjg;
+                try {
+                    cjg = new CompanyJobGUI(jobs.get(i), company);
+                     cjg.setVisible(true);
                 this.dispose();
+                } catch (ParseException ex) {
+                    Logger.getLogger(CompanyPageGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               
             }
         }
         

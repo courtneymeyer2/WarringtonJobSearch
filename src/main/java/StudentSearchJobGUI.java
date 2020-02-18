@@ -1,7 +1,10 @@
 
+import java.text.ParseException;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -365,9 +368,15 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         }
         else
         {
-            StudentJobGUI sjg = new StudentJobGUI(filterJobs.get(index), student, 0);
-            sjg.setVisible(true);
+            StudentJobGUI sjg;
+            try {
+                sjg = new StudentJobGUI(filterJobs.get(index), student, 0);
+                 sjg.setVisible(true);
             this.dispose();
+            } catch (ParseException ex) {
+                Logger.getLogger(StudentSearchJobGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
 
         }
 

@@ -1,6 +1,9 @@
 
+import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -215,9 +218,15 @@ public class AddFeedback extends javax.swing.JFrame {
                 applicant.setStatus(status.getSelectedItem().toString());
                 System.out.println(status.getSelectedItem().toString());
                 JOptionPane.showMessageDialog(null, "Status Changed");
-                CompanyJobGUI cjg = new CompanyJobGUI(job, company);
-                cjg.setVisible(true);
+                CompanyJobGUI cjg;
+                try {
+                    cjg = new CompanyJobGUI(job, company);
+                    cjg.setVisible(true);
                 this.dispose();
+                } catch (ParseException ex) {
+                    Logger.getLogger(AddFeedback.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
             }
         }
         else
@@ -226,18 +235,30 @@ public class AddFeedback extends javax.swing.JFrame {
             applicant.setStatus(status.getSelectedItem().toString());
             System.out.println(status.getSelectedItem().toString());
             JOptionPane.showMessageDialog(null, "Status Changed");
-            CompanyJobGUI cjg = new CompanyJobGUI(job, company);
-             cjg.setVisible(true);
+            CompanyJobGUI cjg;
+            try {
+                cjg = new CompanyJobGUI(job, company);
+                cjg.setVisible(true);
                 this.dispose();
+            } catch (ParseException ex) {
+                Logger.getLogger(AddFeedback.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             
         }
         
         
     }//GEN-LAST:event_selectButtonActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        CompanyJobGUI cjg = new CompanyJobGUI(job,company);
-        cjg.setVisible(true);
+        CompanyJobGUI cjg;
+        try {
+            cjg = new CompanyJobGUI(job,company);
+            cjg.setVisible(true);
         this.dispose();
+        } catch (ParseException ex) {
+            Logger.getLogger(AddFeedback.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_backActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
@@ -245,9 +266,15 @@ public class AddFeedback extends javax.swing.JFrame {
            {
             applicant.getInterview().setFeeback(feedback.getText().toString());
             JOptionPane.showMessageDialog(null, "Feedback has been added");
-            CompanyJobGUI cjg = new CompanyJobGUI(job, company);
-            cjg.setVisible(true);
+            CompanyJobGUI cjg;
+            try {
+                cjg = new CompanyJobGUI(job, company);
+                cjg.setVisible(true);
             this.dispose();
+            } catch (ParseException ex) {
+                Logger.getLogger(AddFeedback.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             
            }
          catch(NullPointerException e)

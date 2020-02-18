@@ -1,4 +1,8 @@
 
+import java.awt.Color;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -21,13 +25,17 @@ public class StudentJobGUI extends javax.swing.JFrame {
         
     }
     
-    public StudentJobGUI(Job job, Student student, int page){
+    public StudentJobGUI(Job job, Student student, int page) throws ParseException{
         this();
         this.page = page;
         this.student = student;
         this.job = job;
         companyAndPosition.setText(JobSearchSystem.getCompanyByJob(job).getCompanyName() + ": " + job.getJobTitle());
         deadline.setText(job.getDeadline());
+        if(job.checkTime())
+        {
+            deadline.setForeground(Color.red);
+        }
         description.setText("Description: " + job.getDescription());
         quali.setText("Qualifications: " + job.getQualifications());
         require.setText("Requirements: " + job.getRequirement());
@@ -251,9 +259,15 @@ public class StudentJobGUI extends javax.swing.JFrame {
 //            }
 
         }
-        StudentJobGUI s = new StudentJobGUI(job, student, 0);
-        s.setVisible(true);
+        StudentJobGUI s;
+        try {
+            s = new StudentJobGUI(job, student, 0);
+             s.setVisible(true);
         this.dispose();
+        } catch (ParseException ex) {
+            Logger.getLogger(StudentJobGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
    
        
     }//GEN-LAST:event_applyActionPerformed
@@ -272,9 +286,15 @@ public class StudentJobGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Removed from Interested Job List");
              Added.setText("Add to List");
         }
-        StudentJobGUI s = new StudentJobGUI(job, student, 0);
-        s.setVisible(true);
+        StudentJobGUI s;
+        try {
+            s = new StudentJobGUI(job, student, 0);
+              s.setVisible(true);
         this.dispose();
+        } catch (ParseException ex) {
+            Logger.getLogger(StudentJobGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
      
     }//GEN-LAST:event_AddedActionPerformed
 

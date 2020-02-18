@@ -1,5 +1,8 @@
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.*;
 
@@ -175,6 +178,31 @@ public class Job {
             }
              }
         return j;
+    }
+
+    public boolean checkTime () throws ParseException 
+    {
+       LocalDateTime localDateTime = LocalDateTime.now();
+      Date D = new SimpleDateFormat("MM/dd/yyyy").parse(deadline);
+      Calendar Cal = Calendar.getInstance();
+      Cal.setTime(D);
+      Cal.set(Calendar.HOUR, localDateTime.getHour());
+      Cal.set(Calendar.MINUTE, localDateTime.getMinute());
+      Cal.set(Calendar.SECOND, localDateTime.getSecond());
+      System.out.println(Cal.getTime());
+      Calendar cal2 = Calendar.getInstance();
+      System.out.println(LocalDateTime.now());
+      Calendar calendar = Calendar.getInstance();
+      calendar.clear();
+      calendar.set(localDateTime.getYear(), localDateTime.getMonthValue()-1, localDateTime.getDayOfMonth()+1, localDateTime.getHour(), localDateTime.getMinute(), localDateTime.getSecond());
+      //calendar.getTime();
+      if(Cal.getTime().equals(calendar.getTime()))
+      {
+          System.out.println("test");
+          return true;
+      }
+      return false;
+      
     }
 
 }

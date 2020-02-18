@@ -306,7 +306,7 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
              if(check)
              {
              job.addInterview(interview);
-             JobSearchSystem.addInterview(interview);
+            // JobSearchSystem.addInterview(interview);
              numOfInterviews --;
              CreateInterviewTimesGUI c = new CreateInterviewTimesGUI(company, job, numOfInterviews);
              c.setVisible(true);
@@ -337,9 +337,15 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
-        CompanyJobGUI cjg = new CompanyJobGUI(job, company);
-        cjg.setVisible(true);
+        CompanyJobGUI cjg;
+        try {
+            cjg = new CompanyJobGUI(job, company);
+             cjg.setVisible(true);
         this.dispose();
+        } catch (ParseException ex) {
+            Logger.getLogger(CreateInterviewTimesGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }//GEN-LAST:event_backActionPerformed
 
     /**

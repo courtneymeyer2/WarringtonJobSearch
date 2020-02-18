@@ -1,6 +1,7 @@
 
 import java.awt.Desktop;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -404,9 +405,15 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_downloadActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        CompanyJobGUI cjg = new CompanyJobGUI(job, company);
-        cjg.setVisible(true);
+        CompanyJobGUI cjg;
+        try {
+            cjg = new CompanyJobGUI(job, company);
+             cjg.setVisible(true);
         this.dispose();
+        } catch (ParseException ex) {
+            Logger.getLogger(CompanyViewofStudentProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**

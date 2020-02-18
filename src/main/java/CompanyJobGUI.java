@@ -1,4 +1,6 @@
 
+import java.awt.Color;
+import java.text.ParseException;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,12 +24,16 @@ public class CompanyJobGUI extends javax.swing.JFrame {
     public CompanyJobGUI() {
         initComponents();
     }
-    public CompanyJobGUI(Job job, Company company) {
+    public CompanyJobGUI(Job job, Company company) throws ParseException {
         this();
         this.company = company;
         this.job = job;
         CompanyWithPosition.setText(company.getCompanyName() + ": " + job.getJobTitle());
         deadline.setText(job.getDeadline());
+        if(job.checkTime())
+        {
+            deadline.setForeground(Color.red);
+        }
         description.setText("Description: " + job.getDescription());
         quali.setText("Qualifications: " + job.getQualifications());
         require.setText("Requirements: " + job.getRequirement());
