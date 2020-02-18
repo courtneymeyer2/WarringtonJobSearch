@@ -1,4 +1,5 @@
 
+import java.io.File;
 import java.util.LinkedList;
 /**
  *
@@ -6,7 +7,7 @@ import java.util.LinkedList;
  */
 public class Undergraduate extends Student {
     
-    public Undergraduate(int id, String name, String email, String major, int graduatingYear, String positionType, String resume, double gpa, String password){
+    public Undergraduate(int id, String name, String email, String major, int graduatingYear, String positionType, File resume, double gpa, String password){
        super(id, name, email, major, graduatingYear, positionType, resume, gpa, password);
        
    }

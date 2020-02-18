@@ -393,7 +393,7 @@ public class JobSearchSystem {
         for(int i=0; i < jobs.size(); i++)
         {
             Boolean b1 = (jobs.get(i).getJobTitle().equals(jobTitle))|| (jobTitle.equals( " "));
-            Boolean b2 = (getCompanyById(jobs.get(i).getCompanyID()).getCompanyName().equals(companyName))||(companyName.equals( " "));
+            Boolean b2 = (getCompanyByJob(jobs.get(i)).getCompanyName().equals(companyName))||(companyName.equals( " "));
             Boolean b3 = (jobs.get(i).getLocation().equals(location))||( location.equals( " "));
             Boolean b4 = jobs.get(i).getPostitonType().equals(positionType);
             if(b1 && b2 && b3 && b4)

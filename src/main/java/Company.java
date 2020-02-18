@@ -32,23 +32,55 @@ public class Company
         this.companyPassword = companyPassword;
     }
     
-    public String toString()
-    {
-        String j = "";
-        if(jobs == null)
-        {
-            j = "No jobs posted.";
-        }
-        else
-        {
-            for(int i=0; i< jobs.size();i++)
-                j += jobs.get(i).getJobID();
-        }
-        
-        String str = String.format("%-8d, %-20s, %-20s", companyID, companyName, j);
-        return str;
-    }
+//    public String toString()
+//    {
+//        String j = "[";
+//        if(jobs == null)
+//        {
+//            j = "No jobs posted.";
+//        }
+//        else
+//        {
+//            for(int i=0; i< jobs.size();i++)
+//            {
+//               
+//            if(i == jobs.size()-1)
+//            {
+//                 j += jobs.get(i).getJobID() +"]";
+//            }
+//            else
+//            {
+//                 j += jobs.get(i).getJobID() +", ";
+//            }
+//             }
+//        }
+//        
+//        
+//        String str = ("" + companyID + ", "+companyName + "," +companyEmail + ", "+companyPassword + "," + j);
+//        return str;
+//    }
 
+    public String getJobIDs()
+    {
+        if(jobs.size() == 0)
+        {
+            return "No jobs added";
+        }
+        String j ="[";
+        for(int i=0; i< jobs.size();i++)
+            {
+               
+            if(i == jobs.size()-1)
+            {
+                 j += jobs.get(i).getJobID() +"]";
+            }
+            else
+            {
+                 j += jobs.get(i).getJobID() +", ";
+            }
+             }
+        return j;
+    }
 
     public static int getNextId()
     { 

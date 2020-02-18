@@ -8,9 +8,10 @@ PostJobListingGUI$5.class
 StudentJobGUI$1.class
 SelectInterviewTimeGUI$1.class
 Report$1.class
+RegisterStudent$9.class
 StudentSearchJobGUI$2.class
 CompanyJobGUI$8.class
-Report$7.class
+StudentAccount$11.class
 StudentAccount$3.class
 StudentSearchJobGUI$5.class
 CompanyViewofStudentProfile$4.class
@@ -68,7 +69,6 @@ RegisterStudent$2.class
 StudentJobGUI$2.class
 RegisterStudent$3.class
 PostJobListingGUI$3.class
-Report$6.class
 CreateInterviewTimesGUI$3.class
 StudentAccount$6.class
 StudentSearchJobGUI.class

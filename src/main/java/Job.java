@@ -16,7 +16,7 @@ import java.util.*;
 public class Job {
     private int jobID;
     private static int nextID = 1;
-    private int companyID;
+    //private int companyID;
     private String jobTitle;
     private String description;
     private String location;
@@ -29,33 +29,33 @@ public class Job {
     //private LinkedList <Student> appliedStudents= new LinkedList <Student>();
     //private LinkedList <Student> selectedStudents = new LinkedList <Student>();
     
-    public String toString()
-    {
-        String applicants = "";
-        for(int i=0; i < JobSearchSystem.getApplication().size(); i++)
-        {
-            if(JobSearchSystem.getApplication().get(i).getJob().getJobID() == jobID)
-            {
-                applicants += JobSearchSystem.getApplication().get(i).getStudent().getId();
-            }
-        }
-        if (applicants.equals(""))
-        {
-            applicants = "No applicants";
-        }
-        
-        String company = JobSearchSystem.getCompanyById(companyID).getCompanyName();
-        
-        String str = String.format("%-8d,%-20s, %-20s, %-20s", jobID, jobTitle, company, applicants);
-        return str;
-    }
+//    public String toString()
+//    {
+//        String applicants = "";
+//        for(int i=0; i < JobSearchSystem.getApplication().size(); i++)
+//        {
+//            if(JobSearchSystem.getApplication().get(i).getJob().getJobID() == jobID)
+//            {
+//                applicants += JobSearchSystem.getApplication().get(i).getStudent().getId();
+//            }
+//        }
+//        if (applicants.equals(""))
+//        {
+//            applicants = "No applicants";
+//        }
+//        
+//        String company = JobSearchSystem.getCompanyById(companyID).getCompanyName();
+//        
+//        String str = String.format("%-8d,%-20s, %-20s, %-20s", jobID, jobTitle, company, applicants);
+//        return str;
+//    }
     
-    public Job(int companyID, String jobTitle, String description, String location, String qualification, String requirement, String degreeRequired, String positionType, String deadline)
+    public Job(String jobTitle, String description, String location, String qualification, String requirement, String degreeRequired, String positionType, String deadline)
     {
         
         this.jobID = nextID;
         nextID ++;
-        this.companyID = companyID;
+        //this.companyID = companyID;
         this.jobTitle = jobTitle;
         this.description = description;
         this.location = location;
@@ -84,10 +84,10 @@ public class Job {
         this.nextID = nextID;
     }
 
-    public int getCompanyID()
-    {
-        return companyID;
-    }
+//    public int getCompanyID()
+//    {
+//        return companyID;
+//    }
 
     public String getJobTitle()
     {
@@ -155,5 +155,26 @@ public class Job {
         interviews.add(interview);
     }
 
+    public String getInterviewIDs()
+    {
+        if(interviews.isEmpty())
+        {
+            return "No interviews added";
+        }
+        String j ="[";
+        for(int i=0; i< interviews.size();i++)
+            {
+               
+            if(i == interviews.size()-1)
+            {
+                 j += interviews.get(i).getInterviewID() +"]";
+            }
+            else
+            {
+                 j += interviews.get(i).getInterviewID() +", ";
+            }
+             }
+        return j;
+    }
 
 }

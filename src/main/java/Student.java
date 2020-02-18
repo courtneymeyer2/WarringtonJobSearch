@@ -1,4 +1,5 @@
 
+import java.io.File;
 import java.util.LinkedList;
 
 /**
@@ -12,7 +13,7 @@ public class Student {
     private String major;
     private int graduatingYear;
     private String positionType;
-    private String resume;
+    private File resume;
     private double gpa;
     private String stuPassword;
     private LinkedList<Job> addedJobs = new LinkedList<Job>();
@@ -24,11 +25,12 @@ public class Student {
     public String getMajor() { return major; }
     public int getGraduatingYear() { return graduatingYear; }
     public String getPositionType() { return positionType; }
-    public String getResume() { return resume; }
+    public File getResume() { return resume; }
     public double getGPA(){return gpa; }
     public String getStudentPassword() { return stuPassword; }
     public LinkedList<Job> getAddedJobs() { return addedJobs; }
     public LinkedList<Interview> getInterview() { return stuInterviews; }
+    public void setResume(File f) { resume = f;}
     
     public void addInterview(Interview interview){
         stuInterviews.add(interview);
@@ -55,24 +57,46 @@ public class Student {
         addedJobs.remove(job);
     }
     
-    //public exportJobList(){}
-    @Override
-    public String toString() {
-
-        String jobId = "";        
-        for(int i=0; i<JobSearchSystem.getApplication().size(); i++){
-            if(JobSearchSystem.getApplication().get(i).getStudent().getId() == UFId)
-                jobId += JobSearchSystem.getApplication().get(i).getJob().getJobID() + " ";
-        }        
-        if(jobId.equals(""))
-            jobId = "No jobs applied.";
-        
-        String str = String.format("%-8d,%-12s,%-15s,%-12s,%-20s",UFId,stuName,major, positionType,jobId);
-
-        return str;
-    }
     
-    public Student(int id, String name, String email, String major, int graduatingYear, String positionType, String resume, double gpa, String password){
+    public String getJobIDs()
+    {
+        if(addedJobs.size() == 0)
+        {
+            return "No jobs added";
+        }
+        String j ="[";
+        for(int i=0; i< addedJobs.size();i++)
+            {
+               
+            if(i == addedJobs.size()-1)
+            {
+                 j += addedJobs.get(i).getJobID() +"]";
+            }
+            else
+            {
+                 j += addedJobs.get(i).getJobID() +", ";
+            }
+             }
+        return j;
+    }
+    //public exportJobList(){}
+//    @Override
+//    public String toString() {
+//
+//        String jobId = "";        
+//        for(int i=0; i<JobSearchSystem.getApplication().size(); i++){
+//            if(JobSearchSystem.getApplication().get(i).getStudent().getId() == UFId)
+//                jobId += JobSearchSystem.getApplication().get(i).getJob().getJobID() + " ";
+//        }        
+//        if(jobId.equals(""))
+//            jobId = "No jobs applied.";
+//        
+//        String str = String.format("%-8d,%-12s,%-15s,%-12s,%-20s",UFId,stuName,major, positionType,jobId);
+//
+//        return str;
+//    }
+//    
+    public Student(int id, String name, String email, String major, int graduatingYear, String positionType, File resume, double gpa, String password){
         this.UFId = id; this.stuName = name; this.stuEmail = email; this.major = major; this.graduatingYear = graduatingYear;
         this.positionType = positionType; this.resume = resume; this.gpa = gpa; this.stuPassword = password;
     }

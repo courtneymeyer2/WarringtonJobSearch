@@ -1,6 +1,7 @@
 
 import java.util.LinkedList;
 import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,53 +20,91 @@ public class Report extends javax.swing.JFrame {
      */
     public Report() {
         initComponents();
-        
-        DefaultListModel m1 = (DefaultListModel)(student.getModel());
-        m1.clear();
-        String header1 = String.format("%-8s,%-12s,%-15s,%-12s,%-20s","UFID","Name","Major", "Position Type","Applied JobID");
-        m1.addElement(header1);
+          
         LinkedList<Student> students = JobSearchSystem.getStudent();
         
-        for(int i=0; i < students.size(); i++) {
-            m1.addElement( students.get(i).toString() );
-        }
+         DefaultTableModel model = (DefaultTableModel) students1.getModel();
         
-        DefaultListModel m2 = (DefaultListModel)(company.getModel());
-        m2.clear();
-        String header2 = String.format("%-8s, %-20s, %-20s", "ID", "Name", "Posted JobID");
-        m2.addElement(header2);
-        LinkedList<Company> companies = JobSearchSystem.getCompany();
-        for(int i=0; i < companies.size(); i++) {
-            m2.addElement( companies.get(i).toString() );
-        }
+            for(int i = 0; i < students.size(); i++)
+                {
+                    if(students.get(i) instanceof Undergraduate)
+                    {
+                      model.addRow(new Object[]{"U", "" +students.get(i).getId(), students.get(i).getName(), "" +students.get(i).getEmail(), "" +students.get(i).getMajor(), "" +students.get(i).getGraduatingYear(), "" +students.get(i).getPositionType(), "" +students.get(i).getResume().getName(), "" +students.get(i).getGPA(), "" +students.get(i).getStudentPassword(), "" +students.get(i).getJobIDs(), "", ""});
+
+                    }
+                    else
+                    {
+                      model.addRow(new Object[]{"G", "" +students.get(i).getId(), students.get(i).getName(), "" +students.get(i).getEmail(), "" +students.get(i).getMajor(), "" +students.get(i).getGraduatingYear(), "" +students.get(i).getPositionType(), "" +students.get(i).getResume().getName(), "" +students.get(i).getGPA(), "" +students.get(i).getStudentPassword(), "" +students.get(i).getJobIDs(), ((Graduate)students.get(i)).getUndergradMajor(), ((Graduate)students.get(i)).getUndergradGPA()});
+                    }
+                    
+                }
+           students1.setModel(model); 
+    
+
+       LinkedList<Company> companies = JobSearchSystem.getCompany();
+         DefaultTableModel model2 = (DefaultTableModel) companies2.getModel();
         
-        DefaultListModel m3 = (DefaultListModel)(job.getModel());
-        m3.clear();
-        String header3 = String.format("%-8d,%-20s, %-20s, %-20s", "ID", "Title", "Company", "Applicants");
-        m3.addElement(header3);
-        LinkedList<Job> jobs = JobSearchSystem.getAllJobs();
-        for(int i=0; i < jobs.size(); i++) {
-            m3.addElement( jobs.get(i).toString() );
-        }
+            for(int i = 0; i < companies.size(); i++)
+                {
+                 
+                      model2.addRow(new Object[]{"" +companies.get(i).getCompanyID(),  companies.get(i).getCompanyName(), companies.get(i).getCompanyEmail(), companies.get(i).getCompanyPassword(), companies.get(i).getJobIDs()});
+                    
+                }
+           companies2.setModel(model2); 
+           
+         LinkedList<Job> jobs = JobSearchSystem.getAllJobs();
+
+                 // LinkedList<Company> companies = JobSearchSystem.getCompany();
+         DefaultTableModel model3 = (DefaultTableModel) jobs1.getModel();
         
-        DefaultListModel m4 = (DefaultListModel)(application.getModel());
-        m4.clear();
-        String header4 = String.format("%-8d, %-8d, %-20s", "Student ID", "Job ID", "Status");
-        m4.addElement(header4);
+            for(int i = 0; i < jobs.size(); i++)
+                {
+                 
+                      model3.addRow(new Object[]{"" +jobs.get(i).getJobID(),""+ JobSearchSystem.getCompanyByJob(jobs.get(i)).getCompanyID(),  jobs.get(i).getJobTitle(), jobs.get(i).getDescription(), jobs.get(i).getLocation(), jobs.get(i).getQualifications(), jobs.get(i).getRequirement(), jobs.get(i).getDegreeRequired(), jobs.get(i).getPostitonType(), jobs.get(i).getDeadline(), jobs.get(i).getInterviewIDs()});
+                    
+                }
+           jobs1.setModel(model3); 
+//        
+      //  DefaultListModel m3 = new DefaultListModel();
+      //  m3.clear();
+       // String header3 = String.format("%-8s,%-20s, %-20s, %-20s", "ID", "Title", "Company", "Applicants");
+       // m3.addElement(header3);
+//        LinkedList<Job> jobs = JobSearchSystem.getAllJobs();
+//        for(int i=0; i < jobs.size(); i++) {
+//            m3.addElement( jobs.get(i).toString() + ", " );
+//        }
+//        job.setModel(m3);
+        
+//        DefaultListModel m4 = new DefaultListModel();
+//        m4.clear();
+        //String header4 = String.format("%-8s, %-8s, %-20s", "Student ID", "Job ID", "Status");
+        //m4.addElement(header4);
         LinkedList<Application> applications = JobSearchSystem.getApplication();
-        for(int i=0; i < applications.size(); i++) {
-            m4.addElement( applications.get(i).toString() );
-        }
+         DefaultTableModel model4 = (DefaultTableModel) applications1.getModel();
         
-        DefaultListModel m5 = (DefaultListModel)(interview.getModel());
-        m5.clear();
-        String header5 = String.format("%-8d, %-20s, %-20s", "ID", "Date", "Selected");
-        m5.addElement(header5);
-        LinkedList<Interview> interviews = JobSearchSystem.getInterview();
-        for(int i=0; i < interviews.size(); i++) {
-            m5.addElement( interviews.get(i).toString() );
-        }
-    }
+            for(int i = 0; i < applications.size(); i++)
+                {
+                 
+                    //  model3.addRow(new Object[]{"" +jobs.get(i).getJobID(),""+ JobSearchSystem.getCompanyByJob(jobs.get(i)).getCompanyID(),  jobs.get(i).getJobTitle(), jobs.get(i).getDescription(), jobs.get(i).getLocation(), jobs.get(i).getQualifications(), jobs.get(i).getRequirement(), jobs.get(i).getDegreeRequired(), jobs.get(i).getPostitonType(), jobs.get(i).getDeadline(), jobs.get(i).getInterviewIDs()});
+                    
+                }
+           applications1.setModel(model4); 
+        
+//        for(int i=0; i < applications.size(); i++) {
+//            m4.addElement( applications.get(i).toString() +", " );
+//        }
+//        application.setModel(m4);
+//        
+//        DefaultListModel m5 = new DefaultListModel();
+//        m5.clear();
+        //String header5 = String.format("%-8s, %-20s, %-20s", "ID", "Date", "Selected");
+        //m5.addElement(header5);
+//        LinkedList<Interview> interviews = JobSearchSystem.getInterview();
+//        for(int i=0; i < interviews.size(); i++) {
+//            m5.addElement( interviews.get(i).toString() + ", " );
+//        }
+//        interview.setModel(m5);
+   }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,22 +118,23 @@ public class Report extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        student = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        company = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        job = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        interview = new javax.swing.JList<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        application = new javax.swing.JList<>();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        applications1 = new javax.swing.JTable();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        students1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        companies2 = new javax.swing.JTable();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jobs1 = new javax.swing.JTable();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        interviews1 = new javax.swing.JTable();
 
         jList3.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -108,21 +148,13 @@ public class Report extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
-        jScrollPane2.setViewportView(student);
-
         jLabel1.setText("Students");
 
-        jScrollPane1.setViewportView(company);
-
         jLabel2.setText("Companies");
-
-        jScrollPane4.setViewportView(job);
 
         jLabel3.setText("Jobs");
 
         jLabel4.setText("Applications");
-
-        jScrollPane5.setViewportView(interview);
 
         jLabel5.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 255));
@@ -130,78 +162,185 @@ public class Report extends javax.swing.JFrame {
 
         jLabel6.setText("Interviews");
 
-        jScrollPane6.setViewportView(application);
+        applications1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Student ID", "Job ID", "Interview ID", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane8.setViewportView(applications1);
+
+        students1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Type", "UF ID", "Name", "Email", "Major", "Grad Year", "Position Type", "Resume", "GPA", "Password", "Added Job IDs", "Under. Major", "Under. GPA"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane9.setViewportView(students1);
+
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        companies2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "Email", "Password", "Job IDs"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane10.setViewportView(companies2);
+
+        jobs1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Company ID", "Title", "Description", "Location", "Qualifications", "Requirement", "Degree", "Position Type", "Deadline", "Interview IDs"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane11.setViewportView(jobs1);
+
+        interviews1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Date", "Duration", "Feedback", "Selected"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane12.setViewportView(interviews1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(368, 368, 368)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 837, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 835, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 19, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(285, 285, 285)
+                                .addComponent(jLabel5))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 847, Short.MAX_VALUE)
+                            .addComponent(jScrollPane10, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(4, 4, 4)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 88, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Home home = new Home();
+        home.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,9 +378,10 @@ public class Report extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> application;
-    private javax.swing.JList<String> company;
-    private javax.swing.JList<String> interview;
+    private javax.swing.JTable applications1;
+    private javax.swing.JTable companies2;
+    private javax.swing.JTable interviews1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -250,13 +390,13 @@ public class Report extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JList<String> jList3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JList<String> job;
-    private javax.swing.JList<String> student;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JTable jobs1;
+    private javax.swing.JTable students1;
     // End of variables declaration//GEN-END:variables
 }

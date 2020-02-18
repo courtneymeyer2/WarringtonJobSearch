@@ -1,5 +1,7 @@
 
+import java.io.File;
 import java.util.LinkedList;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,7 +32,7 @@ public class StudentAccount extends javax.swing.JFrame {
         m.setText(student.getMajor());
         g.setText(student.getGraduatingYear()+ "");
         i.setText(student.getId() + "");
-        r.setText(student.getResume());
+        r.setText(student.getResume().getName());
         if(student.getPositionType().equals("Internship"))
         {
             t.setSelectedIndex(1);
@@ -106,10 +108,10 @@ public class StudentAccount extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        r = new javax.swing.JLabel();
         i = new javax.swing.JLabel();
         t = new javax.swing.JComboBox<>();
-        jButton19 = new javax.swing.JButton();
+        Update = new javax.swing.JButton();
+        r = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         gg = new javax.swing.JLabel();
@@ -186,9 +188,6 @@ public class StudentAccount extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jLabel20.setText("Resume");
 
-        r.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        r.setText("***.pdf");
-
         i.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         i.setText("***");
 
@@ -196,8 +195,15 @@ public class StudentAccount extends javax.swing.JFrame {
         t.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Full-time", "Internship" }));
         t.setEnabled(false);
 
-        jButton19.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jButton19.setText("Download");
+        Update.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        Update.setText("Update");
+        Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateActionPerformed(evt);
+            }
+        });
+
+        r.setText(" ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -221,15 +227,14 @@ public class StudentAccount extends javax.swing.JFrame {
                     .addComponent(jLabel18)
                     .addComponent(jLabel19)
                     .addComponent(jLabel20))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(48, 48, 48)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(r)
                     .addComponent(i)
-                    .addComponent(t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(r)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton19)))
-                .addGap(80, 80, 80))
+                    .addComponent(t, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(Update)
+                .addGap(42, 42, 42))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,8 +252,8 @@ public class StudentAccount extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel20)
-                            .addComponent(r)
-                            .addComponent(jButton19)))
+                            .addComponent(Update)
+                            .addComponent(r, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel78)
@@ -703,6 +708,15 @@ public class StudentAccount extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_exportActionPerformed
 
+    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
+        JFileChooser chooser = new JFileChooser();	
+        chooser.showOpenDialog(null);	
+        f = chooser.getSelectedFile();	
+        String filename = f.getName();	
+        r.setText(filename);	
+        student.setResume(f);
+    }//GEN-LAST:event_UpdateActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -737,9 +751,11 @@ public class StudentAccount extends javax.swing.JFrame {
             }
         });
     }
+    private File f;
     private Student student;
     private LinkedList <Application> applicants;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Update;
     private javax.swing.JButton apply;
     private javax.swing.JButton back;
     private javax.swing.JLabel e;
@@ -750,7 +766,6 @@ public class StudentAccount extends javax.swing.JFrame {
     private javax.swing.JLabel i;
     private javax.swing.JButton intJobDetail;
     private javax.swing.JButton interviewTimes;
-    private javax.swing.JButton jButton19;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
@@ -777,7 +792,7 @@ public class StudentAccount extends javax.swing.JFrame {
     private javax.swing.JButton jobDetail;
     private javax.swing.JLabel m;
     private javax.swing.JLabel n;
-    private javax.swing.JLabel r;
+    private javax.swing.JTextField r;
     private javax.swing.JComboBox<String> t;
     private javax.swing.JLabel ud;
     private javax.swing.JLabel ug;

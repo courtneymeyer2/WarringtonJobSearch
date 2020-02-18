@@ -1,5 +1,9 @@
 
+import java.awt.Desktop;
+import java.io.IOException;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -30,7 +34,7 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
         major.setText(student.getMajor());
         grad.setText(student.getGraduatingYear()+ "");
         ufID.setText(student.getId() + "");
-        resume.setText(student.getResume());
+        resume.setText(student.getResume().getAbsolutePath());
         if(student.getPositionType().equals("Internship"))
         {
             positionType.setSelectedIndex(1);
@@ -77,7 +81,7 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        download = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         positionType = new javax.swing.JComboBox<>();
@@ -85,11 +89,9 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         resume = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         undergradGPA = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -135,10 +137,10 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jLabel7.setText("Graduating Year");
 
-        jButton1.setText("Download");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        download.setText("Download");
+        download.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                downloadActionPerformed(evt);
             }
         });
 
@@ -201,7 +203,7 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
                             .addGroup(gradYearLayout.createSequentialGroup()
                                 .addComponent(resume)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1)))))
+                                .addComponent(download)))))
                 .addContainerGap())
         );
         gradYearLayout.setVerticalGroup(
@@ -219,7 +221,7 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
                             .addComponent(positionType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(gradYearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
+                            .addComponent(download)
                             .addComponent(jLabel21)
                             .addComponent(resume)))
                     .addGroup(gradYearLayout.createSequentialGroup()
@@ -241,10 +243,7 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel16.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel16.setText("Undergraduate ");
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Undergraduate", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Franklin Gothic Demi", 0, 14))); // NOI18N
 
         jLabel17.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jLabel17.setText("Undergraduate GPA");
@@ -257,30 +256,23 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(undergradGPA, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(undergradGPA, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 185, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(undergradGPA))
-                .addGap(0, 51, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel22.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        jLabel22.setText("Graduate");
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Graduate", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Franklin Gothic Demi", 0, 14))); // NOI18N
 
         jLabel23.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jLabel23.setText("Grad-GPA");
@@ -306,7 +298,6 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel22)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel25)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -324,8 +315,7 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
                     .addComponent(gradGPA))
@@ -393,7 +383,7 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, 542, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -403,9 +393,13 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_positionTypeActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void downloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadActionPerformed
+        try {
+            Desktop.getDesktop().open(student.getResume());
+        } catch (IOException ex) {
+            Logger.getLogger(CompanyViewofStudentProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_downloadActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         CompanyJobGUI cjg = new CompanyJobGUI(job, company);
@@ -452,17 +446,15 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
     private Student student;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JButton download;
     private javax.swing.JLabel email;
     private javax.swing.JLabel grad;
     private javax.swing.JLabel gradGPA;
     private javax.swing.JLabel gradUnderGpa;
     private javax.swing.JPanel gradYear;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;

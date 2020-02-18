@@ -36,7 +36,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         for(int i=0; i<jobs.size(); i++){
             titles[i] = jobs.get(i).getJobTitle();
             locations[i] = jobs.get(i).getLocation();
-            companies[i] = JobSearchSystem.getCompanyById(jobs.get(i).getCompanyID()).getCompanyName();
+            companies[i] = JobSearchSystem.getCompanyByJob(jobs.get(i)).getCompanyName();
         }
         
         String[] t = removeDuplicates(titles);  
@@ -342,7 +342,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
             {
                  for(int i = 0; i < filterJobs.size(); i++)
                 {
-                model.addRow(new Object[]{  ""+filterJobs.get(i).getJobTitle(), ""+  JobSearchSystem.getCompanyById(filterJobs.get(i).getCompanyID()).getCompanyName(), ""+  filterJobs.get(i).getDeadline()});
+                model.addRow(new Object[]{  ""+filterJobs.get(i).getJobTitle(), ""+  JobSearchSystem.getCompanyByJob(filterJobs.get(i)).getCompanyName(), ""+  filterJobs.get(i).getDeadline()});
                  }
             jTable3.setModel(model);
             }

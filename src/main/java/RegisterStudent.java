@@ -1,4 +1,6 @@
 
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /*
@@ -57,10 +59,11 @@ public class RegisterStudent extends javax.swing.JFrame {
         gradyear = new javax.swing.JTextField();
         id = new javax.swing.JTextField();
         positiontype = new javax.swing.JComboBox<>();
-        resume = new javax.swing.JButton();
+        resumeButton = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         password = new javax.swing.JTextField();
+        r = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
 
@@ -222,10 +225,10 @@ public class RegisterStudent extends javax.swing.JFrame {
             }
         });
 
-        resume.setText("Upload Resume");
-        resume.addActionListener(new java.awt.event.ActionListener() {
+        resumeButton.setText("Upload Resume");
+        resumeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resumeActionPerformed(evt);
+                resumeButtonActionPerformed(evt);
             }
         });
 
@@ -234,6 +237,13 @@ public class RegisterStudent extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jLabel1.setText("Name");
+
+        r.setEditable(false);
+        r.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -270,9 +280,12 @@ public class RegisterStudent extends javax.swing.JFrame {
                                         .addGap(1, 1, 1)
                                         .addComponent(jLabel8)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(positiontype, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(resume, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(positiontype, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(r)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(resumeButton))))))
                     .addComponent(gradyear, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
@@ -301,12 +314,14 @@ public class RegisterStudent extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addContainerGap(22, Short.MAX_VALUE))
+                        .addContainerGap(25, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(gradyear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(resume))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(r)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel5)
+                                .addComponent(gradyear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(resumeButton)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -367,9 +382,13 @@ public class RegisterStudent extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void resumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resumeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_resumeActionPerformed
+    private void resumeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resumeButtonActionPerformed
+             JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        f = chooser.getSelectedFile();
+        String filename = f.getName();
+        r.setText(filename);
+    }//GEN-LAST:event_resumeButtonActionPerformed
 
     private void positiontypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positiontypeActionPerformed
         // TODO add your handling code here:
@@ -396,14 +415,14 @@ public class RegisterStudent extends javax.swing.JFrame {
             } 
             else {
                 if (undergradStudent.isSelected()){
-                    Student undergrad = new Undergraduate(Integer.parseInt(id.getText()), name.getText(),  email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), "Resume", Double.parseDouble(undergradgpa.getText()), password.getText());
+                    Student undergrad = new Undergraduate(Integer.parseInt(id.getText()), name.getText(),  email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), f, Double.parseDouble(undergradgpa.getText()), password.getText());
                     JobSearchSystem.addNewStudent(undergrad);
                     StudentSearchJobGUI ssj = new StudentSearchJobGUI(undergrad);
                     ssj.setVisible(true);
                     this.dispose();
                 }
                 else {
-                    Student graduate = new Graduate(Integer.parseInt(id.getText()), name.getText(), email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), "Resume", Double.parseDouble(gradgpa.getText()), password.getText(), gradundergraddegree.getText(),Double.parseDouble(gradundergradgps.getText()));
+                    Student graduate = new Graduate(Integer.parseInt(id.getText()), name.getText(), email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), f, Double.parseDouble(gradgpa.getText()), password.getText(), gradundergraddegree.getText(),Double.parseDouble(gradundergradgps.getText()));
                     JobSearchSystem.addNewStudent(graduate);
                     StudentSearchJobGUI ssj = new StudentSearchJobGUI(graduate);
                     ssj.setVisible(true);
@@ -419,6 +438,11 @@ public class RegisterStudent extends javax.swing.JFrame {
     private void gradundergraddegreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gradundergraddegreeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_gradundergraddegreeActionPerformed
+
+    private void rActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rActionPerformed
+   
+        
+    }//GEN-LAST:event_rActionPerformed
 
     /**
      * @param args the command line arguments
@@ -454,7 +478,7 @@ public class RegisterStudent extends javax.swing.JFrame {
             }
         });
     }
-
+    private File f;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField email;
@@ -486,8 +510,9 @@ public class RegisterStudent extends javax.swing.JFrame {
     private javax.swing.JTextField name;
     private javax.swing.JTextField password;
     private javax.swing.JComboBox<String> positiontype;
+    private javax.swing.JTextField r;
     private javax.swing.JButton registerButton;
-    private javax.swing.JButton resume;
+    private javax.swing.JButton resumeButton;
     private javax.swing.JRadioButton undergradStudent;
     private javax.swing.JTextField undergradgpa;
     // End of variables declaration//GEN-END:variables
