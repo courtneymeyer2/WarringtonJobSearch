@@ -1,4 +1,7 @@
 
+import java.io.File;
+import java.util.LinkedList;
+import java.util.Scanner;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
@@ -44,6 +47,7 @@ public class Home extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         registerButton = new javax.swing.JButton();
         loginButton2 = new javax.swing.JButton();
+        textFile = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -111,10 +115,22 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        textFile.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        textFile.setText("Read from Text File");
+        textFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFileActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(loginButton2)
+                .addGap(371, 371, 371))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -140,12 +156,9 @@ public class Home extends javax.swing.JFrame {
                                 .addGap(33, 33, 33)
                                 .addComponent(loginButton)
                                 .addGap(27, 27, 27)
-                                .addComponent(registerButton)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(loginButton2)
-                .addGap(371, 371, 371))
+                                .addComponent(registerButton))
+                            .addComponent(textFile))))
+                .addContainerGap(256, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +185,9 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(registerButton))
                 .addGap(18, 18, 18)
                 .addComponent(loginButton2)
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(textFile)
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -259,6 +274,88 @@ public class Home extends javax.swing.JFrame {
         g.setVisible(true);
     }//GEN-LAST:event_loginButton2ActionPerformed
 
+    private void textFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFileActionPerformed
+                Scanner s1 = null, s2 = null, s3=null, s4=null, s5=null; File file;
+        try {
+            File f1 = new File("students.txt");
+            s1 = new Scanner(f1);
+            
+            while(s1.hasNextLine()) {
+                String line = s1.nextLine();
+                String[] cInfo = line.split(",");
+                if(cInfo[0].equals("U"))
+                {
+                    file = new File(cInfo[6]);
+                    JobSearchSystem.addNewStudent(new Undergraduate(Integer.parseInt(cInfo[0]), cInfo[1], cInfo[2], cInfo[3], Integer.parseInt(cInfo[4]), cInfo[5], file,Double.parseDouble(cInfo[7]), cInfo[8]));
+                }
+                
+                else
+                {
+                    file = new File(cInfo[6]);
+                    JobSearchSystem.addNewStudent(new Graduate(Integer.parseInt(cInfo[0]), cInfo[1], cInfo[2], cInfo[3], Integer.parseInt(cInfo[4]), cInfo[5], file,Double.parseDouble(cInfo[7]), cInfo[8], cInfo[9], Double.parseDouble(cInfo[10])));   
+                }  
+            }
+            
+            File f2 = new File("companies.txt");
+            s2 = new Scanner(f2);
+            
+            while(s2.hasNextLine()) {
+                String line = s2.nextLine();
+                String[] compInfo = line.split(",");
+                    JobSearchSystem.addNewCompany(new Company(compInfo[1], compInfo[2], compInfo[3]));
+            }
+            
+            File f3 = new File("jobs.txt");
+            s3 = new Scanner(f3);
+            
+            while(s3.hasNextLine()) {
+                String line = s3.nextLine();
+                String[] jobInfo = line.split(",");
+                int companyID = Integer.parseInt(jobInfo[0]);
+                Company comp =JobSearchSystem.getCompanyById(companyID);
+                comp.addJobs(new Job(jobInfo[0],jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7]));
+            }    
+            File f5 = new File("applications.txt");
+            s5 = new Scanner(f5);
+            
+            while(s5.hasNextLine()) {
+                String line = s5.nextLine();
+                String[] appsInfo = line.split(",");
+   
+             //   JobSearchSystem.applytoJob(new Application());
+                
+                //Company comp = JobSearchSystem.getCompanyById(Integer.parseInt(appsInfo[0]));
+                Job j = JobSearchSystem.getJobById(Integer.parseInt(appsInfo[0]));
+                Student stu = JobSearchSystem.getStudentById(Integer.parseInt(appsInfo[1]));
+               // Interview inte = JobSearchSystem.getInterviewById(Integer.parseInt(appsInfo[3]));
+                JobSearchSystem.applytoJob(new Application(stu, j, appsInfo[2]));
+                //comp.addJobs(new Job(jobInfo[0],jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7]));
+            }    
+            
+            
+            
+            
+            File f4 = new File("interviews.txt");
+            s4 = new Scanner(f4);
+            
+            while(s4.hasNextLine()) {
+                String line = s4.nextLine();
+                String[] interviewsInfo = line.split(",");
+                Job j = JobSearchSystem.getJobById(Integer.parseInt(interviewsInfo[0]));
+                Student stu = JobSearchSystem.getStudentById(Integer.parseInt(interviewsInfo[1]));
+                Application app = JobSearchSystem.getApplication(stu, j);
+               // Company comp =JobSearchSystem.getCompanyById(companyID);
+               app.setInterview(new Interview(interviewsInfo[2], Integer.parseInt(interviewsInfo[3])));
+               // comp.addJobs(new Job(jobInfo[0],jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7]));
+            }    
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            if(s1 != null) s1.close();
+            if(s2 != null) s2.close();
+        }
+    }//GEN-LAST:event_textFileActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -308,6 +405,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField passwordTextField;
     private javax.swing.JButton registerButton;
     private javax.swing.JRadioButton student;
+    private javax.swing.JButton textFile;
     private javax.swing.ButtonGroup userType;
     // End of variables declaration//GEN-END:variables
 }

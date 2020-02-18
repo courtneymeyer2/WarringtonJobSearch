@@ -81,6 +81,8 @@ public class Company
              }
         return j;
     }
+    
+  
 
     public static int getNextId()
     { 
@@ -113,5 +115,17 @@ public class Company
     public void addJobs(Job job)
     {
        jobs.add(job);
-    }         
+    }  
+    
+    public Job getJobByID(int jobID)
+    {
+        for (int i =0; i < jobs.size(); i++)
+        {
+            if(jobs.get(i).getJobID() == jobID)
+            {
+                return jobs.get(i);
+            }
+        }
+        return null;
+    }
 }
