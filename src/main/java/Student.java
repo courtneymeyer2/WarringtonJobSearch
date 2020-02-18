@@ -17,7 +17,7 @@ public class Student {
     private double gpa;
     private String stuPassword;
     private LinkedList<Job> addedJobs = new LinkedList<Job>();
-    private LinkedList<Interview> stuInterviews = new LinkedList<Interview>();
+    //private LinkedList<Interview> stuInterviews = new LinkedList<Interview>();
     
     public int getId() { return UFId; } 
     public String getName() { return stuName; } 
@@ -29,12 +29,12 @@ public class Student {
     public double getGPA(){return gpa; }
     public String getStudentPassword() { return stuPassword; }
     public LinkedList<Job> getAddedJobs() { return addedJobs; }
-    public LinkedList<Interview> getInterview() { return stuInterviews; }
+  //  public LinkedList<Interview> getInterview() { return stuInterviews; }
     public void setResume(File f) { resume = f;}
     
-    public void addInterview(Interview interview){
-        stuInterviews.add(interview);
-    }
+//    public void addInterview(Interview interview){
+//        stuInterviews.add(interview);
+//    }
     
     public void addJob(Job job){
         addedJobs.add(job);

@@ -14,7 +14,7 @@ import java.util.*;
 public class JobSearchSystem {
     private static LinkedList <Student> students = new LinkedList <Student>();
     //private static LinkedList <Job> jobs = new LinkedList<Job>();
-    private static LinkedList <Interview> interviews = new LinkedList<Interview>();
+    //private static LinkedList <Interview> interviews = new LinkedList<Interview>();
     private static LinkedList <Company> companies = new LinkedList<Company>();
     private static LinkedList <Application> applications = new LinkedList <Application>();
     
@@ -33,6 +33,10 @@ public class JobSearchSystem {
         }
         return null;
     }
+
+    
+    
+    
     public static boolean checkCredentials(String email, String password, String type)
     {
         if(type.equals("student"))
@@ -185,10 +189,10 @@ public class JobSearchSystem {
         return companies;
     }
     
-    public static LinkedList<Interview> getInterview()
-    {
-        return interviews;
-    }
+//    public static LinkedList<Interview> getInterview()
+//    {
+//        return interviews;
+//    }
     
     public static boolean applicationExists(Job job, Student student)
     {
@@ -341,15 +345,15 @@ public class JobSearchSystem {
         
     }
    
-    public static void addInterview(Interview interview)
-    {
-        interviews.add(interview);
-    }
-   
-    public static void removeInterview(Interview interview)
-    {
-        interviews.remove(interview);
-    }
+//    public static void addInterview(Interview interview)
+//    {
+//        interviews.add(interview);
+//    }
+//   
+//    public static void removeInterview(Interview interview)
+//    {
+//        interviews.remove(interview);
+//    }
    
     public static void addNewStudent(Student student)
     {
@@ -423,6 +427,7 @@ public class JobSearchSystem {
            
         }
     }
+    
 
     public static LinkedList <Interview> getAvailableInterviews(Job job)
     {
@@ -481,6 +486,63 @@ public class JobSearchSystem {
             }
         }
         return null;
+    }
+    
+        public static Student getStudentById(int id)
+    {
+        for(int i =0; i < students.size(); i++)
+        {
+            if(students.get(i).getId()==id)
+            {
+                return students.get(i);
+            }
+        }
+        return null;
+    }
+        
+      public static Job getJobById(int id)
+    {
+        for(int j = 0; j < companies.size(); j++)
+        {
+            for(int k =0; k < companies.get(j).getJobs().size(); k++)
+            {
+                if(companies.get(j).getJobs().get(k).getJobID() == id)
+                {
+                    return companies.get(j).getJobs().get(k);
+                }
+            }
+        }
+       return null;
+    }
+      
+      public static Application getApplication(Student student, Job job)
+      {
+          for (int i = 0; i < applications.size(); i++)
+          {
+              if(applications.get(i).getStudent().equals(student) && applications.get(i).getJob().equals(job))
+              {
+                  return applications.get(i);
+              }
+          }
+          return null;
+      }
+         public static Interview getInterviewById(int id)
+    {
+        for(int j = 0; j < companies.size(); j++)
+        {
+            for(int k =0; k < companies.get(j).getJobs().size(); k++)
+            {
+                for(int f = 0; f < companies.get(j).getJobs().get(k).getInterviewList().size(); f++)
+                {
+                    if(companies.get(j).getJobs().get(k).getInterviewList().get(f).getInterviewID() == id)
+                    {
+                        return companies.get(j).getJobs().get(k).getInterviewList().get(f);
+                    }
+                }
+                
+            }
+        }
+       return null;
     }
    
     public static void main(String[] args)
