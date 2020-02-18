@@ -110,7 +110,17 @@ public class Report extends javax.swing.JFrame {
 //        m5.clear();
         //String header5 = String.format("%-8s, %-20s, %-20s", "ID", "Date", "Selected");
         //m5.addElement(header5);
-        LinkedList<Interview> interviews = JobSearchSystem.getInterview();
+        LinkedList<Job> j = JobSearchSystem.getAllJobs();
+        LinkedList<Interview> interviews = new LinkedList<Interview>();
+        for(int n=0; n< j.size(); n++)
+        {
+            if(j.get(n).getInterviewList() != null)
+            {
+                for(int m=0; m<j.get(n).getInterviewList().size(); m++)
+                    interviews.add(j.get(n).getInterviewList().get(m));        
+            }
+        }            
+        
         DefaultTableModel model5 = (DefaultTableModel) interviews1.getModel();
             for(int i=0; i < interviews.size(); i++) 
             {
