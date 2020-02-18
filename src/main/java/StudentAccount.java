@@ -31,8 +31,9 @@ public class StudentAccount extends javax.swing.JFrame {
         e.setText(student.getEmail());
         m.setText(student.getMajor());
         g.setText(student.getGraduatingYear()+ "");
-        i.setText(student.getId() + "");
+        i.setText(student.getId() + "");       
         r.setText(student.getResume().getName());
+        
         if(student.getPositionType().equals("Internship"))
         {
             t.setSelectedIndex(1);

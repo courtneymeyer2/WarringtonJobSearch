@@ -306,6 +306,7 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
              if(check)
              {
              job.addInterview(interview);
+             JobSearchSystem.addInterview(interview);
              numOfInterviews --;
              CreateInterviewTimesGUI c = new CreateInterviewTimesGUI(company, job, numOfInterviews);
              c.setVisible(true);

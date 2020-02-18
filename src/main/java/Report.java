@@ -1,6 +1,7 @@
 
 import java.util.LinkedList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -23,31 +24,35 @@ public class Report extends javax.swing.JFrame {
           
         LinkedList<Student> students = JobSearchSystem.getStudent();
         
-         DefaultTableModel model = (DefaultTableModel) students1.getModel();
+        DefaultTableModel model = (DefaultTableModel) students1.getModel();
         
             for(int i = 0; i < students.size(); i++)
                 {
-                    if(students.get(i) instanceof Undergraduate)
+                    if(students.get(i)!= null)
                     {
-                      model.addRow(new Object[]{"U", "" +students.get(i).getId(), students.get(i).getName(), "" +students.get(i).getEmail(), "" +students.get(i).getMajor(), "" +students.get(i).getGraduatingYear(), "" +students.get(i).getPositionType(), "" +students.get(i).getResume().getName(), "" +students.get(i).getGPA(), "" +students.get(i).getStudentPassword(), "" +students.get(i).getJobIDs(), "", ""});
+                    
+                        if(students.get(i) instanceof Undergraduate)
+                        {
+                          model.addRow(new Object[]{"U", "" +students.get(i).getId(), students.get(i).getName(), "" +students.get(i).getEmail(), "" +students.get(i).getMajor(), "" +students.get(i).getGraduatingYear(), "" +students.get(i).getPositionType(), "" +students.get(i).getResume().getName(), "" +students.get(i).getGPA(), "" +students.get(i).getStudentPassword(), "" +students.get(i).getJobIDs(), "", ""});
 
-                    }
-                    else
-                    {
-                      model.addRow(new Object[]{"G", "" +students.get(i).getId(), students.get(i).getName(), "" +students.get(i).getEmail(), "" +students.get(i).getMajor(), "" +students.get(i).getGraduatingYear(), "" +students.get(i).getPositionType(), "" +students.get(i).getResume().getName(), "" +students.get(i).getGPA(), "" +students.get(i).getStudentPassword(), "" +students.get(i).getJobIDs(), ((Graduate)students.get(i)).getUndergradMajor(), ((Graduate)students.get(i)).getUndergradGPA()});
+                        }
+                        else
+                        {
+                          model.addRow(new Object[]{"G", "" +students.get(i).getId(), students.get(i).getName(), "" +students.get(i).getEmail(), "" +students.get(i).getMajor(), "" +students.get(i).getGraduatingYear(), "" +students.get(i).getPositionType(), "" +students.get(i).getResume().getName(), "" +students.get(i).getGPA(), "" +students.get(i).getStudentPassword(), "" +students.get(i).getJobIDs(), ((Graduate)students.get(i)).getUndergradMajor(), ((Graduate)students.get(i)).getUndergradGPA()});
+                        }
                     }
                     
                 }
            students1.setModel(model); 
     
 
-       LinkedList<Company> companies = JobSearchSystem.getCompany();
-         DefaultTableModel model2 = (DefaultTableModel) companies2.getModel();
+        LinkedList<Company> companies = JobSearchSystem.getCompany();
+        DefaultTableModel model2 = (DefaultTableModel) companies2.getModel();
         
             for(int i = 0; i < companies.size(); i++)
                 {
-                 
-                      model2.addRow(new Object[]{"" +companies.get(i).getCompanyID(),  companies.get(i).getCompanyName(), companies.get(i).getCompanyEmail(), companies.get(i).getCompanyPassword(), companies.get(i).getJobIDs()});
+                    if(companies.get(i)!= null)
+                        model2.addRow(new Object[]{"" +companies.get(i).getCompanyID(),  companies.get(i).getCompanyName(), companies.get(i).getCompanyEmail(), companies.get(i).getCompanyPassword(), companies.get(i).getJobIDs()});
                     
                 }
            companies2.setModel(model2); 
@@ -60,7 +65,8 @@ public class Report extends javax.swing.JFrame {
             for(int i = 0; i < jobs.size(); i++)
                 {
                  
-                      model3.addRow(new Object[]{"" +jobs.get(i).getJobID(),""+ JobSearchSystem.getCompanyByJob(jobs.get(i)).getCompanyID(),  jobs.get(i).getJobTitle(), jobs.get(i).getDescription(), jobs.get(i).getLocation(), jobs.get(i).getQualifications(), jobs.get(i).getRequirement(), jobs.get(i).getDegreeRequired(), jobs.get(i).getPostitonType(), jobs.get(i).getDeadline(), jobs.get(i).getInterviewIDs()});
+                    if(jobs.get(i)!= null)
+                        model3.addRow(new Object[]{"" +jobs.get(i).getJobID(),""+ JobSearchSystem.getCompanyByJob(jobs.get(i)).getCompanyID(), ""+ jobs.get(i).getJobTitle(), ""+jobs.get(i).getDescription(), ""+jobs.get(i).getLocation(), ""+jobs.get(i).getQualifications(), ""+jobs.get(i).getRequirement(), ""+jobs.get(i).getDegreeRequired(),""+ jobs.get(i).getPostitonType(),""+ jobs.get(i).getDeadline(), ""+jobs.get(i).getInterviewIDs()});
                     
                 }
            jobs1.setModel(model3); 
@@ -80,13 +86,18 @@ public class Report extends javax.swing.JFrame {
         //String header4 = String.format("%-8s, %-8s, %-20s", "Student ID", "Job ID", "Status");
         //m4.addElement(header4);
         LinkedList<Application> applications = JobSearchSystem.getApplication();
-         DefaultTableModel model4 = (DefaultTableModel) applications1.getModel();
+        DefaultTableModel model4 = (DefaultTableModel) applications1.getModel();
         
             for(int i = 0; i < applications.size(); i++)
                 {
                  
-                    //  model3.addRow(new Object[]{"" +jobs.get(i).getJobID(),""+ JobSearchSystem.getCompanyByJob(jobs.get(i)).getCompanyID(),  jobs.get(i).getJobTitle(), jobs.get(i).getDescription(), jobs.get(i).getLocation(), jobs.get(i).getQualifications(), jobs.get(i).getRequirement(), jobs.get(i).getDegreeRequired(), jobs.get(i).getPostitonType(), jobs.get(i).getDeadline(), jobs.get(i).getInterviewIDs()});
-                    
+                    if(applications.get(i)!= null)
+                    {
+                        if(applications.get(i).getInterview() != null)
+                            model4.addRow(new Object[]{"" +applications.get(i).getStudent().getId(),""+ applications.get(i).getJob().getJobID(), ""+ applications.get(i).getInterview().getInterviewID(),""+applications.get(i).getStatus()});
+                        else
+                            model4.addRow(new Object[]{"" +applications.get(i).getStudent().getId(),""+ applications.get(i).getJob().getJobID(), ""+ "No interview created",""+applications.get(i).getStatus()});
+                    }
                 }
            applications1.setModel(model4); 
         
@@ -99,9 +110,14 @@ public class Report extends javax.swing.JFrame {
 //        m5.clear();
         //String header5 = String.format("%-8s, %-20s, %-20s", "ID", "Date", "Selected");
         //m5.addElement(header5);
-//        LinkedList<Interview> interviews = JobSearchSystem.getInterview();
-//        for(int i=0; i < interviews.size(); i++) {
-//            m5.addElement( interviews.get(i).toString() + ", " );
+        LinkedList<Interview> interviews = JobSearchSystem.getInterview();
+        DefaultTableModel model5 = (DefaultTableModel) interviews1.getModel();
+            for(int i=0; i < interviews.size(); i++) 
+            {
+                if(interviews.get(i)!= null)
+                    model5.addRow(new Object[]{"" +interviews.get(i).getInterviewID(),""+ interviews.get(i).getDate(),""+ interviews.get(i).getDuration(),""+ interviews.get(i).getFeedback(),""+interviews.get(i).getSelected()});
+            }
+        interviews1.setModel(model5);
 //        }
 //        interview.setModel(m5);
    }
@@ -366,7 +382,7 @@ public class Report extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        } 
         //</editor-fold>
 
         /* Create and display the form */

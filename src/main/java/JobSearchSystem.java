@@ -377,7 +377,7 @@ public class JobSearchSystem {
         {
             for (int i=0; i < allJobs.size(); i++)
             {
-                if (allJobs.get(i).getDegreeRequired().equals("Undergraduate") || allJobs.get(i).getDegreeRequired().equals("Both Undergraduate and Graduate"))
+                if (allJobs.get(i).getDegreeRequired().equals("Undergraduate") | allJobs.get(i).getDegreeRequired().equals("Both Undergraduate and Graduate"))
                     jobs.add(allJobs.get(i));
             }               
         } 
@@ -385,7 +385,7 @@ public class JobSearchSystem {
         {
             for (int i=0; i < allJobs.size(); i++)
             {
-                if (allJobs.get(i).getDegreeRequired().equals("Graduate") || allJobs.get(i).getDegreeRequired().equals("Both Undergraduate and Graduate"))
+                if (allJobs.get(i).getDegreeRequired().equals("Graduate") | allJobs.get(i).getDegreeRequired().equals("Both Undergraduate and Graduate"))
                     jobs.add(allJobs.get(i));
             }
         }

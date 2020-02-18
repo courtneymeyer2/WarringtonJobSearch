@@ -383,7 +383,7 @@ public class RegisterStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void resumeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resumeButtonActionPerformed
-             JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         f = chooser.getSelectedFile();
         String filename = f.getName();
@@ -414,19 +414,24 @@ public class RegisterStudent extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "An account with this email already exists.");
             } 
             else {
-                if (undergradStudent.isSelected()){
-                    Student undergrad = new Undergraduate(Integer.parseInt(id.getText()), name.getText(),  email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), f, Double.parseDouble(undergradgpa.getText()), password.getText());
-                    JobSearchSystem.addNewStudent(undergrad);
-                    StudentSearchJobGUI ssj = new StudentSearchJobGUI(undergrad);
-                    ssj.setVisible(true);
-                    this.dispose();
+                if(f !=null){
+                    if (undergradStudent.isSelected()){
+                        Student undergrad = new Undergraduate(Integer.parseInt(id.getText()), name.getText(),  email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), f, Double.parseDouble(undergradgpa.getText()), password.getText());
+                        JobSearchSystem.addNewStudent(undergrad);
+                        StudentSearchJobGUI ssj = new StudentSearchJobGUI(undergrad);
+                        ssj.setVisible(true);
+                        this.dispose();
+                    }
+                    else {
+                        Student graduate = new Graduate(Integer.parseInt(id.getText()), name.getText(), email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), f, Double.parseDouble(gradgpa.getText()), password.getText(), gradundergraddegree.getText(),Double.parseDouble(gradundergradgps.getText()));
+                        JobSearchSystem.addNewStudent(graduate);
+                        StudentSearchJobGUI ssj = new StudentSearchJobGUI(graduate);
+                        ssj.setVisible(true);
+                        this.dispose();
+                    }
                 }
-                else {
-                    Student graduate = new Graduate(Integer.parseInt(id.getText()), name.getText(), email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), f, Double.parseDouble(gradgpa.getText()), password.getText(), gradundergraddegree.getText(),Double.parseDouble(gradundergradgps.getText()));
-                    JobSearchSystem.addNewStudent(graduate);
-                    StudentSearchJobGUI ssj = new StudentSearchJobGUI(graduate);
-                    ssj.setVisible(true);
-                    this.dispose();
+                else{
+                    JOptionPane.showMessageDialog(null, "Please upload resume!");
                 }
             }  
         }

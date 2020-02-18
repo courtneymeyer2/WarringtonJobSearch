@@ -394,11 +394,13 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_positionTypeActionPerformed
 
     private void downloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadActionPerformed
+
         try {
             Desktop.getDesktop().open(student.getResume());
         } catch (IOException ex) {
             Logger.getLogger(CompanyViewofStudentProfile.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_downloadActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

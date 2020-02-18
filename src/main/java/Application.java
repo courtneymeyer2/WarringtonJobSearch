@@ -13,12 +13,12 @@ public class Application {
     public String getStatus() {return status;} 
     public Interview getInterview(){return interview;}
     
-    @Override
-    public String toString()
-    {
-        String str = String.format("%-8d, %-8d, %-20s", student.getId(), job.getJobID(), status);
-        return str;
-    }
+//    @Override
+//    public String toString()
+//    {
+//        String str = String.format("%-8d, %-8d, %-20s", student.getId(), job.getJobID(), status);
+//        return str;
+//    }
     
     public void setStatus(String status)
     {

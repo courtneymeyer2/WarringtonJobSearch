@@ -42,12 +42,12 @@ public void setFeeback(String feedback)
    this.feedback = feedback;
 }
 
-public String toString()
-{
-    
-    String str = String.format("%-8d, %-20s, %-20s", interviewID, date, selected);
-    return str;
-}
+//public String toString()
+//{
+//    
+//    String str = String.format("%-8d, %-20s, %-20s", interviewID, date, selected);
+//    return str;
+//}
 //public void setStatus(String status)
 //{
 //   this.status = status;
