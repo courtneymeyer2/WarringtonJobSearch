@@ -67,7 +67,7 @@ public class RegisterStudent extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));

@@ -8,9 +8,10 @@
  *
  * @author joshualee
  */
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Company 
+public class Company implements Serializable 
 {
     private int companyID;
     private String companyName;
@@ -31,34 +32,6 @@ public class Company
         this.companyEmail = companyEmail;
         this.companyPassword = companyPassword;
     }
-    
-//    public String toString()
-//    {
-//        String j = "[";
-//        if(jobs == null)
-//        {
-//            j = "No jobs posted.";
-//        }
-//        else
-//        {
-//            for(int i=0; i< jobs.size();i++)
-//            {
-//               
-//            if(i == jobs.size()-1)
-//            {
-//                 j += jobs.get(i).getJobID() +"]";
-//            }
-//            else
-//            {
-//                 j += jobs.get(i).getJobID() +", ";
-//            }
-//             }
-//        }
-//        
-//        
-//        String str = ("" + companyID + ", "+companyName + "," +companyEmail + ", "+companyPassword + "," + j);
-//        return str;
-//    }
 
     public String getJobIDs()
     {
@@ -80,9 +53,7 @@ public class Company
             }
              }
         return j;
-    }
-    
-  
+    } 
 
     public static int getNextId()
     { 
@@ -111,7 +82,8 @@ public class Company
     public LinkedList <Job> getJobs()
     {
         return jobs;
-    }          
+    }  
+
     public void addJobs(Job job)
     {
        jobs.add(job);

@@ -300,7 +300,7 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
         System.out.print(dateFormat2.format(calendar.getTime())); // will print like 2014-02-20 
         String date = dateFormat2.format(calendar.getTime());
 
-        Interview interview = new Interview(date, dur);
+        Interview interview = new Interview(date, dur, job.getJobID());
         try {
             boolean check = JobSearchSystem.checkInterviewTimes(job, interview);
              if(check)

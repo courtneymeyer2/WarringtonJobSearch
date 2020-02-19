@@ -1,4 +1,5 @@
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,10 +17,10 @@ import java.util.*;
  *
  * @author Courtney
  */
-public class Job {
+public class Job implements Serializable{
     private int jobID;
     private static int nextID = 1;
-    //private int companyID;
+    private int companyID;
     private String jobTitle;
     private String description;
     private String location;
@@ -53,12 +54,12 @@ public class Job {
 //        return str;
 //    }
     
-    public Job(String jobTitle, String description, String location, String qualification, String requirement, String degreeRequired, String positionType, String deadline)
+    public Job(String jobTitle, String description, String location, String qualification, String requirement, String degreeRequired, String positionType, String deadline, int companyID)
     {
         
         this.jobID = nextID;
         nextID ++;
-        //this.companyID = companyID;
+        this.companyID = companyID;
         this.jobTitle = jobTitle;
         this.description = description;
         this.location = location;
@@ -73,24 +74,24 @@ public class Job {
     {
 
     }
-    public int getNextID()
+    public static int getNextID()
     {
         return nextID;
+    }
+    public static void setNextID(int id)
+    {
+        nextID = id;
     }
     
      public int getJobID()
     {
         return jobID;
     }
-    public void setNextID()
-    {
-        this.nextID = nextID;
-    }
 
-//    public int getCompanyID()
-//    {
-//        return companyID;
-//    }
+    public int getCompanyID()
+    {
+        return companyID;
+    }
 
     public String getJobTitle()
     {

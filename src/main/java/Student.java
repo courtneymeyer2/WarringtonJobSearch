@@ -1,12 +1,13 @@
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
  *
  * @author Liwen
  */
-public class Student {
+public class Student implements Serializable{
     private int UFId;
     private String stuName;
     private String stuEmail;

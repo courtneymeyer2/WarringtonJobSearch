@@ -8,16 +8,31 @@
  *
  * @author Courtney
  */
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-public class JobSearchSystem {
+public class JobSearchSystem implements Serializable{
     private static LinkedList <Student> students = new LinkedList <Student>();
     //private static LinkedList <Job> jobs = new LinkedList<Job>();
     //private static LinkedList <Interview> interviews = new LinkedList<Interview>();
     private static LinkedList <Company> companies = new LinkedList<Company>();
     private static LinkedList <Application> applications = new LinkedList <Application>();
     
+    public static void setStudents(LinkedList<Student> s)
+    {
+        students = s;
+    }
+    
+    public static void setCompanies(LinkedList<Company> c)
+    {
+        companies = c;
+    }
+    
+    public static void setApplications(LinkedList<Application> a)
+    {
+        applications = a;
+    }
     
     public static Company getCompanyByJob(Job job)
     {

@@ -1,10 +1,14 @@
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.LinkedList;
 import java.util.Scanner;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -48,6 +52,8 @@ public class Home extends javax.swing.JFrame {
         registerButton = new javax.swing.JButton();
         loginButton2 = new javax.swing.JButton();
         textFile = new javax.swing.JButton();
+        textFile1 = new javax.swing.JButton();
+        textFile2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -123,6 +129,23 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        textFile1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        textFile1.setText("Write to Object File");
+        textFile1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFile1ActionPerformed(evt);
+            }
+        });
+
+        textFile2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        textFile2.setText("Read from Object File");
+        textFile2.setToolTipText("");
+        textFile2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFile2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -154,11 +177,18 @@ public class Home extends javax.swing.JFrame {
                             .addComponent(passwordTextField)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(33, 33, 33)
-                                .addComponent(loginButton)
-                                .addGap(27, 27, 27)
-                                .addComponent(registerButton))
-                            .addComponent(textFile))))
-                .addContainerGap(256, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textFile)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(loginButton)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(registerButton))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(313, 313, 313)
+                        .addComponent(textFile1)
+                        .addGap(39, 39, 39)
+                        .addComponent(textFile2)))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +217,11 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(loginButton2)
                 .addGap(18, 18, 18)
                 .addComponent(textFile)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textFile1)
+                    .addComponent(textFile2))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -313,7 +347,7 @@ public class Home extends javax.swing.JFrame {
                 String[] jobInfo = line.split(",");
                 int companyID = Integer.parseInt(jobInfo[0]);
                 Company comp =JobSearchSystem.getCompanyById(companyID);
-                comp.addJobs(new Job(jobInfo[0],jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7]));
+                comp.addJobs(new Job(jobInfo[1],jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7], jobInfo[8], companyID));
             }    
             File f5 = new File("applications.txt");
             s5 = new Scanner(f5);
@@ -345,7 +379,7 @@ public class Home extends javax.swing.JFrame {
                 Student stu = JobSearchSystem.getStudentById(Integer.parseInt(interviewsInfo[1]));
                 Application app = JobSearchSystem.getApplication(stu, j);
                // Company comp =JobSearchSystem.getCompanyById(companyID);
-               app.setInterview(new Interview(interviewsInfo[2], Integer.parseInt(interviewsInfo[3])));
+               app.setInterview(new Interview(interviewsInfo[2], Integer.parseInt(interviewsInfo[3]),Integer.parseInt(interviewsInfo[4])));
                // comp.addJobs(new Job(jobInfo[0],jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7]));
             }    
         } catch (Exception e) {
@@ -355,6 +389,107 @@ public class Home extends javax.swing.JFrame {
             if(s2 != null) s2.close();
         }
     }//GEN-LAST:event_textFileActionPerformed
+
+    private void textFile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFile1ActionPerformed
+        // TODO add your handling code here:
+        ObjectOutputStream oos = null;
+        try {
+            FileOutputStream fos = new FileOutputStream("rs.dat");
+            oos = new ObjectOutputStream(fos);
+            
+            LinkedList<Student> students = JobSearchSystem.getStudent();
+            LinkedList<Company> companies = JobSearchSystem.getCompany();
+            LinkedList<Job> jobs = JobSearchSystem.getAllJobs();
+            LinkedList<Application> applications = JobSearchSystem.getApplication();
+            LinkedList<Interview> interviews = new LinkedList<Interview>();
+            
+            for(int n=0; n< jobs.size(); n++){
+                if(jobs.get(n).getInterviewList() != null){
+                    for(int m=0; m<jobs.get(n).getInterviewList().size(); m++)
+                        interviews.add(jobs.get(n).getInterviewList().get(m));        
+                }
+            }        
+            
+            int companyNextId = Company.getNextId();
+            int jobNextId = Job.getNextID();
+            int applicationNextId = Application.getNextID();
+            int interviewNextId = Interview.getNextID();
+            
+            oos.writeObject(students);
+            oos.writeObject(companies);
+            oos.writeObject(jobs);
+            oos.writeObject(applications);
+            oos.writeObject(interviews);
+           
+            oos.writeObject(companyNextId);
+            oos.writeObject(jobNextId);           
+            oos.writeObject(applicationNextId);
+            oos.writeObject(interviewNextId);
+            
+            if(oos != null) 
+                oos.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            
+        }
+
+    }//GEN-LAST:event_textFile1ActionPerformed
+
+    private void textFile2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFile2ActionPerformed
+        // TODO add your handling code here:
+        ObjectInputStream ois = null;
+        try {
+            FileInputStream fis = new FileInputStream("rs.dat");
+            ois = new ObjectInputStream(fis);
+            
+            LinkedList<Student> students = (LinkedList<Student>)ois.readObject();
+            LinkedList<Company> companies = (LinkedList<Company>)ois.readObject();
+            LinkedList<Job> jobs = (LinkedList<Job>)ois.readObject();
+            LinkedList<Application> applications = (LinkedList<Application>)ois.readObject();
+            LinkedList<Interview> interviews = (LinkedList<Interview>)ois.readObject();
+            
+            int companyNextId = (Integer)ois.readObject();
+            int jobNextId = (Integer)ois.readObject();
+            int applicationNextId = (Integer)ois.readObject();
+            int interviewNextId = (Integer)ois.readObject();
+
+            JobSearchSystem.setStudents(students);
+            JobSearchSystem.setCompanies(companies);
+            
+            for(int i=0; i<jobs.size();i++){
+                if(jobs.get(i)!=null){         
+                    Company c = JobSearchSystem.getCompanyById(jobs.get(i).getCompanyID());
+                    c.addJobs(jobs.get(i));
+                }
+            }
+            
+            JobSearchSystem.setApplications(applications);
+            
+            for(int i=0; i<interviews.size();i++){
+                if( interviews.get(i)!=null){         
+                    int jID = interviews.get(i).getJobID();
+                    for(int j=0; j<jobs.size(); j++){
+                        if(jobs.get(j).getJobID()== jID)
+                            jobs.get(j).addInterview(interviews.get(i));
+                       }
+                }
+            }
+            
+            Company.setNextId(companyNextId);
+            Job.setNextID(jobNextId);
+            Application.setNextID(applicationNextId);
+            Interview.setNextID(interviewNextId);
+            
+            if(ois != null) 
+                ois.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            
+        }
+
+    }//GEN-LAST:event_textFile2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -406,6 +541,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton registerButton;
     private javax.swing.JRadioButton student;
     private javax.swing.JButton textFile;
+    private javax.swing.JButton textFile1;
+    private javax.swing.JButton textFile2;
     private javax.swing.ButtonGroup userType;
     // End of variables declaration//GEN-END:variables
 }
