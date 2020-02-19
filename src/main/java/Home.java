@@ -285,14 +285,14 @@ public class Home extends javax.swing.JFrame {
                 String[] cInfo = line.split(",");
                 if(cInfo[0].equals("U"))
                 {
-                    file = new File(cInfo[6]);
-                    JobSearchSystem.addNewStudent(new Undergraduate(Integer.parseInt(cInfo[0]), cInfo[1], cInfo[2], cInfo[3], Integer.parseInt(cInfo[4]), cInfo[5], file,Double.parseDouble(cInfo[7]), cInfo[8]));
+                    file = new File(cInfo[7]);
+                    JobSearchSystem.addNewStudent(new Undergraduate(Integer.parseInt(cInfo[1]), cInfo[2], cInfo[3], cInfo[4], Integer.parseInt(cInfo[5]), cInfo[6], file,Double.parseDouble(cInfo[8]), cInfo[9]));
                 }
                 
                 else
                 {
-                    file = new File(cInfo[6]);
-                    JobSearchSystem.addNewStudent(new Graduate(Integer.parseInt(cInfo[0]), cInfo[1], cInfo[2], cInfo[3], Integer.parseInt(cInfo[4]), cInfo[5], file,Double.parseDouble(cInfo[7]), cInfo[8], cInfo[9], Double.parseDouble(cInfo[10])));   
+                    file = new File(cInfo[7]);
+                    JobSearchSystem.addNewStudent(new Graduate(Integer.parseInt(cInfo[1]), cInfo[2], cInfo[3], cInfo[4], Integer.parseInt(cInfo[5]), cInfo[6], file,Double.parseDouble(cInfo[8]), cInfo[9], cInfo[10], Double.parseDouble(cInfo[11])));   
                 }  
             }
             
@@ -302,7 +302,7 @@ public class Home extends javax.swing.JFrame {
             while(s2.hasNextLine()) {
                 String line = s2.nextLine();
                 String[] compInfo = line.split(",");
-                    JobSearchSystem.addNewCompany(new Company(compInfo[1], compInfo[2], compInfo[3]));
+                    JobSearchSystem.addNewCompany(new Company(compInfo[0], compInfo[1], compInfo[2]));
             }
             
             File f3 = new File("jobs.txt");
@@ -310,10 +310,10 @@ public class Home extends javax.swing.JFrame {
             
             while(s3.hasNextLine()) {
                 String line = s3.nextLine();
-                String[] jobInfo = line.split(",");
+                String[] jobInfo = line.split(",,");
                 int companyID = Integer.parseInt(jobInfo[0]);
                 Company comp =JobSearchSystem.getCompanyById(companyID);
-                comp.addJobs(new Job(jobInfo[0],jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7]));
+                comp.addJobs(new Job(jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7], jobInfo[8]));
             }    
             File f5 = new File("applications.txt");
             s5 = new Scanner(f5);

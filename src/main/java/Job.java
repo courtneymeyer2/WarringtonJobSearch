@@ -159,7 +159,7 @@ public class Job {
     }
 
     public String getInterviewIDs()
-    {
+   {
         if(interviews.isEmpty())
         {
             return "No interviews added";
