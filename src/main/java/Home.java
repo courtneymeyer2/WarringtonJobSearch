@@ -277,24 +277,7 @@ public class Home extends javax.swing.JFrame {
     private void textFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFileActionPerformed
                 Scanner s1 = null, s2 = null, s3=null, s4=null, s5=null; File file;
         try {
-            File f1 = new File("students.txt");
-            s1 = new Scanner(f1);
             
-            while(s1.hasNextLine()) {
-                String line = s1.nextLine();
-                String[] cInfo = line.split(",");
-                if(cInfo[0].equals("U"))
-                {
-                    file = new File(cInfo[7]);
-                    JobSearchSystem.addNewStudent(new Undergraduate(Integer.parseInt(cInfo[1]), cInfo[2], cInfo[3], cInfo[4], Integer.parseInt(cInfo[5]), cInfo[6], file,Double.parseDouble(cInfo[8]), cInfo[9]));
-                }
-                
-                else
-                {
-                    file = new File(cInfo[7]);
-                    JobSearchSystem.addNewStudent(new Graduate(Integer.parseInt(cInfo[1]), cInfo[2], cInfo[3], cInfo[4], Integer.parseInt(cInfo[5]), cInfo[6], file,Double.parseDouble(cInfo[8]), cInfo[9], cInfo[10], Double.parseDouble(cInfo[11])));   
-                }  
-            }
             
             File f2 = new File("companies.txt");
             s2 = new Scanner(f2);
@@ -314,7 +297,59 @@ public class Home extends javax.swing.JFrame {
                 int companyID = Integer.parseInt(jobInfo[0]);
                 Company comp =JobSearchSystem.getCompanyById(companyID);
                 comp.addJobs(new Job(jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7], jobInfo[8]));
-            }    
+            }  
+            
+            File f1 = new File("students.txt");
+            s1 = new Scanner(f1);
+              String[] adds;
+            while(s1.hasNextLine()) {
+                String line = s1.nextLine();
+                String[] cInfo = line.split(",");
+                if(cInfo[0].equals("U"))
+                {
+                    file = new File(cInfo[7]);
+                   
+     
+                    Student s = new Undergraduate(Integer.parseInt(cInfo[1]), cInfo[2], cInfo[3], cInfo[4], Integer.parseInt(cInfo[5]), cInfo[6], file,Double.parseDouble(cInfo[8]), cInfo[9]);
+                    JobSearchSystem.addNewStudent(s);
+                     if(cInfo.length == 11)
+                    {
+                      adds = cInfo[10].split(" ");
+                      for(int j =0; j < adds.length; j++)
+                     {
+                     Job jj = JobSearchSystem.getJobById(Integer.parseInt(adds[j]));
+                     s.addJob(jj);
+                     }
+                     
+                         
+                     }
+                    
+                    //s.addJob(job);
+                     }  
+            
+                
+                else
+                {
+                    file = new File(cInfo[7]);
+                    Student g = new Graduate(Integer.parseInt(cInfo[1]), cInfo[2], cInfo[3], cInfo[4], Integer.parseInt(cInfo[5]), cInfo[6], file,Double.parseDouble(cInfo[8]), cInfo[9], cInfo[10], Double.parseDouble(cInfo[11]));
+                    JobSearchSystem.addNewStudent(g);   
+                   if(cInfo.length == 13)
+                    {
+                      adds = cInfo[12].split(" ");
+                      System.out.println(adds.length);
+                      for(int j =0; j < adds.length; j++)
+                     {
+                     Job jj = JobSearchSystem.getJobById(Integer.parseInt(adds[j]));
+                     g.addJob(jj);
+                     }
+                     
+                         
+                     }
+                
+                
+                } 
+                
+            }
             File f5 = new File("applications.txt");
             s5 = new Scanner(f5);
             
