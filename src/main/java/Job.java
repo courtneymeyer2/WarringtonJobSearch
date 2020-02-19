@@ -20,7 +20,7 @@ import java.util.*;
 public class Job implements Serializable{
     private int jobID;
     private static int nextID = 1;
-    private int companyID;
+  //  private int companyID;
     private String jobTitle;
     private String description;
     private String location;
@@ -54,12 +54,12 @@ public class Job implements Serializable{
 //        return str;
 //    }
     
-    public Job(String jobTitle, String description, String location, String qualification, String requirement, String degreeRequired, String positionType, String deadline, int companyID)
+    public Job(String jobTitle, String description, String location, String qualification, String requirement, String degreeRequired, String positionType, String deadline)
     {
         
         this.jobID = nextID;
         nextID ++;
-        this.companyID = companyID;
+      //  this.companyID = companyID;
         this.jobTitle = jobTitle;
         this.description = description;
         this.location = location;
@@ -88,10 +88,10 @@ public class Job implements Serializable{
         return jobID;
     }
 
-    public int getCompanyID()
-    {
-        return companyID;
-    }
+//    public int getCompanyID()
+//    {
+//        return companyID;
+//    }
 
     public String getJobTitle()
     {

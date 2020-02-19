@@ -1,4 +1,3 @@
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -331,8 +330,8 @@ public class Home extends javax.swing.JFrame {
                 int companyID = Integer.parseInt(jobInfo[0]);
                 Company comp =JobSearchSystem.getCompanyById(companyID);
 
-                comp.addJobs(new Job(jobInfo[1],jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7], jobInfo[8], companyID));
-            }    
+                //comp.addJobs(new Job(jobInfo[1],jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7], jobInfo[8], companyID));
+                
 
                 comp.addJobs(new Job(jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7], jobInfo[8]));
             }  
@@ -419,7 +418,7 @@ public class Home extends javax.swing.JFrame {
                 Student stu = JobSearchSystem.getStudentById(Integer.parseInt(interviewsInfo[1]));
                 Application app = JobSearchSystem.getApplication(stu, j);
                // Company comp =JobSearchSystem.getCompanyById(companyID);
-               app.setInterview(new Interview(interviewsInfo[2], Integer.parseInt(interviewsInfo[3]),Integer.parseInt(interviewsInfo[4])));
+               app.setInterview(new Interview(interviewsInfo[2], Integer.parseInt(interviewsInfo[3])));
                // comp.addJobs(new Job(jobInfo[0],jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7]));
             }    
         } catch (Exception e) {
@@ -499,8 +498,8 @@ public class Home extends javax.swing.JFrame {
             
             for(int i=0; i<jobs.size();i++){
                 if(jobs.get(i)!=null){         
-                    Company c = JobSearchSystem.getCompanyById(jobs.get(i).getCompanyID());
-                    c.addJobs(jobs.get(i));
+//                    Company c = JobSearchSystem.getCompanyById(jobs.get(i).getCompanyID());
+//                    c.addJobs(jobs.get(i));
                 }
             }
             
@@ -508,10 +507,10 @@ public class Home extends javax.swing.JFrame {
             
             for(int i=0; i<interviews.size();i++){
                 if( interviews.get(i)!=null){         
-                    int jID = interviews.get(i).getJobID();
+                  ///  int jID = interviews.get(i).getJobID();
                     for(int j=0; j<jobs.size(); j++){
-                        if(jobs.get(j).getJobID()== jID)
-                            jobs.get(j).addInterview(interviews.get(i));
+//                        if(jobs.get(j).getJobID()== jID)
+//                            jobs.get(j).addInterview(interviews.get(i));
                        }
                 }
             }
