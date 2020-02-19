@@ -160,7 +160,7 @@ public class Job implements Serializable{
     }
 
     public String getInterviewIDs()
-    {
+   {
         if(interviews.isEmpty())
         {
             return "No interviews added";

@@ -35,7 +35,7 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
         major.setText(student.getMajor());
         grad.setText(student.getGraduatingYear()+ "");
         ufID.setText(student.getId() + "");
-        resume.setText(student.getResume().getAbsolutePath());
+        resume.setText(student.getResume().getName());
         if(student.getPositionType().equals("Internship"))
         {
             positionType.setSelectedIndex(1);
