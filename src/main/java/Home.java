@@ -415,10 +415,28 @@ public class Home extends javax.swing.JFrame {
                 String line = s4.nextLine();
                 String[] interviewsInfo = line.split(",");
                 Job j = JobSearchSystem.getJobById(Integer.parseInt(interviewsInfo[0]));
-                Student stu = JobSearchSystem.getStudentById(Integer.parseInt(interviewsInfo[1]));
-                Application app = JobSearchSystem.getApplication(stu, j);
+                Interview inte = new Interview(interviewsInfo[2], Integer.parseInt(interviewsInfo[3]));
+                j.addInterview(inte);
+                if(interviewsInfo[1].equals(" "))
+                {
+                    
+                }
+                else
+                {
+                    Student stu = JobSearchSystem.getStudentById(Integer.parseInt(interviewsInfo[1]));
+                    Application app = JobSearchSystem.getApplication(stu, j);
+                    app.setInterview(inte);
+                    inte.setSelected(true);
+                    
+                    if(interviewsInfo.length == 5)
+                    {
+                        inte.setFeeback(interviewsInfo[4]);
+                    }
+                }
+                
                // Company comp =JobSearchSystem.getCompanyById(companyID);
-               app.setInterview(new Interview(interviewsInfo[2], Integer.parseInt(interviewsInfo[3])));
+              
+             
                // comp.addJobs(new Job(jobInfo[0],jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7]));
             }    
         } catch (Exception e) {
