@@ -78,14 +78,14 @@ public class StudentAccount extends javax.swing.JFrame {
            
            
        DefaultTableModel model2 = (DefaultTableModel) jTable3.getModel();
-       LinkedList <Integer> jobIDS = new LinkedList <Integer>();
+      // LinkedList <Integer> jobIDS = new LinkedList <Integer>();
        
        for(int i = 0; i < student.getAddedJobs().size(); i++)
        {
              model2.addRow(new Object[]{"" +student.getAddedJobs().get(i).getJobTitle() , ""+ JobSearchSystem.getCompanyByJob(student.getAddedJobs().get(i)).getCompanyName() , "" + student.getAddedJobs().get(i).getDeadline()});
             if(student.getAddedJobs().get(i).checkTime())
             {
-                jobIDS.add(student.getAddedJobs().get(i).getJobID());
+                //jobIDS.add(student.getAddedJobs().get(i).getJobID());
                                 JOptionPane.showMessageDialog(null, "Job " +student.getAddedJobs().get(i).getJobID() +" 's deadline is in less than 24 hours");
 
             }
