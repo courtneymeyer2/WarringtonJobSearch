@@ -303,7 +303,7 @@ public class PostJobListingGUI extends javax.swing.JFrame {
           //  System.out.println(sDate1+"\t"+date1);
             String degreeType = degreetype.getSelectedItem().toString();
         String Type = type.getSelectedItem().toString();
-        Job job = new Job(title.getText(), description.getText(), location.getText(),qualification.getText(), requirements.getText(), degreeType ,Type, date, company.getCompanyID());
+        Job job = new Job(title.getText(), description.getText(), location.getText(),qualification.getText(), requirements.getText(), degreeType ,Type, date);
         company.addJobs(job);
         //JobSearchSystem.addJob(job);
         CompanyPageGUI cjg = new CompanyPageGUI(company);

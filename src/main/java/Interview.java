@@ -23,19 +23,19 @@ import java.util.LinkedList;
        // private String status;
         private boolean selected = false;
         private static int nextID = 1;
-        private int jobID;
+     //   private int jobID;
 
     public Interview()
     {
 
     }
-    public Interview(String date, int duration, int job)
+    public Interview(String date, int duration)
     { 
         this.interviewID = nextID;
         nextID ++;
         this.date = date;
         this.duration = duration;
-        this.jobID = jobID;
+       // this.jobID = jobID;
 
         //this.feedback = feedback;
         //this.status = status;
@@ -92,9 +92,9 @@ import java.util.LinkedList;
     {
         nextID = id;
     }
-    public int getJobID()
-    {
-        return jobID;
-    }
+//    public int getJobID()
+//    {
+//        return jobID;
+//    }
     
 }

@@ -1,4 +1,3 @@
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -331,8 +330,8 @@ public class Home extends javax.swing.JFrame {
                 int companyID = Integer.parseInt(jobInfo[0]);
                 Company comp =JobSearchSystem.getCompanyById(companyID);
 
-                comp.addJobs(new Job(jobInfo[1],jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7], jobInfo[8], companyID));
-            }    
+                //comp.addJobs(new Job(jobInfo[1],jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7], jobInfo[8], companyID));
+                
 
                 comp.addJobs(new Job(jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7], jobInfo[8]));
             }  
@@ -416,10 +415,28 @@ public class Home extends javax.swing.JFrame {
                 String line = s4.nextLine();
                 String[] interviewsInfo = line.split(",");
                 Job j = JobSearchSystem.getJobById(Integer.parseInt(interviewsInfo[0]));
-                Student stu = JobSearchSystem.getStudentById(Integer.parseInt(interviewsInfo[1]));
-                Application app = JobSearchSystem.getApplication(stu, j);
+                Interview inte = new Interview(interviewsInfo[2], Integer.parseInt(interviewsInfo[3]));
+                j.addInterview(inte);
+                if(interviewsInfo[1].equals(" "))
+                {
+                    
+                }
+                else
+                {
+                    Student stu = JobSearchSystem.getStudentById(Integer.parseInt(interviewsInfo[1]));
+                    Application app = JobSearchSystem.getApplication(stu, j);
+                    app.setInterview(inte);
+                    inte.setSelected(true);
+                    
+                    if(interviewsInfo.length == 5)
+                    {
+                        inte.setFeeback(interviewsInfo[4]);
+                    }
+                }
+                
                // Company comp =JobSearchSystem.getCompanyById(companyID);
-               app.setInterview(new Interview(interviewsInfo[2], Integer.parseInt(interviewsInfo[3]),Integer.parseInt(interviewsInfo[4])));
+              
+             
                // comp.addJobs(new Job(jobInfo[0],jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7]));
             }    
         } catch (Exception e) {
@@ -497,24 +514,24 @@ public class Home extends javax.swing.JFrame {
             JobSearchSystem.setStudents(students);
             JobSearchSystem.setCompanies(companies);
             
-            for(int i=0; i<jobs.size();i++){
-                if(jobs.get(i)!=null){         
-                    Company c = JobSearchSystem.getCompanyById(jobs.get(i).getCompanyID());
-                    c.addJobs(jobs.get(i));
-                }
-            }
+//            for(int i=0; i<jobs.size();i++){
+//                if(jobs.get(i)!=null){         
+////                    Company c = JobSearchSystem.getCompanyById(jobs.get(i).getCompanyID());
+////                    c.addJobs(jobs.get(i));
+//                }
+//            }
             
             JobSearchSystem.setApplications(applications);
             
-            for(int i=0; i<interviews.size();i++){
-                if( interviews.get(i)!=null){         
-                    int jID = interviews.get(i).getJobID();
-                    for(int j=0; j<jobs.size(); j++){
-                        if(jobs.get(j).getJobID()== jID)
-                            jobs.get(j).addInterview(interviews.get(i));
-                       }
-                }
-            }
+//            for(int i=0; i<interviews.size();i++){
+//                if( interviews.get(i)!=null){         
+//                  ///  int jID = interviews.get(i).getJobID();
+//                    for(int j=0; j<jobs.size(); j++){
+////                        if(jobs.get(j).getJobID()== jID)
+////                            jobs.get(j).addInterview(interviews.get(i));
+//                       }
+//                }
+//            }
             
             Company.setNextId(companyNextId);
             Job.setNextID(jobNextId);
