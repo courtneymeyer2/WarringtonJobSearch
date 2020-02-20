@@ -258,8 +258,7 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-       if(numOfInterviews > 0)
-       {
+       
         int durIndex = duration.getSelectedIndex();
         int dur;
         if(durIndex == 0)
@@ -281,11 +280,11 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
         }
         
         Calendar calendar = Calendar.getInstance();
-        System.out.println(Integer.parseInt(year.getSelectedItem().toString()));
-        System.out.println(month.getSelectedIndex());
-        System.out.println(Integer.parseInt(day.getSelectedItem().toString()));
-        System.out.println(hour.getSelectedIndex());
-        System.out.println(Integer.parseInt(minute.getSelectedItem().toString()));
+       // System.out.println(Integer.parseInt(year.getSelectedItem().toString()));
+//        System.out.println(month.getSelectedIndex());
+//        System.out.println(Integer.parseInt(day.getSelectedItem().toString()));
+//        System.out.println(hour.getSelectedIndex());
+//        System.out.println(Integer.parseInt(minute.getSelectedItem().toString()));
         calendar.set(Integer.parseInt(year.getSelectedItem().toString()), (month.getSelectedIndex()), Integer.parseInt(day.getSelectedItem().toString()), (hour.getSelectedIndex())+1, Integer.parseInt(minute.getSelectedItem().toString()));
         calendar.set(Calendar.HOUR, (hour.getSelectedIndex()+1));
         if(ampm.getSelectedIndex() == 0)
@@ -297,7 +296,7 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
             calendar.set(Calendar.AM_PM, Calendar.PM);
         }
         DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy hh.mm aa");
-        System.out.print(dateFormat2.format(calendar.getTime())); // will print like 2014-02-20 
+        //System.out.print(dateFormat2.format(calendar.getTime())); // will print like 2014-02-20 
         String date = dateFormat2.format(calendar.getTime());
 
         Interview interview = new Interview(date, dur);
@@ -325,18 +324,20 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
         }
         
        
-       }
+       
         
-       else 
-       {
-           JOptionPane.showMessageDialog(null, "You have already added interview times for all applicants with status Interview Requested");
-       }
+     
        
 
     }//GEN-LAST:event_addActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
+          if(numOfInterviews !=0)
+       {
+           JOptionPane.showMessageDialog(null, "You must create interview times for at least the number of applicants with interview requested status");
+       }
+        
         CompanyJobGUI cjg;
         try {
             cjg = new CompanyJobGUI(job, company);

@@ -388,6 +388,7 @@ public class JobSearchSystem implements Serializable{
    
     public static LinkedList <Job> filterJobs(String jobTitle, String companyName, String location, String positionType, Student student)
     {
+        System.out.println(jobTitle+ companyName+ location+ positionType);
         LinkedList<Job> j = new LinkedList<>();
         LinkedList<Job> allJobs = getAllJobs();
         LinkedList<Job> jobs = new LinkedList<>();
@@ -396,15 +397,17 @@ public class JobSearchSystem implements Serializable{
         {
             for (int i=0; i < allJobs.size(); i++)
             {
-                if (allJobs.get(i).getDegreeRequired().equals("Undergraduate") | allJobs.get(i).getDegreeRequired().equals("Both Undergraduate and Graduate"))
-                    jobs.add(allJobs.get(i));
+                if (allJobs.get(i).getDegreeRequired().equals("Undergraduate") || allJobs.get(i).getDegreeRequired().equals("Both Undergraduate and Graduate"))
+                { jobs.add(allJobs.get(i));
+                System.out.println("works");
+                }
             }               
         } 
         else
         {
             for (int i=0; i < allJobs.size(); i++)
             {
-                if (allJobs.get(i).getDegreeRequired().equals("Graduate") | allJobs.get(i).getDegreeRequired().equals("Both Undergraduate and Graduate"))
+                if (allJobs.get(i).getDegreeRequired().equals("Graduate") || allJobs.get(i).getDegreeRequired().equals("Both Undergraduate and Graduate"))
                     jobs.add(allJobs.get(i));
             }
         }
@@ -416,7 +419,10 @@ public class JobSearchSystem implements Serializable{
             Boolean b3 = (jobs.get(i).getLocation().equals(location))||( location.equals( " "));
             Boolean b4 = jobs.get(i).getPostitonType().equals(positionType);
             if(b1 && b2 && b3 && b4)
+            {
                 j.add(jobs.get(i));
+                System.out.println(i);
+            }
             
         }
         return j;

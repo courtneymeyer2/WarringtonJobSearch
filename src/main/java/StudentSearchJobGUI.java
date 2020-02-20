@@ -31,6 +31,8 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
     public StudentSearchJobGUI(Student student) {
         this();
         this.student = student;
+        positionType.setSelectedItem(student.getPositionType());
+        
         jobs = JobSearchSystem.getAllJobs();
         String[] titles = new String[jobs.size()];
         String[] locations = new String[jobs.size()];
@@ -330,7 +332,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-        
+       // System.out.println("test"+jobTitle.getSelectedItem().toString()+"test");
         filterJobs = JobSearchSystem.filterJobs(jobTitle.getSelectedItem().toString(), companyName.getSelectedItem().toString(), location.getSelectedItem().toString(),positionType.getSelectedItem().toString(), student);
         DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
         
