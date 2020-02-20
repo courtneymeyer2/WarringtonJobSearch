@@ -514,6 +514,7 @@ public class Home extends javax.swing.JFrame {
             JobSearchSystem.setStudents(students);
             JobSearchSystem.setCompanies(companies);
             
+
 //            for(int i=0; i<jobs.size();i++){
 //                if(jobs.get(i)!=null){         
 ////                    Company c = JobSearchSystem.getCompanyById(jobs.get(i).getCompanyID());
@@ -532,7 +533,26 @@ public class Home extends javax.swing.JFrame {
 //                       }
 //                }
 //            }
-            
+
+//            for(int i=0; i<jobs.size();i++){
+//                if(jobs.get(i)!=null){         
+////                    Company c = JobSearchSystem.getCompanyById(jobs.get(i).getCompanyID());
+////                    c.addJobs(jobs.get(i));
+//                }
+//            }
+//            
+            JobSearchSystem.setApplications(applications);
+//            
+//            for(int i=0; i<interviews.size();i++){
+//                if( interviews.get(i)!=null){         
+//                  ///  int jID = interviews.get(i).getJobID();
+//                    for(int j=0; j<jobs.size(); j++){
+////                        if(jobs.get(j).getJobID()== jID)
+////                            jobs.get(j).addInterview(interviews.get(i));
+//                       }
+//                }
+//            }
+
             Company.setNextId(companyNextId);
             Job.setNextID(jobNextId);
             Application.setNextID(applicationNextId);
