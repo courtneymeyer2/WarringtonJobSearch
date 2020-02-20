@@ -30,16 +30,17 @@ public class StudentJobGUI extends javax.swing.JFrame {
         this.page = page;
         this.student = student;
         this.job = job;
-        companyAndPosition.setText(JobSearchSystem.getCompanyByJob(job).getCompanyName() + ": " + job.getJobTitle());
-        deadline.setText(job.getDeadline());
+       companyAndPosition.setText(JobSearchSystem.getCompanyByJob(job).getCompanyName() + ": " + job.getJobTitle());
+       deadline.setText(job.getDeadline());
         if(job.checkTime())
         {
             deadline.setForeground(Color.red);
         }
+        
         description.setText("Description: " + job.getDescription());
         quali.setText("Qualifications: " + job.getQualifications());
         require.setText("Requirements: " + job.getRequirement());
-        degree.setText("Degree Required: " + job.getDegreeRequired());
+       degree.setText("Degree Required: " + job.getDegreeRequired());
         position.setText("Position Type: " + job.getPostitonType());
         location.setText("Location: " +job.getLocation());
         applied = JobSearchSystem.applicationExists(job, student);
@@ -169,7 +170,6 @@ public class StudentJobGUI extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(position, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,14 +177,15 @@ public class StudentJobGUI extends javax.swing.JFrame {
                                         .addComponent(jLabel1)
                                         .addGap(18, 18, 18)
                                         .addComponent(deadline, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(Added, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(281, 281, 281)
                                         .addComponent(jButton3))
-                                    .addComponent(apply))))
+                                    .addComponent(apply)))
+                            .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -210,18 +211,18 @@ public class StudentJobGUI extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(deadline))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(degree)
-                .addGap(47, 47, 47)
-                .addComponent(location)
-                .addGap(36, 36, 36)
+                .addGap(97, 97, 97)
                 .addComponent(position)
-                .addGap(52, 52, 52)
+                .addGap(32, 32, 32)
+                .addComponent(location)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -251,6 +252,16 @@ public class StudentJobGUI extends javax.swing.JFrame {
             try {
                 sa = new StudentAccount(student);
                            sa.setVisible(true);
+                           for(int i=0; i < student.getAddedJobs().size(); i ++)
+                           {
+                                if(student.getAddedJobs().get(i).checkTime())
+                                {
+                //jobIDS.add(student.getAddedJobs().get(i).getJobID());
+                                JOptionPane.showMessageDialog(null, "Job " +student.getAddedJobs().get(i).getJobID() +" 's deadline is in less than 24 hours");
+
+                                  }
+                           }
+                              
             this.dispose();
             } catch (ParseException ex) {
                 Logger.getLogger(StudentJobGUI.class.getName()).log(Level.SEVERE, null, ex);

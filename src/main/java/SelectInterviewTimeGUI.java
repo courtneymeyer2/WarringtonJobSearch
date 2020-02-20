@@ -193,6 +193,15 @@ public class SelectInterviewTimeGUI extends javax.swing.JFrame {
         try {
             sa = new StudentAccount(applicant.getStudent());
                  sa.setVisible(true);
+                   for(int i=0; i < student.getAddedJobs().size(); i ++)
+                           {
+                                if(student.getAddedJobs().get(i).checkTime())
+                                {
+                //jobIDS.add(student.getAddedJobs().get(i).getJobID());
+                                JOptionPane.showMessageDialog(null, "Job " +student.getAddedJobs().get(i).getJobID() +" 's deadline is in less than 24 hours");
+
+                                  }
+                           }
         this.dispose();
         } catch (ParseException ex) {
             Logger.getLogger(SelectInterviewTimeGUI.class.getName()).log(Level.SEVERE, null, ex);

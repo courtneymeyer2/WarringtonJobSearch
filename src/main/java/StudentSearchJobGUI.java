@@ -388,7 +388,17 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         try {
             sa = new StudentAccount(student);
               sa.setVisible(true);
+              
         this.dispose();
+          for(int i=0; i < student.getAddedJobs().size(); i ++)
+                           {
+                                if(student.getAddedJobs().get(i).checkTime())
+                                {
+                //jobIDS.add(student.getAddedJobs().get(i).getJobID());
+                                JOptionPane.showMessageDialog(null, "Job " +student.getAddedJobs().get(i).getJobID() +" 's deadline is in less than 24 hours");
+
+                                  }
+                           }
         } catch (ParseException ex) {
             Logger.getLogger(StudentSearchJobGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
