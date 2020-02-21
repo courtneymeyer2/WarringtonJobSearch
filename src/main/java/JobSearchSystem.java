@@ -388,7 +388,7 @@ public class JobSearchSystem implements Serializable{
         return j;
     }
    
-    public static LinkedList <Job> filterJobs(String jobTitle, String companyName, String location, String positionType, Student student)
+     public static LinkedList <Job> filterJobs(String jobTitle, String companyName, String location, String positionType, Student student)
     {
         System.out.println(jobTitle+ companyName+ location+ positionType);
         LinkedList<Job> j = new LinkedList<>();
