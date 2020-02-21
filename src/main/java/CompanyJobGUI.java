@@ -34,9 +34,9 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         {
             deadline.setForeground(Color.red);
         }
-        description.setText("Description: " + job.getDescription());
-        quali.setText("Qualifications: " + job.getQualifications());
-        require.setText("Requirements: " + job.getRequirement());
+        Description.setText(job.getDescription());
+        Qualifications.setText( job.getQualifications());
+        Requirements.setText(job.getRequirement());
         degree.setText("Degree Required: " + job.getDegreeRequired());
         position.setText("Position Type: " + job.getPostitonType());
         location.setText("Location: " +job.getLocation());
@@ -92,12 +92,15 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         applicantStatus = new javax.swing.JButton();
         degree = new javax.swing.JLabel();
         position = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        require = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        quali = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        description = new javax.swing.JLabel();
+        location1 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        Description = new javax.swing.JTextArea();
+        location2 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        Qualifications = new javax.swing.JTextArea();
+        location3 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        Requirements = new javax.swing.JTextArea();
 
         jInternalFrame1.setTitle("*** Company - *** Job");
         jInternalFrame1.setVisible(true);
@@ -176,9 +179,8 @@ public class CompanyJobGUI extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(871, 536));
         setResizable(false);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -271,17 +273,35 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         position.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         position.setText("Position Type:");
 
-        require.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        require.setText("Requirements:");
-        jScrollPane1.setViewportView(require);
+        location1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        location1.setText("Description:");
 
-        quali.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
-        quali.setText("Qualifications: ");
-        jScrollPane3.setViewportView(quali);
+        Description.setColumns(20);
+        Description.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        Description.setLineWrap(true);
+        Description.setRows(5);
+        Description.setBorder(null);
+        jScrollPane5.setViewportView(Description);
 
-        description.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
-        description.setText("Description: ");
-        jScrollPane4.setViewportView(description);
+        location2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        location2.setText("Qualifications:");
+
+        Qualifications.setColumns(20);
+        Qualifications.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        Qualifications.setLineWrap(true);
+        Qualifications.setRows(5);
+        Qualifications.setBorder(null);
+        jScrollPane6.setViewportView(Qualifications);
+
+        location3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        location3.setText("Requirements:");
+
+        Requirements.setColumns(20);
+        Requirements.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
+        Requirements.setLineWrap(true);
+        Requirements.setRows(5);
+        Requirements.setBorder(null);
+        jScrollPane7.setViewportView(Requirements);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -297,16 +317,8 @@ public class CompanyJobGUI extends javax.swing.JFrame {
                 .addGap(80, 80, 80)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(degree, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(position, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deadline, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(22, 22, 22)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,17 +328,33 @@ public class CompanyJobGUI extends javax.swing.JFrame {
                                         .addGap(93, 93, 93)
                                         .addComponent(applicantStatus)
                                         .addGap(90, 90, 90)
-                                        .addComponent(addFeedback)))))
+                                        .addComponent(addFeedback))))
+                            .addComponent(degree, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(deadline, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(location2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                                    .addComponent(location3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(73, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(location1)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                 .addComponent(CompanyWithPosition, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(interviewTimes))
-                            .addComponent(jScrollPane3))
+                                .addComponent(interviewTimes)))
                         .addGap(55, 55, 55))))
         );
         jPanel4Layout.setVerticalGroup(
@@ -344,19 +372,25 @@ public class CompanyJobGUI extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(deadline))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(location)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(position)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(degree)
-                .addGap(4, 4, 4)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(location1)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(location)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(position)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(degree)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(location2)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(location3)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -520,12 +554,14 @@ public class CompanyJobGUI extends javax.swing.JFrame {
     private Company company;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CompanyWithPosition;
+    private javax.swing.JTextArea Description;
+    private javax.swing.JTextArea Qualifications;
+    private javax.swing.JTextArea Requirements;
     private javax.swing.JButton addFeedback;
     private javax.swing.JButton applicantStatus;
     private javax.swing.JButton backButton;
     private javax.swing.JLabel deadline;
     private javax.swing.JLabel degree;
-    private javax.swing.JLabel description;
     private javax.swing.JButton interviewTimes;
     private javax.swing.JButton jButton1;
     private javax.swing.JInternalFrame jInternalFrame1;
@@ -535,15 +571,16 @@ public class CompanyJobGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTable jTable2;
     private javax.swing.JLabel location;
+    private javax.swing.JLabel location1;
+    private javax.swing.JLabel location2;
+    private javax.swing.JLabel location3;
     private javax.swing.JLabel position;
-    private javax.swing.JLabel quali;
-    private javax.swing.JLabel require;
     private javax.swing.JButton viewProfile;
     // End of variables declaration//GEN-END:variables
 }

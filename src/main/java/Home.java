@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -291,7 +292,7 @@ public class Home extends javax.swing.JFrame {
                Company company = JobSearchSystem.getCompanyByEmail(email);
                CompanyPageGUI cpg = new CompanyPageGUI(company);
                cpg.setVisible(true);
-               setVisible(false);
+               this.dispose();
            }
            else
            {

@@ -1,5 +1,7 @@
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -54,38 +56,38 @@ public class StudentAccount extends javax.swing.JFrame {
         }
         else
         {
-           gg.setText(((Graduate)student).getGPA()+"");
-           gug.setText(((Graduate)student).getUndergradGPA()+"");
-           ud.setText(((Graduate)student).getUndergradMajor());
+            gg.setText(((Graduate)student).getGPA()+"");
+            gug.setText(((Graduate)student).getUndergradGPA()+"");
+            ud.setText(((Graduate)student).getUndergradMajor());
          //  System.out.println(((Graduate)student).getUndergradMajor());
         }
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-       applicants = JobSearchSystem.getApplicants(student);
-       for(int i = 0; i < applicants.size(); i++)
-       {
-           try
-           {
-             model.addRow(new Object[]{"" +applicants.get(i).getJob().getJobTitle() , ""+ JobSearchSystem.getCompanyByJob(applicants.get(i).getJob()).getCompanyName() , "" + applicants.get(i).getJob().getDeadline() , "" + applicants.get(i).getStatus() ,"" + applicants.get(i).getInterview().getDate() , "" +applicants.get(i).getInterview().getFeedback()});
+        applicants = JobSearchSystem.getApplicants(student);
+        for(int i = 0; i < applicants.size(); i++)
+        {
+            try
+            {
+                model.addRow(new Object[]{"" +applicants.get(i).getJob().getJobTitle() , ""+ JobSearchSystem.getCompanyByJob(applicants.get(i).getJob()).getCompanyName() , "" + applicants.get(i).getJob().getDeadline() , "" + applicants.get(i).getStatus() ,"" + applicants.get(i).getInterview().getDate() , "" +applicants.get(i).getInterview().getFeedback()});
 
-           }
-           catch (NullPointerException e)
-           {
-            model.addRow(new Object[]{"" +applicants.get(i).getJob().getJobTitle() , ""+ JobSearchSystem.getCompanyByJob(applicants.get(i).getJob()).getCompanyName() , "" + applicants.get(i).getJob().getDeadline() , "" + applicants.get(i).getStatus() , "" , "" });
+            }
+            catch (NullPointerException e)
+            {
+                model.addRow(new Object[]{"" +applicants.get(i).getJob().getJobTitle() , ""+ JobSearchSystem.getCompanyByJob(applicants.get(i).getJob()).getCompanyName() , "" + applicants.get(i).getJob().getDeadline() , "" + applicants.get(i).getStatus() , "" , "" });
  
-           }
-       }
-           jTable2.setModel(model); 
+            }
+        }
+            jTable2.setModel(model); 
            
            
-       DefaultTableModel model2 = (DefaultTableModel) jTable3.getModel();
+        DefaultTableModel model2 = (DefaultTableModel) jTable3.getModel();
       // LinkedList <Integer> jobIDS = new LinkedList <Integer>();
        
-       for(int i = 0; i < student.getAddedJobs().size(); i++)
-       {
-             model2.addRow(new Object[]{"" +student.getAddedJobs().get(i).getJobTitle() , ""+ JobSearchSystem.getCompanyByJob(student.getAddedJobs().get(i)).getCompanyName() , "" + student.getAddedJobs().get(i).getDeadline()});
+        for(int i = 0; i < student.getAddedJobs().size(); i++)
+        {
+            model2.addRow(new Object[]{"" +student.getAddedJobs().get(i).getJobTitle() , ""+ JobSearchSystem.getCompanyByJob(student.getAddedJobs().get(i)).getCompanyName() , "" + student.getAddedJobs().get(i).getDeadline()});
         
-       }
-           jTable3.setModel(model2); 
+        }
+            jTable3.setModel(model2); 
         
     }
 
@@ -141,7 +143,7 @@ public class StudentAccount extends javax.swing.JFrame {
         export = new javax.swing.JButton();
         viewFeedback = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -599,24 +601,24 @@ public class StudentAccount extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jobDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobDetailActionPerformed
-               int index = jTable2.getSelectedRow();
-               
-               if(index == -1)
-                {
-                     JOptionPane.showMessageDialog(null, "You must select a job");
-                }
-               else
-               {
-                   StudentJobGUI sjg;
-                   try {
-                       sjg = new StudentJobGUI(applicants.get(index).getJob(), student, 1);
-                        sjg.setVisible(true);
-                   this.dispose();
-                   } catch (ParseException ex) {
-                       Logger.getLogger(StudentAccount.class.getName()).log(Level.SEVERE, null, ex);
-                   }
-                  
-               }
+        int index = jTable2.getSelectedRow();
+
+        if(index == -1)
+        {
+            JOptionPane.showMessageDialog(null, "You must select a job");
+        }
+        else
+        {
+            StudentJobGUI sjg;
+            try {
+                sjg = new StudentJobGUI(applicants.get(index).getJob(), student, 1);
+                sjg.setVisible(true);
+                this.dispose();
+            } catch (ParseException ex) {
+               Logger.getLogger(StudentAccount.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+       }
                
 
     }//GEN-LAST:event_jobDetailActionPerformed
@@ -688,7 +690,7 @@ public class StudentAccount extends javax.swing.JFrame {
        }
        else
        {
-           Job j = student.getAddedJobs().get(index);
+            Job j = student.getAddedJobs().get(index);
             JobSearchSystem.applytoJob(new Application(student, j, "Pending"));
             JOptionPane.showMessageDialog(null, "Applied Successfully");
             StudentAccount sa;
@@ -716,25 +718,54 @@ public class StudentAccount extends javax.swing.JFrame {
         int index = jTable2.getSelectedRow();
         if(index == -1)
         {
-          JOptionPane.showMessageDialog(null, "You must select a job");
+           JOptionPane.showMessageDialog(null, "You must select a job");
         }
         else if(applicants.get(index).getInterview() == null)
         {
-           JOptionPane.showMessageDialog(null,"An interview has not been created" );
+            JOptionPane.showMessageDialog(null,"An interview has not been created" );
         }
         else if(applicants.get(index).getStatus().equals("Offer") ||applicants.get(index).getStatus().equals("Rejected") )
         {
-           JOptionPane.showMessageDialog(null,applicants.get(index).getInterview().getFeedback());
+            JOptionPane.showMessageDialog(null,applicants.get(index).getInterview().getFeedback());
         }
         else
         {
-           JOptionPane.showMessageDialog(null, "Feedback has not been created");
+            JOptionPane.showMessageDialog(null, "Feedback has not been created");
         }
         
     }//GEN-LAST:event_viewFeedbackActionPerformed
 
     private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
         // TODO add your handling code here:
+       PrintWriter output = null ;
+       
+   
+        try 
+        {	
+            output = new PrintWriter("ExportedJobs.txt");
+            String header = String.format("%-8s%-30s%-30s%-15s%-20s%-20s%-50s", "JobID", "JobTitle", "Company", "Deadline","Status","Interview","Feedback");
+            output.println(header);    
+            
+            for(int i=0; i<jTable2.getRowCount();i++)
+            {
+                if(applicants.get(i)!=null && applicants.get(i).getInterview() !=null)
+                {
+                    String str = String.format("%-20s%-20s%-50s",applicants.get(i).getStatus(),applicants.get(i).getInterview().getDate(),applicants.get(i).getInterview().getFeedback());
+                    output.println(applicants.get(i).getJob().toString()+ str); 
+                } 
+                else
+                {
+                    String str = String.format("%-20s%-20s%-50s",applicants.get(i).getStatus(),"" ,"");
+                    output.println(applicants.get(i).getJob().toString()+ str); 
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Applied job list exported sucessfully!");
+        }
+        catch(IOException ioe) 
+        {
+            System.out.println(ioe.toString());
+        } 
+        finally {    if (output != null)      output.close();     }
     }//GEN-LAST:event_exportActionPerformed
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
