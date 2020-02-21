@@ -55,6 +55,13 @@ public class StudentJobGUI extends javax.swing.JFrame {
         {
             Added.setText("Remove from List");
         }
+        if(JobSearchSystem.checkApplicationClose(job))
+        {
+            apply.setEnabled(false);
+            apply.setText("Expired");
+            Added.setEnabled(false);
+        }
+
     }
 
     /**

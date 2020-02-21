@@ -13,6 +13,7 @@
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 public class JobSearchSystem implements Serializable{
     private static LinkedList <Student> students = new LinkedList <Student>();
@@ -574,4 +575,42 @@ public class JobSearchSystem implements Serializable{
         Home home = new Home();
         home.setVisible(true);
     }
+    public static boolean checkApplicationClose(Job job) throws ParseException 
+    {
+        Date jobDeadline = new SimpleDateFormat("MM/dd/yyy").parse(job.getDeadline());
+        Calendar applicationCloseCal = Calendar.getInstance();
+        applicationCloseCal.setTime(jobDeadline);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Calendar currentDate = Calendar.getInstance();
+        currentDate.set(localDateTime.getYear(), localDateTime.getMonthValue()-1, localDateTime.getDayOfMonth());
+        //currentDate.setTime(localDateTime);
+        if(applicationCloseCal.before(currentDate) || applicationCloseCal.equals(currentDate))
+        {               
+          return true;
+        }
+        else
+        {
+         return false;
+        }
+     }
+    
+    public static boolean checkDeadline(Job job) throws ParseException 
+    {
+        Date jobDeadline = new SimpleDateFormat("MM/dd/yyy").parse(job.getDeadline());
+        Calendar applicationCloseCal = Calendar.getInstance();
+        applicationCloseCal.setTime(jobDeadline);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Calendar currentDate = Calendar.getInstance();
+        currentDate.set(localDateTime.getYear(), localDateTime.getMonthValue()-1, localDateTime.getDayOfMonth());
+        //currentDate.setTime(localDateTime);
+        if(applicationCloseCal.after(currentDate) || applicationCloseCal.equals(currentDate))
+        {               
+          return true;
+        }
+        else
+        {
+         return false;
+        }
+     }
+
  }

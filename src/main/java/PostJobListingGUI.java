@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -304,23 +305,36 @@ public class PostJobListingGUI extends javax.swing.JFrame {
             String degreeType = degreetype.getSelectedItem().toString();
         String Type = type.getSelectedItem().toString();
         Job job = new Job(title.getText(), description.getText(), location.getText(),qualification.getText(), requirements.getText(), degreeType ,Type, date);
-        company.addJobs(job);
-        //JobSearchSystem.addJob(job);
-        CompanyPageGUI cjg = new CompanyPageGUI(company);
-        cjg.setVisible(true);
-        this.dispose();
+        
+        try {
+            if(JobSearchSystem.checkDeadline(job))
+            {
+                company.addJobs(job);
+                //JobSearchSystem.addJob(job);
+                CompanyPageGUI cjg = new CompanyPageGUI(company);
+                cjg.setVisible(true);
+                this.dispose();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "The deadline cannot be before the current date");
+            }
             
-        //} catch (ParseException ex) {
-          //  Logger.getLogger(PostJobListingGUI.class.getName()).log(Level.SEVERE, null, ex);
-        //}
-         
+            
+            //} catch (ParseException ex) {
+            //  Logger.getLogger(PostJobListingGUI.class.getName()).log(Level.SEVERE, null, ex);
+            //}
+            
 //        String pattern = "MM/dd/yyyy";
 //        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 //        String date = simpleDateFormat.format(new Date((month.getSelectedIndex()), Integer.parseInt(day.getSelectedItem().toString()), Integer.parseInt(year.getSelectedItem().toString())));
 //        System.out.println(date);
-        
-        //Date deadline = new Date(Integer.parseInt(year.getSelectedItem().toString()),(month.getSelectedIndex()), Integer.parseInt(day.getSelectedItem().toString()));
-        //System.out.println(deadline);
+
+//Date deadline = new Date(Integer.parseInt(year.getSelectedItem().toString()),(month.getSelectedIndex()), Integer.parseInt(day.getSelectedItem().toString()));
+//System.out.println(deadline);
+        } catch (ParseException ex) {
+            Logger.getLogger(PostJobListingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_submitButtonActionPerformed
 
