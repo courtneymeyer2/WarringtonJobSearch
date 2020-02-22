@@ -62,8 +62,8 @@ public class RegisterStudent extends javax.swing.JFrame {
         resumeButton = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        password = new javax.swing.JTextField();
         r = new javax.swing.JTextField();
+        password2 = new javax.swing.JPasswordField();
         jLabel13 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
 
@@ -270,9 +270,9 @@ public class RegisterStudent extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel6))
                                 .addGap(23, 23, 23)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(id, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                                    .addComponent(password2)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
@@ -287,7 +287,7 @@ public class RegisterStudent extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(resumeButton))))))
                     .addComponent(gradyear, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,7 +297,7 @@ public class RegisterStudent extends javax.swing.JFrame {
                     .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel1)
-                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(password2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -339,7 +339,7 @@ public class RegisterStudent extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(registerButton))
-                .addContainerGap(412, Short.MAX_VALUE))
+                .addContainerGap(428, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,7 +370,7 @@ public class RegisterStudent extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, 891, 891, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -416,14 +416,14 @@ public class RegisterStudent extends javax.swing.JFrame {
             else {
                 if(f !=null){
                     if (undergradStudent.isSelected()){
-                        Student undergrad = new Undergraduate(Integer.parseInt(id.getText()), name.getText(),  email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), f, Double.parseDouble(undergradgpa.getText()), password.getText());
+                        Student undergrad = new Undergraduate(Integer.parseInt(id.getText()), name.getText(),  email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), f, Double.parseDouble(undergradgpa.getText()), String.valueOf(password2.getPassword()));
                         JobSearchSystem.addNewStudent(undergrad);
                         StudentSearchJobGUI ssj = new StudentSearchJobGUI(undergrad);
                         ssj.setVisible(true);
                         this.dispose();
                     }
                     else {
-                        Student graduate = new Graduate(Integer.parseInt(id.getText()), name.getText(), email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), f, Double.parseDouble(gradgpa.getText()), password.getText(), gradundergraddegree.getText(),Double.parseDouble(gradundergradgps.getText()));
+                        Student graduate = new Graduate(Integer.parseInt(id.getText()), name.getText(), email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), f, Double.parseDouble(gradgpa.getText()), String.valueOf(password2.getPassword()), gradundergraddegree.getText(),Double.parseDouble(gradundergradgps.getText()));
                         JobSearchSystem.addNewStudent(graduate);
                         StudentSearchJobGUI ssj = new StudentSearchJobGUI(graduate);
                         ssj.setVisible(true);
@@ -513,7 +513,7 @@ public class RegisterStudent extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField major;
     private javax.swing.JTextField name;
-    private javax.swing.JTextField password;
+    private javax.swing.JPasswordField password2;
     private javax.swing.JComboBox<String> positiontype;
     private javax.swing.JTextField r;
     private javax.swing.JButton registerButton;
