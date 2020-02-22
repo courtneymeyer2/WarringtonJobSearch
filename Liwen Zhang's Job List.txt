@@ -1,0 +1,3 @@
+JobID   JobTitle                      Company                       Deadline                      Status                        Interview                     Feedback                      
+4       Consultant                    Microsoft                     02/23/2020                    Interview Requested           05/11/2020 01.00 AM                                         
+1       Technology Software Engineer  American Express              04/05/2020                    Offer                         05/10/2020 01.30 PM           Congrats! We would love it if you would join our family.
