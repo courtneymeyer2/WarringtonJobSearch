@@ -235,11 +235,11 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Job Title", "Company", "Deadline"
+                "Job Title", "Company", "Location", "Deadline"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -350,7 +350,7 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
             {
                  for(int i = 0; i < filterJobs.size(); i++)
                 {
-                model.addRow(new Object[]{  ""+filterJobs.get(i).getJobTitle(), ""+  JobSearchSystem.getCompanyByJob(filterJobs.get(i)).getCompanyName(), ""+  filterJobs.get(i).getDeadline()});
+                model.addRow(new Object[]{  ""+filterJobs.get(i).getJobTitle(), ""+  JobSearchSystem.getCompanyByJob(filterJobs.get(i)).getCompanyName(), ""+filterJobs.get(i).getLocation(),""+  filterJobs.get(i).getDeadline()});
                 }
             jTable3.setModel(model);
             }           
