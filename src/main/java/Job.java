@@ -33,7 +33,7 @@ public class Job implements Serializable{
     public String toString()
     {
         String company = JobSearchSystem.getCompanyByJob(this).getCompanyName();        
-        String str = String.format("%-8d%-40s%-40s%-40s", jobID, jobTitle, company, deadline);
+        String str = String.format("%-8d%-30s%-30s%-30s", jobID, jobTitle, company, deadline);
         return str;
     }
     
