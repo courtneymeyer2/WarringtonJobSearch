@@ -211,7 +211,7 @@ public class AddFeedback extends javax.swing.JFrame {
         {
             if(status.getSelectedItem().toString().equals("Offer") || status.getSelectedItem().toString().equals("Rejected") )
             {
-                        JOptionPane.showMessageDialog(null, "An interview must be created first");
+                JOptionPane.showMessageDialog(null, "An interview must be created first");
             }
             else
             {
@@ -219,14 +219,15 @@ public class AddFeedback extends javax.swing.JFrame {
                 System.out.println(status.getSelectedItem().toString());
                 JOptionPane.showMessageDialog(null, "Status Changed");
                 CompanyJobGUI cjg;
-                try {
+                try 
+                {
                     cjg = new CompanyJobGUI(job, company);
                     cjg.setVisible(true);
                 this.dispose();
-                } catch (ParseException ex) {
+                } catch (ParseException ex) 
+                {
                     Logger.getLogger(AddFeedback.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
+                }               
             }
         }
         else
@@ -236,11 +237,13 @@ public class AddFeedback extends javax.swing.JFrame {
             System.out.println(status.getSelectedItem().toString());
             JOptionPane.showMessageDialog(null, "Status Changed");
             CompanyJobGUI cjg;
-            try {
+            try 
+            {
                 cjg = new CompanyJobGUI(job, company);
                 cjg.setVisible(true);
                 this.dispose();
-            } catch (ParseException ex) {
+            } catch (ParseException ex) 
+            {
                 Logger.getLogger(AddFeedback.class.getName()).log(Level.SEVERE, null, ex);
             }
              
@@ -251,11 +254,13 @@ public class AddFeedback extends javax.swing.JFrame {
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         CompanyJobGUI cjg;
-        try {
+        try 
+        {
             cjg = new CompanyJobGUI(job,company);
             cjg.setVisible(true);
         this.dispose();
-        } catch (ParseException ex) {
+        } catch (ParseException ex) 
+        {
             Logger.getLogger(AddFeedback.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -263,23 +268,25 @@ public class AddFeedback extends javax.swing.JFrame {
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         try
-           {
+        {
             applicant.getInterview().setFeeback(feedback.getText().toString());
             JOptionPane.showMessageDialog(null, "Feedback has been added");
             CompanyJobGUI cjg;
-            try {
+            try 
+            {
                 cjg = new CompanyJobGUI(job, company);
                 cjg.setVisible(true);
-            this.dispose();
-            } catch (ParseException ex) {
+                this.dispose();
+            } catch (ParseException ex)
+            {
                 Logger.getLogger(AddFeedback.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             
-           }
-         catch(NullPointerException e)
-         {
-             JOptionPane.showMessageDialog(null, "An interview has not been created");
+        }
+        catch(NullPointerException e)
+        {
+            JOptionPane.showMessageDialog(null, "An interview has not been created");
          }
     }//GEN-LAST:event_addActionPerformed
 
@@ -317,9 +324,6 @@ public class AddFeedback extends javax.swing.JFrame {
             }
         });
     }
-    private Job job;
-    private Application applicant;
-    private Company company;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
     private javax.swing.JButton back;
@@ -334,4 +338,7 @@ public class AddFeedback extends javax.swing.JFrame {
     private javax.swing.JButton selectButton;
     private javax.swing.JComboBox<String> status;
     // End of variables declaration//GEN-END:variables
+    private Job job;
+    private Application applicant;
+    private Company company;
 }

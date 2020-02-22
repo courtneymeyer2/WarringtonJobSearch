@@ -408,13 +408,17 @@ public class RegisterStudent extends javax.swing.JFrame {
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         // TODO add your handling code here:
-        try{   
+        try
+        {   
             boolean b = JobSearchSystem.checkRegistration(email.getText(), "student");
-            if (!b){
+            if (!b)
+            {
                 JOptionPane.showMessageDialog(null, "An account with this email already exists.");
             } 
-            else {
-                if(f !=null){
+            else 
+            {
+                if(f !=null)
+                {
                     if (undergradStudent.isSelected()){
                         Student undergrad = new Undergraduate(Integer.parseInt(id.getText()), name.getText(),  email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), f, Double.parseDouble(undergradgpa.getText()), String.valueOf(password2.getPassword()));
                         JobSearchSystem.addNewStudent(undergrad);
@@ -422,7 +426,8 @@ public class RegisterStudent extends javax.swing.JFrame {
                         ssj.setVisible(true);
                         this.dispose();
                     }
-                    else {
+                    else 
+                    {
                         Student graduate = new Graduate(Integer.parseInt(id.getText()), name.getText(), email.getText(), major.getText(), Integer.parseInt(gradyear.getText()), positiontype.getSelectedItem().toString(), f, Double.parseDouble(gradgpa.getText()), String.valueOf(password2.getPassword()), gradundergraddegree.getText(),Double.parseDouble(gradundergradgps.getText()));
                         JobSearchSystem.addNewStudent(graduate);
                         StudentSearchJobGUI ssj = new StudentSearchJobGUI(graduate);
@@ -430,7 +435,8 @@ public class RegisterStudent extends javax.swing.JFrame {
                         this.dispose();
                     }
                 }
-                else{
+                else
+                {
                     JOptionPane.showMessageDialog(null, "Please upload resume!");
                 }
             }  
@@ -483,7 +489,7 @@ public class RegisterStudent extends javax.swing.JFrame {
             }
         });
     }
-    private File f;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField email;
@@ -521,4 +527,5 @@ public class RegisterStudent extends javax.swing.JFrame {
     private javax.swing.JRadioButton undergradStudent;
     private javax.swing.JTextField undergradgpa;
     // End of variables declaration//GEN-END:variables
+    private File f;
 }

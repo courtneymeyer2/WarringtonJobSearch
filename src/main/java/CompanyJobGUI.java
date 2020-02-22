@@ -41,26 +41,21 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         position.setText("Position Type: " + job.getPostitonType());
         location.setText("Location: " +job.getLocation());
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-      // Student student = new Graduate(3, "Courtney", "Courtneymeyer2@gmail.com", "info", 2019, "Internship", "resume", 3.19, "password", "Isom", 3.7);
-      // Application application = new Application(student, job, null, "Pending");
-       //JobSearchSystem.applytoJob(application);
-       applicants = JobSearchSystem.getApplicants(job);
-       for(int i = 0; i < applicants.size(); i++)
-       {
-           try
-           {
-               System.out.println("status" +applicants.get(i).getStatus());
-               model.addRow(new Object[]{"" +applicants.get(i).getStudent().getName(), "" +applicants.get(i).getStatus(), "" +applicants.get(i).getInterview().getDate(), "" + applicants.get(i).getInterview().getFeedback()});
-           }
-           catch(NullPointerException e)
-           {
-               model.addRow(new Object[]{"" +applicants.get(i).getStudent().getName(), "" +applicants.get(i).getStatus(), "" , ""});
-           }
-        
-     
-       }
-           jTable2.setModel(model); 
-
+      
+        applicants = JobSearchSystem.getApplicants(job);
+        for(int i = 0; i < applicants.size(); i++)
+        {
+            try
+            {
+                System.out.println("status" +applicants.get(i).getStatus());
+                model.addRow(new Object[]{"" +applicants.get(i).getStudent().getName(), "" +applicants.get(i).getStatus(), "" +applicants.get(i).getInterview().getDate(), "" + applicants.get(i).getInterview().getFeedback()});
+            }
+            catch(NullPointerException e)
+            {
+                model.addRow(new Object[]{"" +applicants.get(i).getStudent().getName(), "" +applicants.get(i).getStatus(), "" , ""});
+            }
+        }
+        jTable2.setModel(model); 
     }
 
     /**
@@ -430,7 +425,6 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         }
         else
         {
-            //TableModel model2 = jTable2.getModel();
             Student student = applicants.get(index).getStudent();
             AddFeedback af = new AddFeedback(applicants.get(index), company, job);
             af.setVisible(true);
@@ -446,7 +440,6 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         }
         else
         {
-            //TableModel model2 = jTable2.getModel();
             Student student = applicants.get(index).getStudent();
             CompanyViewofStudentProfile cvosp= new CompanyViewofStudentProfile(student, company, job);
             cvosp.setVisible(true);
@@ -467,14 +460,9 @@ public class CompanyJobGUI extends javax.swing.JFrame {
             af.setVisible(true);
             this.dispose();
         }
-
         else
         {
             JOptionPane.showMessageDialog(null, "You must first change the applicant's status to Offer or Rejected");
-
-            //TableModel model2 = jTable2.getModel();
-            //Student student = applicants.get(index).getStudent();
-
         }
     }//GEN-LAST:event_addFeedbackActionPerformed
 
@@ -553,9 +541,7 @@ public class CompanyJobGUI extends javax.swing.JFrame {
             }
         });
     }
-    private LinkedList <Application> applicants = new LinkedList <Application>();
-    private Job job;
-    private Company company;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CompanyWithPosition;
     private javax.swing.JTextArea Description;
@@ -587,4 +573,7 @@ public class CompanyJobGUI extends javax.swing.JFrame {
     private javax.swing.JLabel position;
     private javax.swing.JButton viewProfile;
     // End of variables declaration//GEN-END:variables
+    private LinkedList <Application> applicants = new LinkedList <Application>();
+    private Job job;
+    private Company company;
 }

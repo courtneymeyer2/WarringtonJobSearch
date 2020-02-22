@@ -20,7 +20,6 @@ import java.util.*;
 public class Job implements Serializable{
     private int jobID;
     private static int nextID = 1;
-  //  private int companyID;
     private String jobTitle;
     private String description;
     private String location;
@@ -30,22 +29,10 @@ public class Job implements Serializable{
     private String positionType;
     private String deadline;
     private LinkedList <Interview> interviews = new LinkedList <Interview>();
-    //private LinkedList <Student> appliedStudents= new LinkedList <Student>();
-    //private LinkedList <Student> selectedStudents = new LinkedList <Student>();
     
     public String toString()
     {
-        String applicants = "";
-        for(int i=0; i < JobSearchSystem.getApplication().size(); i++)
-        {
-            if(JobSearchSystem.getApplication().get(i).getJob().getJobID() == jobID)
-            {
-                applicants += JobSearchSystem.getApplication().get(i).getStudent().getId();
-            }
-        }
-
-        String company = JobSearchSystem.getCompanyByJob(this).getCompanyName();
-        
+        String company = JobSearchSystem.getCompanyByJob(this).getCompanyName();        
         String str = String.format("%-8d%-40s%-40s%-40s", jobID, jobTitle, company, deadline);
         return str;
     }
@@ -55,7 +42,6 @@ public class Job implements Serializable{
         
         this.jobID = nextID;
         nextID ++;
-      //  this.companyID = companyID;
         this.jobTitle = jobTitle;
         this.description = description;
         this.location = location;
@@ -66,10 +52,8 @@ public class Job implements Serializable{
         this.deadline = deadline;
     }
 
-    public Job()
-    {
-
-    }
+    public Job() {}
+    
     public static int getNextID()
     {
         return nextID;
@@ -83,11 +67,6 @@ public class Job implements Serializable{
     {
         return jobID;
     }
-
-//    public int getCompanyID()
-//    {
-//        return companyID;
-//    }
 
     public String getJobTitle()
     {
@@ -107,7 +86,6 @@ public class Job implements Serializable{
     public String getQualifications()
     {
         return qualification;
-
     }
 
     public String getRequirement()
@@ -135,28 +113,13 @@ public class Job implements Serializable{
         return interviews;
     }
 
-//    public LinkedList <Student> getAppliedStudents()
-//    {
-//        return appliedStudents;
-//    }
-//
-//    public LinkedList <Student> getSelectedStudents()
-//    {
-//        return selectedStudents;
-//    }
-//
-//    public void addAppliedStudent(Student student)
-//    {
-//        appliedStudents.add(student);
-//    }
-
     public void addInterview(Interview interview)
     {
         interviews.add(interview);
     }
 
     public String getInterviewIDs()
-   {
+    {
         if(interviews.isEmpty())
         {
             return "No interviews added";
@@ -165,41 +128,41 @@ public class Job implements Serializable{
         for(int i=0; i< interviews.size();i++)
             {
                
-            if(i == interviews.size()-1)
-            {
-                 j += interviews.get(i).getInterviewID() +"]";
+                if(i == interviews.size()-1)
+                {
+                    j += interviews.get(i).getInterviewID() +"]";
+                }
+                else
+                {
+                    j += interviews.get(i).getInterviewID() +", ";
+                }
             }
-            else
-            {
-                 j += interviews.get(i).getInterviewID() +", ";
-            }
-             }
+        
         return j;
     }
 
     public boolean checkTime () throws ParseException 
     {
-       LocalDateTime localDateTime = LocalDateTime.now();
-      Date D = new SimpleDateFormat("MM/dd/yyyy").parse(deadline);
-      Calendar Cal = Calendar.getInstance();
-      Cal.setTime(D);
-      Cal.set(Calendar.HOUR, localDateTime.getHour());
-      Cal.set(Calendar.MINUTE, localDateTime.getMinute());
-      Cal.set(Calendar.SECOND, localDateTime.getSecond());
-      System.out.println(Cal.getTime());
-      Calendar cal2 = Calendar.getInstance();
-      System.out.println(LocalDateTime.now());
-      Calendar calendar = Calendar.getInstance();
-      calendar.clear();
-      calendar.set(localDateTime.getYear(), localDateTime.getMonthValue()-1, localDateTime.getDayOfMonth()+1, localDateTime.getHour(), localDateTime.getMinute(), localDateTime.getSecond());
-      //calendar.getTime();
-      if(Cal.getTime().equals(calendar.getTime()))
-      {
-          System.out.println("test");
-          return true;
-      }
-      return false;
-      
-    }
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Date D = new SimpleDateFormat("MM/dd/yyyy").parse(deadline);
+        Calendar Cal = Calendar.getInstance();
+        Cal.setTime(D);
+        Cal.set(Calendar.HOUR, localDateTime.getHour());
+        Cal.set(Calendar.MINUTE, localDateTime.getMinute());
+        Cal.set(Calendar.SECOND, localDateTime.getSecond());
+        System.out.println(Cal.getTime());
+        Calendar cal2 = Calendar.getInstance();
+        System.out.println(LocalDateTime.now());
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(localDateTime.getYear(), localDateTime.getMonthValue()-1, localDateTime.getDayOfMonth()+1, localDateTime.getHour(), localDateTime.getMinute(), localDateTime.getSecond());
 
+        if(Cal.getTime().equals(calendar.getTime()))
+        {
+            System.out.println("test");
+            return true;
+        }
+        
+        return false;
+        }
 }

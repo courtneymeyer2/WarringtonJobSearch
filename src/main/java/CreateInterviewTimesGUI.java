@@ -33,7 +33,6 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
         this.company = company;
         this.job = job;
         this.numOfInterviews = numOfInterviews;
-       // job.addInterview(new Interview("05/01/2020 10.30 PM", 30, "", "Interview Requested"));
 
         DefaultListModel lm2 = new DefaultListModel();
         for(int i =0; i <job.getInterviewList().size(); i ++)
@@ -46,19 +45,6 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
         {
             duration.setEditable(false);
         }
-//          if(lm2 == null)
-//            {
-//            lm2 = new DefaultListModel();
-//            jList1.setModel(lm2);
-//            }
-//          lm2.addElement("Text");
-        //jList1.add(ampm)
-                // DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        //DefaultListModel interviewList = (DefaultListModel) jList1.getModel();
-        //JList list = new JList(interviewList);
-//        listModel.a
-//        interviewList.addElement("addElements");
-//        JList listd = new JList(demoList);
     }
 
 
@@ -280,11 +266,7 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
         }
         
         Calendar calendar = Calendar.getInstance();
-       // System.out.println(Integer.parseInt(year.getSelectedItem().toString()));
-//        System.out.println(month.getSelectedIndex());
-//        System.out.println(Integer.parseInt(day.getSelectedItem().toString()));
-//        System.out.println(hour.getSelectedIndex());
-//        System.out.println(Integer.parseInt(minute.getSelectedItem().toString()));
+
         calendar.set(Integer.parseInt(year.getSelectedItem().toString()), (month.getSelectedIndex()), Integer.parseInt(day.getSelectedItem().toString()), (hour.getSelectedIndex())+1, Integer.parseInt(minute.getSelectedItem().toString()));
         calendar.set(Calendar.HOUR, (hour.getSelectedIndex()+1));
         if(ampm.getSelectedIndex() == 0)
@@ -296,54 +278,52 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
             calendar.set(Calendar.AM_PM, Calendar.PM);
         }
         DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy hh.mm aa");
-        //System.out.print(dateFormat2.format(calendar.getTime())); // will print like 2014-02-20 
+        // will print like 2014-02-20 
         String date = dateFormat2.format(calendar.getTime());
 
         Interview interview = new Interview(date, dur);
-        try {
+        try 
+        {
             boolean check = JobSearchSystem.checkInterviewTimes(job, interview);
-             if(check)
-             {
-             job.addInterview(interview);
-            // JobSearchSystem.addInterview(interview);
-             numOfInterviews --;
-             CreateInterviewTimesGUI c = new CreateInterviewTimesGUI(company, job, numOfInterviews);
-             c.setVisible(true);
-             this.dispose();
+            if(check)
+            {
+                job.addInterview(interview);
 
-             JOptionPane.showMessageDialog(null, "Interview time added successfully");
-             }
-             else
-             {
+                numOfInterviews --;
+                CreateInterviewTimesGUI c = new CreateInterviewTimesGUI(company, job, numOfInterviews);
+                c.setVisible(true);
+                this.dispose();
+
+                JOptionPane.showMessageDialog(null, "Interview time added successfully");
+            }
+            else
+            {
                  JOptionPane.showMessageDialog(null,"You have a conflicting interview time");
-             }
+            }
             
         }
-        catch (ParseException ex) {
+        catch (ParseException ex) 
+        {
             Logger.getLogger(CreateInterviewTimesGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       
-       
-        
-     
-       
 
     }//GEN-LAST:event_addActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
-          if(numOfInterviews !=0)
-       {
+        if(numOfInterviews !=0)
+        {
            JOptionPane.showMessageDialog(null, "You must create interview times for at least the number of applicants with interview requested status");
-       }
+        }
         
         CompanyJobGUI cjg;
-        try {
+        try 
+        {
             cjg = new CompanyJobGUI(job, company);
-             cjg.setVisible(true);
-        this.dispose();
-        } catch (ParseException ex) {
+            cjg.setVisible(true);
+            this.dispose();
+        } catch (ParseException ex)
+        {
             Logger.getLogger(CreateInterviewTimesGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
        
@@ -383,9 +363,7 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
             }
         });
     }
-    private Company company;
-    private Job job;
-    private int numOfInterviews;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
     private javax.swing.JComboBox<String> ampm;
@@ -407,4 +385,7 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> month;
     private javax.swing.JComboBox<String> year;
     // End of variables declaration//GEN-END:variables
+    private Company company;
+    private Job job;
+    private int numOfInterviews;
 }

@@ -288,29 +288,23 @@ public class PostJobListingGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_degreetypeActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        
-       // System.out.println("year" + Integer.parseInt(year.getSelectedItem().toString()));
-        //System.out.println("month" + month.getSelectedIndex() +1);
-        //System.out.println("day" +  Integer.parseInt(day.getSelectedItem().toString()));
-          //String sDate1= day.getSelectedItem().toString() +"/" + (month.getSelectedIndex() +1) + "/" + year.getSelectedItem().toString();  
-           // Date date1; 
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Integer.parseInt(year.getSelectedItem().toString()), (month.getSelectedIndex()), Integer.parseInt(day.getSelectedItem().toString()));
-            DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
-            System.out.print(dateFormat2.format(calendar.getTime())); // will print like 2014-02-20 
-            String date = dateFormat2.format(calendar.getTime());
-//try {
-            //date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
-          //  System.out.println(sDate1+"\t"+date1);
-            String degreeType = degreetype.getSelectedItem().toString();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Integer.parseInt(year.getSelectedItem().toString()), (month.getSelectedIndex()), Integer.parseInt(day.getSelectedItem().toString()));
+        DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
+        System.out.print(dateFormat2.format(calendar.getTime())); // will print like 2014-02-20 
+        String date = dateFormat2.format(calendar.getTime());
+
+        String degreeType = degreetype.getSelectedItem().toString();
         String Type = type.getSelectedItem().toString();
         Job job = new Job(title.getText(), description.getText(), location.getText(),qualification.getText(), requirements.getText(), degreeType ,Type, date);
         
-        try {
+        try 
+        {
             if(JobSearchSystem.checkDeadline(job))
             {
                 company.addJobs(job);
-                //JobSearchSystem.addJob(job);
+
                 CompanyPageGUI cjg = new CompanyPageGUI(company);
                 cjg.setVisible(true);
                 this.dispose();
@@ -319,20 +313,9 @@ public class PostJobListingGUI extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(null, "The deadline cannot be before the current date");
             }
-            
-            
-            //} catch (ParseException ex) {
-            //  Logger.getLogger(PostJobListingGUI.class.getName()).log(Level.SEVERE, null, ex);
-            //}
-            
-//        String pattern = "MM/dd/yyyy";
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-//        String date = simpleDateFormat.format(new Date((month.getSelectedIndex()), Integer.parseInt(day.getSelectedItem().toString()), Integer.parseInt(year.getSelectedItem().toString())));
-//        System.out.println(date);
 
-//Date deadline = new Date(Integer.parseInt(year.getSelectedItem().toString()),(month.getSelectedIndex()), Integer.parseInt(day.getSelectedItem().toString()));
-//System.out.println(deadline);
-        } catch (ParseException ex) {
+        } catch (ParseException ex)
+        {
             Logger.getLogger(PostJobListingGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -376,7 +359,7 @@ public class PostJobListingGUI extends javax.swing.JFrame {
             }
         });
     }
-    private Company company;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> day;
     private javax.swing.JComboBox<String> degreetype;
@@ -401,4 +384,5 @@ public class PostJobListingGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> type;
     private javax.swing.JComboBox<String> year;
     // End of variables declaration//GEN-END:variables
+    private Company company;
 }

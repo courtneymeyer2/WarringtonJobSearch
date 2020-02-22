@@ -33,83 +33,54 @@ public class Report extends javax.swing.JFrame {
                     
                         if(students.get(i) instanceof Undergraduate)
                         {
-                          model.addRow(new Object[]{"U", "" +students.get(i).getId(), students.get(i).getName(), "" +students.get(i).getEmail(), "" +students.get(i).getMajor(), "" +students.get(i).getGraduatingYear(), "" +students.get(i).getPositionType(), "" +students.get(i).getResume().getName(), "" +students.get(i).getGPA(), "" +students.get(i).getStudentPassword(), "" +students.get(i).getJobIDs(), "", ""});
+                            model.addRow(new Object[]{"U", "" +students.get(i).getId(), students.get(i).getName(), "" +students.get(i).getEmail(), "" +students.get(i).getMajor(), "" +students.get(i).getGraduatingYear(), "" +students.get(i).getPositionType(), "" +students.get(i).getResume().getName(), "" +students.get(i).getGPA(), "" +students.get(i).getStudentPassword(), "" +students.get(i).getJobIDs(), "", ""});
 
                         }
                         else
                         {
-                          model.addRow(new Object[]{"G", "" +students.get(i).getId(), students.get(i).getName(), "" +students.get(i).getEmail(), "" +students.get(i).getMajor(), "" +students.get(i).getGraduatingYear(), "" +students.get(i).getPositionType(), "" +students.get(i).getResume().getName(), "" +students.get(i).getGPA(), "" +students.get(i).getStudentPassword(), "" +students.get(i).getJobIDs(), ((Graduate)students.get(i)).getUndergradMajor(), ((Graduate)students.get(i)).getUndergradGPA()});
+                            model.addRow(new Object[]{"G", "" +students.get(i).getId(), students.get(i).getName(), "" +students.get(i).getEmail(), "" +students.get(i).getMajor(), "" +students.get(i).getGraduatingYear(), "" +students.get(i).getPositionType(), "" +students.get(i).getResume().getName(), "" +students.get(i).getGPA(), "" +students.get(i).getStudentPassword(), "" +students.get(i).getJobIDs(), ((Graduate)students.get(i)).getUndergradMajor(), ((Graduate)students.get(i)).getUndergradGPA()});
                         }
-                    }
-                    
+                    }                   
                 }
            students1.setModel(model); 
-    
 
         LinkedList<Company> companies = JobSearchSystem.getCompany();
         DefaultTableModel model2 = (DefaultTableModel) companies2.getModel();
         
-            for(int i = 0; i < companies.size(); i++)
-                {
-                    if(companies.get(i)!= null)
-                        model2.addRow(new Object[]{"" +companies.get(i).getCompanyID(),  companies.get(i).getCompanyName(), companies.get(i).getCompanyEmail(), companies.get(i).getCompanyPassword(), companies.get(i).getJobIDs()});
-                    
-                }
-           companies2.setModel(model2); 
-           
-         LinkedList<Job> jobs = JobSearchSystem.getAllJobs();
+        for(int i = 0; i < companies.size(); i++)
+            {
+                if(companies.get(i)!= null)
+                    model2.addRow(new Object[]{"" +companies.get(i).getCompanyID(),  companies.get(i).getCompanyName(), companies.get(i).getCompanyEmail(), companies.get(i).getCompanyPassword(), companies.get(i).getJobIDs()});
 
-                 // LinkedList<Company> companies = JobSearchSystem.getCompany();
-         DefaultTableModel model3 = (DefaultTableModel) jobs1.getModel();
+            }
+        companies2.setModel(model2); 
+           
+        LinkedList<Job> jobs = JobSearchSystem.getAllJobs();
+
+        DefaultTableModel model3 = (DefaultTableModel) jobs1.getModel();
         
-            for(int i = 0; i < jobs.size(); i++)
-                {
-                 
-                    if(jobs.get(i)!= null)
-                        model3.addRow(new Object[]{"" +jobs.get(i).getJobID(),""+ JobSearchSystem.getCompanyByJob(jobs.get(i)).getCompanyID(), ""+ jobs.get(i).getJobTitle(), ""+jobs.get(i).getDescription(), ""+jobs.get(i).getLocation(), ""+jobs.get(i).getQualifications(), ""+jobs.get(i).getRequirement(), ""+jobs.get(i).getDegreeRequired(),""+ jobs.get(i).getPostitonType(),""+ jobs.get(i).getDeadline(), ""+jobs.get(i).getInterviewIDs()});
-                    
-                }
-           jobs1.setModel(model3); 
-//        
-      //  DefaultListModel m3 = new DefaultListModel();
-      //  m3.clear();
-       // String header3 = String.format("%-8s,%-20s, %-20s, %-20s", "ID", "Title", "Company", "Applicants");
-       // m3.addElement(header3);
-//        LinkedList<Job> jobs = JobSearchSystem.getAllJobs();
-//        for(int i=0; i < jobs.size(); i++) {
-//            m3.addElement( jobs.get(i).toString() + ", " );
-//        }
-//        job.setModel(m3);
-        
-//        DefaultListModel m4 = new DefaultListModel();
-//        m4.clear();
-        //String header4 = String.format("%-8s, %-8s, %-20s", "Student ID", "Job ID", "Status");
-        //m4.addElement(header4);
+        for(int i = 0; i < jobs.size(); i++)
+            {
+                if(jobs.get(i)!= null)
+                    model3.addRow(new Object[]{"" +jobs.get(i).getJobID(),""+ JobSearchSystem.getCompanyByJob(jobs.get(i)).getCompanyID(), ""+ jobs.get(i).getJobTitle(), ""+jobs.get(i).getDescription(), ""+jobs.get(i).getLocation(), ""+jobs.get(i).getQualifications(), ""+jobs.get(i).getRequirement(), ""+jobs.get(i).getDegreeRequired(),""+ jobs.get(i).getPostitonType(),""+ jobs.get(i).getDeadline(), ""+jobs.get(i).getInterviewIDs()});                   
+            }
+        jobs1.setModel(model3); 
+
         LinkedList<Application> applications = JobSearchSystem.getApplication();
         DefaultTableModel model4 = (DefaultTableModel) applications1.getModel();
         
-            for(int i = 0; i < applications.size(); i++)
+        for(int i = 0; i < applications.size(); i++)
+            {                 
+                if(applications.get(i)!= null)
                 {
-                 
-                    if(applications.get(i)!= null)
-                    {
-                        if(applications.get(i).getInterview() != null)
-                            model4.addRow(new Object[]{"" +applications.get(i).getStudent().getId(),""+ applications.get(i).getJob().getJobID(), ""+ applications.get(i).getInterview().getInterviewID(),""+applications.get(i).getStatus()});
-                        else
-                            model4.addRow(new Object[]{"" +applications.get(i).getStudent().getId(),""+ applications.get(i).getJob().getJobID(), ""+ "No interview created",""+applications.get(i).getStatus()});
-                    }
+                    if(applications.get(i).getInterview() != null)
+                        model4.addRow(new Object[]{"" +applications.get(i).getStudent().getId(),""+ applications.get(i).getJob().getJobID(), ""+ applications.get(i).getInterview().getInterviewID(),""+applications.get(i).getStatus()});
+                    else
+                        model4.addRow(new Object[]{"" +applications.get(i).getStudent().getId(),""+ applications.get(i).getJob().getJobID(), ""+ "No interview created",""+applications.get(i).getStatus()});
                 }
-           applications1.setModel(model4); 
-        
-//        for(int i=0; i < applications.size(); i++) {
-//            m4.addElement( applications.get(i).toString() +", " );
-//        }
-//        application.setModel(m4);
-//        
-//        DefaultListModel m5 = new DefaultListModel();
-//        m5.clear();
-        //String header5 = String.format("%-8s, %-20s, %-20s", "ID", "Date", "Selected");
-        //m5.addElement(header5);
+            }
+        applications1.setModel(model4); 
+
         LinkedList<Job> j = JobSearchSystem.getAllJobs();
         LinkedList<Interview> interviews = new LinkedList<Interview>();
         for(int n=0; n< j.size(); n++)
@@ -128,8 +99,6 @@ public class Report extends javax.swing.JFrame {
                     model5.addRow(new Object[]{"" +interviews.get(i).getInterviewID(),""+ interviews.get(i).getDate(),""+ interviews.get(i).getDuration(),""+ interviews.get(i).getFeedback(),""+interviews.get(i).getSelected()});
             }
         interviews1.setModel(model5);
-//        }
-//        interview.setModel(m5);
    }
     
     /**

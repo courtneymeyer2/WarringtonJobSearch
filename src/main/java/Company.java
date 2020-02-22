@@ -20,10 +20,8 @@ public class Company implements Serializable
     private LinkedList <Job> jobs = new LinkedList <Job>();
     private static int nextID = 1;
     
-    public Company()
-    {
-
-    }
+    public Company() {}
+    
     public Company(String companyName, String companyEmail, String companyPassword)
     { 
         this.companyID = nextID;

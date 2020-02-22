@@ -18,7 +18,6 @@ public class Student implements Serializable{
     private double gpa;
     private String stuPassword;
     private LinkedList<Job> addedJobs = new LinkedList<Job>();
-    //private LinkedList<Interview> stuInterviews = new LinkedList<Interview>();
     
     public int getId() { return UFId; } 
     public String getName() { return stuName; } 
@@ -30,12 +29,11 @@ public class Student implements Serializable{
     public double getGPA(){return gpa; }
     public String getStudentPassword() { return stuPassword; }
     public LinkedList<Job> getAddedJobs() { return addedJobs; }
-  //  public LinkedList<Interview> getInterview() { return stuInterviews; }
-    public void setResume(File f) { resume = f;}
-    
-//    public void addInterview(Interview interview){
-//        stuInterviews.add(interview);
-//    }
+
+    public void setResume(File f) 
+    {
+        resume = f;
+    }
     
     public void addJob(Job job){
         addedJobs.add(job);
@@ -80,23 +78,7 @@ public class Student implements Serializable{
              }
         return j;
     }
-    //public exportJobList(){}
-//    @Override
-//    public String toString() {
-//
-//        String jobId = "";        
-//        for(int i=0; i<JobSearchSystem.getApplication().size(); i++){
-//            if(JobSearchSystem.getApplication().get(i).getStudent().getId() == UFId)
-//                jobId += JobSearchSystem.getApplication().get(i).getJob().getJobID() + " ";
-//        }        
-//        if(jobId.equals(""))
-//            jobId = "No jobs applied.";
-//        
-//        String str = String.format("%-8d,%-12s,%-15s,%-12s,%-20s",UFId,stuName,major, positionType,jobId);
-//
-//        return str;
-//    }
-//    
+ 
     public Student(int id, String name, String email, String major, int graduatingYear, String positionType, File resume, double gpa, String password){
         this.UFId = id; this.stuName = name; this.stuEmail = email; this.major = major; this.graduatingYear = graduatingYear;
         this.positionType = positionType; this.resume = resume; this.gpa = gpa; this.stuPassword = password;
