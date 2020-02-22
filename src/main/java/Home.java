@@ -306,6 +306,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         Report g = new Report();
         g.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_loginButton2ActionPerformed
 
     private void textFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFileActionPerformed
