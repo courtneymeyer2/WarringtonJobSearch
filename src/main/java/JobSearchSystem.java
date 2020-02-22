@@ -227,8 +227,40 @@ public class JobSearchSystem implements Serializable{
             {
                 return false;
             }  
+           
         }      
         return true;
+    }
+    
+    public static boolean checkBefore(Job job, Interview interview) throws ParseException
+    {
+        String date;
+        int duration;
+        String interviewDate = interview.getDate();
+        int interviewDuration = interview.getDuration();
+        Date interviewD = new SimpleDateFormat("MM/dd/yyyy hh.mm aa").parse(interviewDate);
+        
+        Calendar interviewCal = Calendar.getInstance();
+        interviewCal.setTime(interviewD);
+        
+        LocalDateTime localDateTime = LocalDateTime.now();
+        
+                    Calendar Cal = Calendar.getInstance();
+                    Cal.set(Calendar.MONTH, localDateTime.getMonthValue());
+                    Cal.set(Calendar.DAY_OF_MONTH, localDateTime.getDayOfMonth());
+                    Cal.set(Calendar.YEAR, localDateTime.getYear());
+                    Cal.set(Calendar.HOUR, localDateTime.getHour());
+                    Cal.set(Calendar.MINUTE, localDateTime.getMinute());
+                    Cal.set(Calendar.SECOND, localDateTime.getSecond());
+                    System.out.println(Cal.getTime());
+                    
+              if(interviewCal.before(Cal))
+            {
+               
+                return false;
+            }
+              return true;
+        
     }
     
     public static boolean checkInterviewTimes(Student student, Interview interview) throws ParseException
@@ -264,6 +296,8 @@ public class JobSearchSystem implements Serializable{
                     Calendar cal2 = Calendar.getInstance();
                     cal2.setTime(date1);
                     cal2.add(Calendar.MINUTE, duration);
+                    
+                    
 
                     if(interviewCal.before(cal) && interviewCal2.after(cal))
                     {
@@ -276,7 +310,8 @@ public class JobSearchSystem implements Serializable{
                     else if(interviewCal.equals(cal))
                     {
                         return false;
-                    }         
+                    }  
+                   
              }                   
         }
         return true;        
@@ -329,7 +364,7 @@ public class JobSearchSystem implements Serializable{
         for(int i=0; i < jobs.size(); i++)
         {
             Boolean b1 = (jobs.get(i).getJobTitle().equals(jobTitle))|| (jobTitle.equals( " "));
-            Boolean b2 = (getCompanyByJob(jobs.get(i)).getCompanyName().equals(companyName))||(companyName.equals( " "));
+            Boolean b2 = (getCompanyByJob(jobs.get(i)).getCompanyName().equals(companyName))||(companyName.equals(" "));
             Boolean b3 = (jobs.get(i).getLocation().equals(location))||( location.equals( " "));
             Boolean b4 = jobs.get(i).getPostitonType().equals(positionType);
             if(b1 && b2 && b3 && b4)
@@ -485,9 +520,9 @@ public class JobSearchSystem implements Serializable{
         }
     }
     
-    public static boolean checkDeadline(Job job) throws ParseException 
+    public static boolean checkDeadline(String date) throws ParseException 
     {
-        Date jobDeadline = new SimpleDateFormat("MM/dd/yyy").parse(job.getDeadline());
+        Date jobDeadline = new SimpleDateFormat("MM/dd/yyy").parse(date);
         Calendar applicationCloseCal = Calendar.getInstance();
         applicationCloseCal.setTime(jobDeadline);
         LocalDateTime localDateTime = LocalDateTime.now();

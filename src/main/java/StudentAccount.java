@@ -80,7 +80,7 @@ public class StudentAccount extends javax.swing.JFrame {
        
         for(int i = 0; i < student.getAddedJobs().size(); i++)
         {
-            model2.addRow(new Object[]{"" +student.getAddedJobs().get(i).getJobTitle() , ""+ JobSearchSystem.getCompanyByJob(student.getAddedJobs().get(i)).getCompanyName() , "" + student.getAddedJobs().get(i).getDeadline()});
+            model2.addRow(new Object[]{"" +student.getAddedJobs().get(i).getJobID(), ""+student.getAddedJobs().get(i).getJobTitle() , ""+ JobSearchSystem.getCompanyByJob(student.getAddedJobs().get(i)).getCompanyName() , "" + student.getAddedJobs().get(i).getDeadline()});
         
         }
             jTable3.setModel(model2); 
@@ -439,14 +439,14 @@ public class StudentAccount extends javax.swing.JFrame {
 
             },
             new String [] {
-                " Job Title", "Company", "Deadline"
+                "Job ID", " Job Title", "Company", "Deadline"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

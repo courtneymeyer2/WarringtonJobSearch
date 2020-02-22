@@ -176,37 +176,32 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="position" min="-2" pref="318" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPane2" min="-2" pref="692" max="-2" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Component id="viewProfile" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                                          <Component id="applicantStatus" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                                          <Component id="addFeedback" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
                               <Component id="degree" min="-2" pref="318" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="deadline" min="-2" pref="97" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Component id="jScrollPane5" alignment="1" min="-2" pref="644" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="location2" min="-2" pref="81" max="-2" attributes="0"/>
-                                          <Component id="location3" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jScrollPane7" min="-2" pref="631" max="-2" attributes="0"/>
-                                          <Component id="jScrollPane6" min="-2" pref="631" max="-2" attributes="0"/>
-                                      </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="location2" min="-2" pref="81" max="-2" attributes="0"/>
+                                      <Component id="location3" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jScrollPane7" min="-2" pref="631" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane6" min="-2" pref="631" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="jScrollPane5" alignment="1" min="-2" pref="631" max="-2" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                  <Component id="jScrollPane2" min="-2" pref="692" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="viewProfile" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                                      <Component id="applicantStatus" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                                      <Component id="addFeedback" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -251,7 +246,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="location1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane5" min="-2" pref="49" max="-2" attributes="0"/>
+                      <Component id="jScrollPane5" min="-2" pref="66" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="location" min="-2" max="-2" attributes="0"/>
@@ -259,20 +254,17 @@
                   <Component id="position" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="degree" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane6" min="-2" pref="66" max="-2" attributes="0"/>
                       <Component id="location2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane6" min="-2" pref="44" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="location3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="32" max="32767" attributes="0"/>
-                      </Group>
-                      <Component id="jScrollPane7" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="location3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane7" min="-2" pref="60" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="93" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -280,7 +272,7 @@
                       <Component id="applicantStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="addFeedback" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -465,6 +457,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="Description">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Franklin Gothic Demi" size="11" style="0"/>
@@ -495,6 +488,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="Qualifications">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Franklin Gothic Demi" size="11" style="0"/>
@@ -525,6 +519,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="Requirements">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Franklin Gothic Demi" size="11" style="0"/>

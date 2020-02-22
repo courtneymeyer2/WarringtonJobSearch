@@ -299,12 +299,13 @@ public class PostJobListingGUI extends javax.swing.JFrame {
 
         String degreeType = degreetype.getSelectedItem().toString();
         String Type = type.getSelectedItem().toString();
-        Job job = new Job(title.getText(), description.getText(), location.getText(),qualification.getText(), requirements.getText(), degreeType ,Type, date);
         
         try 
         {
-            if(JobSearchSystem.checkDeadline(job))
+            if(JobSearchSystem.checkDeadline(date))
             {
+              Job job = new Job(title.getText(), description.getText(), location.getText(),qualification.getText(), requirements.getText(), degreeType ,Type, date);
+
                 company.addJobs(job);
 
                 CompanyPageGUI cjg = new CompanyPageGUI(company);

@@ -329,14 +329,22 @@ public class StudentJobGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void applyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyActionPerformed
-        
+            
         if(apply.getText().equals("Apply"))
         {
+            if(student.getPositionType().equals(job.getPostitonType()))
+            {
             Application applicant = new Application(student, job, "Pending");
             JobSearchSystem.applytoJob(applicant);
             JOptionPane.showMessageDialog(null, "Application Successful!");
             apply.setEnabled(false);
             apply.setText("Applied");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "You can only apply to jobs that match your position type");
+            }
+           
 
         }
         StudentJobGUI s;
@@ -354,9 +362,17 @@ public class StudentJobGUI extends javax.swing.JFrame {
     private void AddedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddedActionPerformed
         if(added == false)
         {
-            student.addJob(job);
+            if(student.getPositionType().equals(job.getPostitonType()))
+            {
+                student.addJob(job);
             JOptionPane.showMessageDialog(null, "Added to Interested Job List!");
             Added.setText("Remove from List");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "You can only add jobs that match your position type");
+            }
+            
         }
         else
         {

@@ -284,7 +284,10 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
         Interview interview = new Interview(date, dur);
         try 
         {
-            boolean check = JobSearchSystem.checkInterviewTimes(job, interview);
+            
+            if(JobSearchSystem.checkBefore(job, interview))
+            {
+                boolean check = JobSearchSystem.checkInterviewTimes(job, interview);
             if(check)
             {
                 job.addInterview(interview);
@@ -298,7 +301,15 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
             }
             else
             {
+               
                  JOptionPane.showMessageDialog(null,"You have a conflicting interview time");
+            }
+            
+            }
+            else
+            {
+             JOptionPane.showMessageDialog(null,"You cannot create an interview before the current date");
+
             }
             
         }
@@ -311,12 +322,13 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
-        if(numOfInterviews !=0)
+        if(numOfInterviews >0)
         {
            JOptionPane.showMessageDialog(null, "You must create interview times for at least the number of applicants with interview requested status");
         }
-        
-        CompanyJobGUI cjg;
+        else
+        {
+              CompanyJobGUI cjg;
         try 
         {
             cjg = new CompanyJobGUI(job, company);
@@ -326,6 +338,8 @@ public class CreateInterviewTimesGUI extends javax.swing.JFrame {
         {
             Logger.getLogger(CreateInterviewTimesGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }
+      
        
     }//GEN-LAST:event_backActionPerformed
 
