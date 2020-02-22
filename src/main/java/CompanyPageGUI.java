@@ -201,7 +201,7 @@ public class CompanyPageGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // int row = jTable1.rowAtPoint(evt.getPoint());
+
         int index = jTable1.getSelectedRow();
         System.out.println(index);
         TableModel model2 = jTable1.getModel();
@@ -213,17 +213,17 @@ public class CompanyPageGUI extends javax.swing.JFrame {
             if(jobs.get(i).getJobID() == jobID)
             {
                 CompanyJobGUI cjg;
-                try {
+                try 
+                {
                     cjg = new CompanyJobGUI(jobs.get(i), company);
-                     cjg.setVisible(true);
-                this.dispose();
-                } catch (ParseException ex) {
+                    cjg.setVisible(true);
+                    this.dispose();
+                } catch (ParseException ex) 
+                {
                     Logger.getLogger(CompanyPageGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
-               
             }
         }
-        
         System.out.println();
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -261,8 +261,7 @@ public class CompanyPageGUI extends javax.swing.JFrame {
             }
         });
     }
-    private Company company;
-    private LinkedList <Job> jobs;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -275,4 +274,6 @@ public class CompanyPageGUI extends javax.swing.JFrame {
     private java.awt.Menu menu2;
     private java.awt.MenuBar menuBar1;
     // End of variables declaration//GEN-END:variables
+    private Company company;
+    private LinkedList <Job> jobs;
 }

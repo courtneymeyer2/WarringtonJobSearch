@@ -38,7 +38,8 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         String[] locations = new String[jobs.size()];
         String[] companies = new String[jobs.size()];
         
-        for(int i=0; i<jobs.size(); i++){
+        for(int i=0; i<jobs.size(); i++)
+        {
             titles[i] = jobs.get(i).getJobTitle();
             locations[i] = jobs.get(i).getLocation();
             companies[i] = JobSearchSystem.getCompanyByJob(jobs.get(i)).getCompanyName();
@@ -56,7 +57,8 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         l1[0] = " ";
         c1[0] = " ";
         
-        for (int i=1; i <= jobs.size(); i++){
+        for (int i=1; i <= jobs.size(); i++)
+        {
             t1[i] = t[i-1];
             l1[i] = l[i-1];
             c1[i] = c[i-1];
@@ -332,13 +334,14 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-       // System.out.println("test"+jobTitle.getSelectedItem().toString()+"test");
+ 
         filterJobs = JobSearchSystem.filterJobs(jobTitle.getSelectedItem().toString(), companyName.getSelectedItem().toString(), location.getSelectedItem().toString(),positionType.getSelectedItem().toString(), student);
         DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
         
         model.setRowCount(0);
         
-        if(filterJobs != null) {
+        if(filterJobs != null)
+        {
             if(filterJobs.isEmpty())
             {
                 JOptionPane.showMessageDialog(null, "No jobs with this criteria exist");
@@ -348,13 +351,10 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
                  for(int i = 0; i < filterJobs.size(); i++)
                 {
                 model.addRow(new Object[]{  ""+filterJobs.get(i).getJobTitle(), ""+  JobSearchSystem.getCompanyByJob(filterJobs.get(i)).getCompanyName(), ""+  filterJobs.get(i).getDeadline()});
-                 }
+                }
             jTable3.setModel(model);
-            }
-           
-        } 
-      
-        
+            }           
+        }        
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void positionTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positionTypeActionPerformed
@@ -371,40 +371,37 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         else
         {
             StudentJobGUI sjg;
-            try {
+            try 
+            {
                 sjg = new StudentJobGUI(filterJobs.get(index), student, 0);
-                 sjg.setVisible(true);
-            this.dispose();
-            } catch (ParseException ex) {
+                sjg.setVisible(true);
+                this.dispose();
+            } catch (ParseException ex) 
+            {
                 Logger.getLogger(StudentSearchJobGUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-           
-
-        }
-
-       
+            }           
+        }      
     }//GEN-LAST:event_viewJobButtonActionPerformed
 
     private void accountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountActionPerformed
         StudentAccount sa;
-        try {
+        try 
+        {
             sa = new StudentAccount(student);
-              sa.setVisible(true);
+            sa.setVisible(true);
               
-        this.dispose();
-          for(int i=0; i < student.getAddedJobs().size(); i ++)
-                           {
-                                if(student.getAddedJobs().get(i).checkTime())
-                                {
-                //jobIDS.add(student.getAddedJobs().get(i).getJobID());
-                                JOptionPane.showMessageDialog(null, "Job " +student.getAddedJobs().get(i).getJobID() +" 's deadline is in less than 24 hours");
-
-                                  }
-                           }
-        } catch (ParseException ex) {
+            this.dispose();
+            for(int i=0; i < student.getAddedJobs().size(); i ++)
+                {
+                    if(student.getAddedJobs().get(i).checkTime())
+                    {
+                        JOptionPane.showMessageDialog(null, "Job " +student.getAddedJobs().get(i).getJobID() +" 's deadline is in less than 24 hours");
+                    }
+                }
+        } catch (ParseException ex) 
+        {
             Logger.getLogger(StudentSearchJobGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      
+        }     
     }//GEN-LAST:event_accountActionPerformed
 
     /**
@@ -422,23 +419,8 @@ public class StudentSearchJobGUI extends javax.swing.JFrame {
         
         set.toArray(str);
         return str;
-//        if (n==0 || n==1){  
-//            return n;  
-//        }  
-//        String[] temp = new String[n];  
-//        int j = 0;  
-//        for (int i=0; i<n-1; i++){  
-//            if (arr[i] == null ? arr[i+1] != null : !arr[i].equals(arr[i+1])){  
-//                temp[j++] = arr[i];  
-//            }  
-//         }  
-//        temp[j++] = arr[n-1];     
-// 
-//        System.arraycopy(temp, 0, arr, 0, j);  
-//        return j;  
     }
-                                       
-    
+  
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

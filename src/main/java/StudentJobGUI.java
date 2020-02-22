@@ -30,8 +30,8 @@ public class StudentJobGUI extends javax.swing.JFrame {
         this.page = page;
         this.student = student;
         this.job = job;
-       companyAndPosition.setText(JobSearchSystem.getCompanyByJob(job).getCompanyName() + ": " + job.getJobTitle());
-       deadline.setText(job.getDeadline());
+        companyAndPosition.setText(JobSearchSystem.getCompanyByJob(job).getCompanyName() + ": " + job.getJobTitle());
+        deadline.setText(job.getDeadline());
         if(job.checkTime())
         {
             deadline.setForeground(Color.red);
@@ -40,7 +40,7 @@ public class StudentJobGUI extends javax.swing.JFrame {
         Description.setText( job.getDescription());
         Qualifications.setText( job.getQualifications());
         Requirements.setText(  job.getRequirement());
-       degree.setText("Degree Required: " + job.getDegreeRequired());
+        degree.setText("Degree Required: " + job.getDegreeRequired());
         position.setText("Position Type: " + job.getPostitonType());
         location.setText("Location: " +job.getLocation());
         applied = JobSearchSystem.applicationExists(job, student);
@@ -300,33 +300,32 @@ public class StudentJobGUI extends javax.swing.JFrame {
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         if(page == 0)
         {
-        StudentSearchJobGUI sj = new StudentSearchJobGUI(student);
-        sj.setVisible(true);
-        this.dispose();
+            StudentSearchJobGUI sj = new StudentSearchJobGUI(student);
+            sj.setVisible(true);
+            this.dispose();
         }
         else
         {
             StudentAccount sa;
-            try {
+            try 
+            {
                 sa = new StudentAccount(student);
-                           sa.setVisible(true);
-                           for(int i=0; i < student.getAddedJobs().size(); i ++)
-                           {
+                            sa.setVisible(true);
+                            for(int i=0; i < student.getAddedJobs().size(); i ++)
+                            {
                                 if(student.getAddedJobs().get(i).checkTime())
                                 {
-                //jobIDS.add(student.getAddedJobs().get(i).getJobID());
                                 JOptionPane.showMessageDialog(null, "Job " +student.getAddedJobs().get(i).getJobID() +" 's deadline is in less than 24 hours");
 
-                                  }
-                           }
-                              
-            this.dispose();
-            } catch (ParseException ex) {
+                                }
+                            }                              
+                this.dispose();
+                
+            } catch (ParseException ex) 
+            {
                 Logger.getLogger(StudentJobGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
- 
-        }
-       
+        }      
     }//GEN-LAST:event_backActionPerformed
 
     private void applyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyActionPerformed
@@ -338,23 +337,18 @@ public class StudentJobGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Application Successful!");
             apply.setEnabled(false);
             apply.setText("Applied");
-//            if(added)
-//            {
-//                student.removeFromJobList(job);
-//            }
 
         }
         StudentJobGUI s;
-        try {
+        try 
+        {
             s = new StudentJobGUI(job, student, 0);
              s.setVisible(true);
         this.dispose();
-        } catch (ParseException ex) {
+        } catch (ParseException ex)
+        {
             Logger.getLogger(StudentJobGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-   
-       
+        }   
     }//GEN-LAST:event_applyActionPerformed
 
     private void AddedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddedActionPerformed
@@ -369,18 +363,16 @@ public class StudentJobGUI extends javax.swing.JFrame {
 
             student.removeFromJobList(job);
             JOptionPane.showMessageDialog(null, "Removed from Interested Job List");
-             Added.setText("Add to List");
+            Added.setText("Add to List");
         }
         StudentJobGUI s;
         try {
             s = new StudentJobGUI(job, student, 0);
-              s.setVisible(true);
-        this.dispose();
+            s.setVisible(true);
+            this.dispose();
         } catch (ParseException ex) {
             Logger.getLogger(StudentJobGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-     
     }//GEN-LAST:event_AddedActionPerformed
 
     /**

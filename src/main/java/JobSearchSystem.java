@@ -1,4 +1,8 @@
-
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,15 +14,9 @@
  *
  * @author Courtney
  */
-import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.*;
+
 public class JobSearchSystem implements Serializable{
     private static LinkedList <Student> students = new LinkedList <Student>();
-    //private static LinkedList <Job> jobs = new LinkedList<Job>();
-    //private static LinkedList <Interview> interviews = new LinkedList<Interview>();
     private static LinkedList <Company> companies = new LinkedList<Company>();
     private static LinkedList <Application> applications = new LinkedList <Application>();
     
@@ -35,6 +33,21 @@ public class JobSearchSystem implements Serializable{
     public static void setApplications(LinkedList<Application> a)
     {
         applications = a;
+    }
+     
+    public static LinkedList<Student> getStudent()
+    {
+        return students;
+    }
+    
+    public static LinkedList<Application> getApplication()
+    {
+        return applications;
+    }
+    
+    public static LinkedList<Company> getCompany()
+    {
+        return companies;
     }
     
     public static Company getCompanyByJob(Job job)
@@ -161,57 +174,7 @@ public class JobSearchSystem implements Serializable{
             return 3;
         }
     }
-    
-//    public static Job getJobInfo(int jobID)
-//    {
-//        return Job;
-//    }
-//    
-//    public static LinkedList <Undergraduate> getAppliedUndergraduates(Company company, Job job)
-//    {
-//        return Undergraduates;
-//    }
-//    
-//    public static LinkedList <Graduate> getAppliedGraduates(Company company, Job job)
-//    {
-//        return Graduates;
-//    }
-//    
-//    public static LinkedList <Interview> getInterviews(Student student, Job job)
-//    {
-//        return Interview;
-//    }
-//    
-//    public static LinkedList <Interview> getInterviews(Job job)
-//    {
-//        return Interview;
-//    }
-//    
-//    public static LinkedList <Interview> getInterviews(Student student)
-//    {
-//        return Interview;
-//    }
-//    
-    public static LinkedList<Student> getStudent()
-    {
-        return students;
-    }
-    
-    public static LinkedList<Application> getApplication()
-    {
-        return applications;
-    }
-    
-    public static LinkedList<Company> getCompany()
-    {
-        return companies;
-    }
-    
-//    public static LinkedList<Interview> getInterview()
-//    {
-//        return interviews;
-//    }
-    
+
     public static boolean applicationExists(Job job, Student student)
     {
         for(int i = 0; i < applications.size(); i++)
@@ -229,61 +192,42 @@ public class JobSearchSystem implements Serializable{
         String date;
         int duration;
         String interviewDate = interview.getDate();
-       // System.out.println("interviewDate" +interviewDate);
         int interviewDuration = interview.getDuration();
-        //System.out.println("interviewDuration" +interviewDuration);
         Date interviewD = new SimpleDateFormat("MM/dd/yyyy hh.mm aa").parse(interviewDate);
+        
         Calendar interviewCal = Calendar.getInstance();
         interviewCal.setTime(interviewD);
-        //System.out.println("interviewCal" +interviewCal.getTime());
         Calendar interviewCal2 = Calendar.getInstance();
         interviewCal2.setTime(interviewD);
         interviewCal2.add(Calendar.MINUTE, interviewDuration);
-        //System.out.println("interviewCal2" +interviewCal2.getTime());
         
         LinkedList <Interview> inters = new LinkedList <Interview>();
-        //System.out.println(job.getInterviewList().size());
+
         for(int i = 0 ; i < job.getInterviewList().size(); i++)
         {
             duration = job.getInterviewList().get(i).getDuration();
-            //System.out.println("duration" +duration);
             date = job.getInterviewList().get(i).getDate();
-            //System.out.println("date" +date);
             Date date1 = new SimpleDateFormat("MM/dd/yyyy hh.mm aa").parse(date); 
             Calendar cal = Calendar.getInstance();
             cal.setTime(date1);
-            //System.out.println("cal" +cal.getTime());
             Calendar cal2 = Calendar.getInstance();
             cal2.setTime(date1);
             cal2.add(Calendar.MINUTE, duration);
-            //System.out.println("cal2" +cal2.getTime());
-            
-           
+                      
             if(interviewCal.before(cal) && interviewCal2.after(cal))
             {
-                                System.out.println("1");
-
-                return false;
-                    
-            }
-            
+                System.out.println("1");
+                return false;         
+            } 
             else if(interviewCal.after(cal) && interviewCal.before(cal2))
             {
-                                //System.out.println("2");
-
                 return false;
             }
-            
-           
             else if(interviewCal.equals(cal))
             {
-                                //System.out.println("4");
-
                 return false;
             }  
         }      
-                        //System.out.println("5");
-
         return true;
     }
     
@@ -294,85 +238,50 @@ public class JobSearchSystem implements Serializable{
         String date;
         int duration;
         String interviewDate = interview.getDate();
-       // System.out.println("interviewDate" +interviewDate);
         int interviewDuration = interview.getDuration();
-        //System.out.println("interviewDuration" +interviewDuration);
+        
         Date interviewD = new SimpleDateFormat("MM/dd/yyyy hh.mm aa").parse(interviewDate);
         Calendar interviewCal = Calendar.getInstance();
         interviewCal.setTime(interviewD);
-        //System.out.println("interviewCal" +interviewCal.getTime());
         Calendar interviewCal2 = Calendar.getInstance();
         interviewCal2.setTime(interviewD);
         interviewCal2.add(Calendar.MINUTE, interviewDuration);
-        //System.out.println("interviewCal2" +interviewCal2.getTime());
         
         LinkedList <Interview> inters = new LinkedList <Interview>();
-        //System.out.println(job.getInterviewList().size());
+
         for(int j = 0; j < applications.size(); j++)
         {
-             if(applications.get(j).getInterview() == null)
-             {
-                 
-             }
+             if(applications.get(j).getInterview() == null) {}
              else
              {
                     duration = applications.get(j).getInterview().getDuration();
-                    //System.out.println("duration" +duration);
                     date = applications.get(j).getInterview().getDate();
-                    //System.out.println("date" +date);
+
                     Date date1 = new SimpleDateFormat("MM/dd/yyyy hh.mm aa").parse(date); 
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(date1);
-                    //System.out.println("cal" +cal.getTime());
+
                     Calendar cal2 = Calendar.getInstance();
                     cal2.setTime(date1);
                     cal2.add(Calendar.MINUTE, duration);
-                    //System.out.println("cal2" +cal2.getTime());
-
 
                     if(interviewCal.before(cal) && interviewCal2.after(cal))
                     {
-                                        //System.out.println("1");
-
                         return false;
-
                     }
-
                     else if(interviewCal.after(cal) && interviewCal.before(cal2))
                     {
-                                        //System.out.println("2");
-
                         return false;
                     }
-
-
                     else if(interviewCal.equals(cal))
                     {
-                                        //System.out.println("4");
-
                         return false;
-                    }  
-        
-             }
-                    
+                    }         
+             }                   
         }
-         
-                        //System.out.println("5");
-
-        return true;
-        
+        return true;        
     }
-   
-//    public static void addInterview(Interview interview)
-//    {
-//        interviews.add(interview);
-//    }
-//   
-//    public static void removeInterview(Interview interview)
-//    {
-//        interviews.remove(interview);
-//    }
-   
+ 
     public static void addNewStudent(Student student)
     {
         students.add(student);
@@ -381,9 +290,11 @@ public class JobSearchSystem implements Serializable{
     public static LinkedList <Job> getAllJobs()
     {
         LinkedList<Job> j = new LinkedList<> ();
-        for(int i = 0; i < companies.size(); i++){
-            for (int n = 0; n < companies.get(i).getJobs().size(); n++){
-            j.add(companies.get(i).getJobs().get(n));
+        for(int i = 0; i < companies.size(); i++)
+        {
+            for (int n = 0; n < companies.get(i).getJobs().size(); n++)
+            {
+                j.add(companies.get(i).getJobs().get(n));
             }
         }
         return j;
@@ -431,49 +342,29 @@ public class JobSearchSystem implements Serializable{
         return j;
     }
   
-    public static boolean appliedToJob(Student student, Job job)
-    {
-        return true;
-    }
-   
-    public static boolean addedtoJobs(Student student, Job job)
-    {
-        return true;
-    }
-   
     public static void applytoJob(Application application)
     {
         applications.add(application);
        
         if(application.getStudent().getAddedJobs().contains(application.getJob()))
         {
-            application.getStudent().removeFromJobList(application.getJob());
-           
+            application.getStudent().removeFromJobList(application.getJob());          
         }
     }
     
-
     public static LinkedList <Interview> getAvailableInterviews(Job job)
     {
        
         LinkedList <Interview> interviews = new LinkedList <Interview>();
         for(int i = 0; i < job.getInterviewList().size(); i++)
         {
-            if(job.getInterviewList().get(i).getSelected())
-            {
-               
-            }
+            if(job.getInterviewList().get(i).getSelected()) {}
             else
             {
                 interviews.add(job.getInterviewList().get(i));
             }
         }
         return interviews;
-    }
-   
-    public static void selectInterview(Student student, Interview interview)
-    {
-       
     }
    
     public static Student getStudentByEmail(String email)
@@ -512,7 +403,7 @@ public class JobSearchSystem implements Serializable{
         return null;
     }
     
-        public static Student getStudentById(int id)
+    public static Student getStudentById(int id)
     {
         for(int i =0; i < students.size(); i++)
         {
@@ -539,18 +430,19 @@ public class JobSearchSystem implements Serializable{
        return null;
     }
       
-      public static Application getApplication(Student student, Job job)
-      {
-          for (int i = 0; i < applications.size(); i++)
-          {
-              if(applications.get(i).getStudent().equals(student) && applications.get(i).getJob().equals(job))
-              {
-                  return applications.get(i);
-              }
-          }
-          return null;
-      }
-         public static Interview getInterviewById(int id)
+    public static Application getApplication(Student student, Job job)
+    {
+        for (int i = 0; i < applications.size(); i++)
+        {
+            if(applications.get(i).getStudent().equals(student) && applications.get(i).getJob().equals(job))
+            {
+                return applications.get(i);
+            }
+        }
+        return null;
+    }
+      
+    public static Interview getInterviewById(int id)
     {
         for(int j = 0; j < companies.size(); j++)
         {
@@ -562,8 +454,7 @@ public class JobSearchSystem implements Serializable{
                     {
                         return companies.get(j).getJobs().get(k).getInterviewList().get(f);
                     }
-                }
-                
+                }                
             }
         }
        return null;
@@ -583,16 +474,16 @@ public class JobSearchSystem implements Serializable{
         LocalDateTime localDateTime = LocalDateTime.now();
         Calendar currentDate = Calendar.getInstance();
         currentDate.set(localDateTime.getYear(), localDateTime.getMonthValue()-1, localDateTime.getDayOfMonth());
-        //currentDate.setTime(localDateTime);
+
         if(applicationCloseCal.before(currentDate) || applicationCloseCal.equals(currentDate))
         {               
-          return true;
+            return true;
         }
         else
         {
-         return false;
+            return false;
         }
-     }
+    }
     
     public static boolean checkDeadline(Job job) throws ParseException 
     {
@@ -602,7 +493,7 @@ public class JobSearchSystem implements Serializable{
         LocalDateTime localDateTime = LocalDateTime.now();
         Calendar currentDate = Calendar.getInstance();
         currentDate.set(localDateTime.getYear(), localDateTime.getMonthValue()-1, localDateTime.getDayOfMonth());
-        //currentDate.setTime(localDateTime);
+
         if(applicationCloseCal.after(currentDate) || applicationCloseCal.equals(currentDate))
         {               
           return true;
@@ -612,5 +503,4 @@ public class JobSearchSystem implements Serializable{
          return false;
         }
      }
-
  }

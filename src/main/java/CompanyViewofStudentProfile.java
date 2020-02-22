@@ -52,14 +52,11 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
         }
         else
         {
-           gradGPA.setText(((Graduate)student).getGPA()+"");
-           gradUnderGpa.setText(((Graduate)student).getUndergradGPA()+"");
-           underDegree.setText(((Graduate)student).getUndergradMajor());
-           System.out.println(((Graduate)student).getUndergradMajor());
+            gradGPA.setText(((Graduate)student).getGPA()+"");
+            gradUnderGpa.setText(((Graduate)student).getUndergradGPA()+"");
+            underDegree.setText(((Graduate)student).getUndergradMajor());
+            System.out.println(((Graduate)student).getUndergradMajor());
         }
-        
-        
-        
     }
 
     /**
@@ -396,9 +393,11 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
 
     private void downloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadActionPerformed
 
-        try {
+        try 
+        {
             Desktop.getDesktop().open(student.getResume());
-        } catch (IOException ex) {
+        } catch (IOException ex) 
+        {
             Logger.getLogger(CompanyViewofStudentProfile.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -406,11 +405,13 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         CompanyJobGUI cjg;
-        try {
+        try 
+        {
             cjg = new CompanyJobGUI(job, company);
-             cjg.setVisible(true);
-        this.dispose();
-        } catch (ParseException ex) {
+            cjg.setVisible(true);
+            this.dispose();
+        } catch (ParseException ex) 
+        {
             Logger.getLogger(CompanyViewofStudentProfile.class.getName()).log(Level.SEVERE, null, ex);
         }
        
@@ -450,9 +451,7 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
             }
         });
     }
-    private Job job;
-    private Company company;
-    private Student student;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JButton download;
@@ -484,4 +483,7 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
     private javax.swing.JLabel underDegree;
     private javax.swing.JLabel undergradGPA;
     // End of variables declaration//GEN-END:variables
+    private Job job;
+    private Company company;
+    private Student student;
 }

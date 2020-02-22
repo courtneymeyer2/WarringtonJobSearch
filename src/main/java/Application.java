@@ -20,12 +20,6 @@ public class Application implements Serializable{
     public Interview getInterview(){return interview;}
     public static int getNextID() {return nextID;}
     
-//    @Override
-//    public String toString()
-//    {
-//        String str = String.format("%-8d, %-8d, %-20s", student.getId(), job.getJobID(), status);
-//        return str;
-//    }
     public static void setNextID(int id)
     {
         nextID = id;
@@ -45,7 +39,6 @@ public class Application implements Serializable{
     {
         this.student = student; 
         this.job = job;
-        //this.interview = interview;
         this.status = status;
         this.ID = nextID;
         nextID++;

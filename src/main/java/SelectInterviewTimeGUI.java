@@ -164,7 +164,8 @@ public class SelectInterviewTimeGUI extends javax.swing.JFrame {
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
         int index = jList2.getSelectedIndex();
-        try {
+        try
+        {
             boolean check = JobSearchSystem.checkInterviewTimes(student, availableInterviews.get(index));
             
             if(check)
@@ -180,7 +181,8 @@ public class SelectInterviewTimeGUI extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(null, "You have a conflicting interview");
             }
-        } catch (ParseException ex) {
+        } catch (ParseException ex)
+        {
             Logger.getLogger(SelectInterviewTimeGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -190,23 +192,22 @@ public class SelectInterviewTimeGUI extends javax.swing.JFrame {
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         StudentAccount sa;
-        try {
+        try 
+        {
             sa = new StudentAccount(applicant.getStudent());
-                 sa.setVisible(true);
-                   for(int i=0; i < student.getAddedJobs().size(); i ++)
-                           {
-                                if(student.getAddedJobs().get(i).checkTime())
-                                {
-                //jobIDS.add(student.getAddedJobs().get(i).getJobID());
-                                JOptionPane.showMessageDialog(null, "Job " +student.getAddedJobs().get(i).getJobID() +" 's deadline is in less than 24 hours");
-
-                                  }
-                           }
+            sa.setVisible(true);
+            for(int i=0; i < student.getAddedJobs().size(); i ++)
+            {
+                if(student.getAddedJobs().get(i).checkTime())
+                {
+                    JOptionPane.showMessageDialog(null, "Job " +student.getAddedJobs().get(i).getJobID() +" 's deadline is in less than 24 hours");
+                }
+            }
         this.dispose();
-        } catch (ParseException ex) {
+        } catch (ParseException ex) 
+        {
             Logger.getLogger(SelectInterviewTimeGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-   
+        }  
     }//GEN-LAST:event_backActionPerformed
 
     /**
@@ -243,10 +244,7 @@ public class SelectInterviewTimeGUI extends javax.swing.JFrame {
             }
         });
     }
-    private Job job;
-    private Student student;
-    private Application applicant;
-    private LinkedList <Interview> availableInterviews;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
     private javax.swing.JLabel duration;
@@ -258,4 +256,8 @@ public class SelectInterviewTimeGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton select;
     // End of variables declaration//GEN-END:variables
+    private Job job;
+    private Student student;
+    private Application applicant;
+    private LinkedList <Interview> availableInterviews;
 }

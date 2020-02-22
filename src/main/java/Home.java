@@ -27,7 +27,7 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
-            }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -311,118 +311,98 @@ public class Home extends javax.swing.JFrame {
 
     private void textFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFileActionPerformed
         Scanner s1 = null, s2 = null, s3=null, s4=null, s5=null; File file;
-        try {
-            
-            
+        try 
+        {
             File f2 = new File("companies.txt");
             s2 = new Scanner(f2);
             
-            while(s2.hasNextLine()) {
+            while(s2.hasNextLine()) 
+            {
                 String line = s2.nextLine();
                 String[] compInfo = line.split(",");
-                    JobSearchSystem.addNewCompany(new Company(compInfo[0], compInfo[1], compInfo[2]));
+                JobSearchSystem.addNewCompany(new Company(compInfo[0], compInfo[1], compInfo[2]));
             }
             
             File f3 = new File("jobs.txt");
             s3 = new Scanner(f3);
             
-            while(s3.hasNextLine()) {
+            while(s3.hasNextLine()) 
+            {
                 String line = s3.nextLine();
                 String[] jobInfo = line.split(",,");
                 int companyID = Integer.parseInt(jobInfo[0]);
                 Company comp =JobSearchSystem.getCompanyById(companyID);
-
-                //comp.addJobs(new Job(jobInfo[1],jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7], jobInfo[8], companyID));
-                
 
                 comp.addJobs(new Job(jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7], jobInfo[8]));
             }  
             
             File f1 = new File("students.txt");
             s1 = new Scanner(f1);
-              String[] adds;
-            while(s1.hasNextLine()) {
+            String[] adds;
+            while(s1.hasNextLine()) 
+            {
                 String line = s1.nextLine();
                 String[] cInfo = line.split(",");
                 if(cInfo[0].equals("U"))
                 {
                     file = new File(cInfo[7]);
-                   
-     
+
                     Student s = new Undergraduate(Integer.parseInt(cInfo[1]), cInfo[2], cInfo[3], cInfo[4], Integer.parseInt(cInfo[5]), cInfo[6], file,Double.parseDouble(cInfo[8]), cInfo[9]);
                     JobSearchSystem.addNewStudent(s);
-                     if(cInfo.length == 11)
+                    if(cInfo.length == 11)
                     {
-                      adds = cInfo[10].split(" ");
-                      for(int j =0; j < adds.length; j++)
-                     {
-                     Job jj = JobSearchSystem.getJobById(Integer.parseInt(adds[j]));
-                     s.addJob(jj);
-                     }
-                     
-                         
-                     }
-                    
-                    //s.addJob(job);
-                     }  
-            
-                
+                        adds = cInfo[10].split(" ");
+                        for(int j =0; j < adds.length; j++)
+                        {
+                        Job jj = JobSearchSystem.getJobById(Integer.parseInt(adds[j]));
+                        s.addJob(jj);
+                        }
+                    }
+
+                }  
                 else
                 {
                     file = new File(cInfo[7]);
                     Student g = new Graduate(Integer.parseInt(cInfo[1]), cInfo[2], cInfo[3], cInfo[4], Integer.parseInt(cInfo[5]), cInfo[6], file,Double.parseDouble(cInfo[8]), cInfo[9], cInfo[10], Double.parseDouble(cInfo[11]));
                     JobSearchSystem.addNewStudent(g);   
-                   if(cInfo.length == 13)
+                    if(cInfo.length == 13)
                     {
-                      adds = cInfo[12].split(" ");
-                      System.out.println(adds.length);
-                      for(int j =0; j < adds.length; j++)
-                     {
-                     Job jj = JobSearchSystem.getJobById(Integer.parseInt(adds[j]));
-                     g.addJob(jj);
-                     }
-                     
-                         
-                     }
-                
-                
-                } 
-                
+                        adds = cInfo[12].split(" ");
+                        System.out.println(adds.length);
+                        for(int j =0; j < adds.length; j++)
+                        {
+                            Job jj = JobSearchSystem.getJobById(Integer.parseInt(adds[j]));
+                            g.addJob(jj);
+                        }
+                    } 
+                }     
             }
 
             File f5 = new File("applications.txt");
             s5 = new Scanner(f5);
             
-            while(s5.hasNextLine()) {
+            while(s5.hasNextLine()) 
+            {
                 String line = s5.nextLine();
                 String[] appsInfo = line.split(",");
-   
-             //   JobSearchSystem.applytoJob(new Application());
-                
-                //Company comp = JobSearchSystem.getCompanyById(Integer.parseInt(appsInfo[0]));
+
                 Job j = JobSearchSystem.getJobById(Integer.parseInt(appsInfo[0]));
                 Student stu = JobSearchSystem.getStudentById(Integer.parseInt(appsInfo[1]));
-               // Interview inte = JobSearchSystem.getInterviewById(Integer.parseInt(appsInfo[3]));
+
                 JobSearchSystem.applytoJob(new Application(stu, j, appsInfo[2]));
-                //comp.addJobs(new Job(jobInfo[0],jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7]));
             }    
-            
-            
-            
-            
+ 
             File f4 = new File("interviews.txt");
             s4 = new Scanner(f4);
             
-            while(s4.hasNextLine()) {
+            while(s4.hasNextLine()) 
+            {
                 String line = s4.nextLine();
                 String[] interviewsInfo = line.split(",");
                 Job j = JobSearchSystem.getJobById(Integer.parseInt(interviewsInfo[0]));
                 Interview inte = new Interview(interviewsInfo[2], Integer.parseInt(interviewsInfo[3]));
                 j.addInterview(inte);
-                if(interviewsInfo[1].equals(" "))
-                {
-                    
-                }
+                if(interviewsInfo[1].equals(" ")) {}
                 else
                 {
                     Student stu = JobSearchSystem.getStudentById(Integer.parseInt(interviewsInfo[1]));
@@ -436,14 +416,12 @@ public class Home extends javax.swing.JFrame {
                     }
                 }
                 
-               // Company comp =JobSearchSystem.getCompanyById(companyID);
-              
-             
-               // comp.addJobs(new Job(jobInfo[0],jobInfo[1], jobInfo[2], jobInfo[3], jobInfo[4], jobInfo[5], jobInfo[6], jobInfo[7]));
             }    
-        } catch (Exception e) {
+        } catch (Exception e) 
+        {
             System.out.println(e.toString());
-        } finally {
+        } finally 
+        {
             if(s1 != null) s1.close();
             if(s2 != null) s2.close();
         }
@@ -452,7 +430,8 @@ public class Home extends javax.swing.JFrame {
     private void textFile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFile1ActionPerformed
         // TODO add your handling code here:
         ObjectOutputStream oos = null;
-        try {
+        try 
+        {
             FileOutputStream fos = new FileOutputStream("rs.dat");
             oos = new ObjectOutputStream(fos);
             
@@ -487,18 +466,17 @@ public class Home extends javax.swing.JFrame {
             
             if(oos != null) 
                 oos.close();
-        } catch (Exception e) {
+        } catch (Exception e) 
+        {
             System.out.println(e.toString());
-        } finally {
-            
-        }
-
+        } finally {}
     }//GEN-LAST:event_textFile1ActionPerformed
 
     private void textFile2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFile2ActionPerformed
         // TODO add your handling code here:
         ObjectInputStream ois = null;
-        try {
+        try 
+        {
             FileInputStream fis = new FileInputStream("rs.dat");
             ois = new ObjectInputStream(fis);
             
@@ -515,45 +493,8 @@ public class Home extends javax.swing.JFrame {
 
             JobSearchSystem.setStudents(students);
             JobSearchSystem.setCompanies(companies);
-            
-
-//            for(int i=0; i<jobs.size();i++){
-//                if(jobs.get(i)!=null){         
-////                    Company c = JobSearchSystem.getCompanyById(jobs.get(i).getCompanyID());
-////                    c.addJobs(jobs.get(i));
-//                }
-//            }
-            
+                
             JobSearchSystem.setApplications(applications);
-            
-//            for(int i=0; i<interviews.size();i++){
-//                if( interviews.get(i)!=null){         
-//                  ///  int jID = interviews.get(i).getJobID();
-//                    for(int j=0; j<jobs.size(); j++){
-////                        if(jobs.get(j).getJobID()== jID)
-////                            jobs.get(j).addInterview(interviews.get(i));
-//                       }
-//                }
-//            }
-
-//            for(int i=0; i<jobs.size();i++){
-//                if(jobs.get(i)!=null){         
-////                    Company c = JobSearchSystem.getCompanyById(jobs.get(i).getCompanyID());
-////                    c.addJobs(jobs.get(i));
-//                }
-//            }
-//            
-            JobSearchSystem.setApplications(applications);
-//            
-//            for(int i=0; i<interviews.size();i++){
-//                if( interviews.get(i)!=null){         
-//                  ///  int jID = interviews.get(i).getJobID();
-//                    for(int j=0; j<jobs.size(); j++){
-////                        if(jobs.get(j).getJobID()== jID)
-////                            jobs.get(j).addInterview(interviews.get(i));
-//                       }
-//                }
-//            }
 
             Company.setNextId(companyNextId);
             Job.setNextID(jobNextId);
@@ -562,12 +503,10 @@ public class Home extends javax.swing.JFrame {
             
             if(ois != null) 
                 ois.close();
-        } catch (Exception e) {
+        } catch (Exception e) 
+        {
             System.out.println(e.toString());
-        } finally {
-            
-        }
-
+        } finally {}
     }//GEN-LAST:event_textFile2ActionPerformed
 
     /**

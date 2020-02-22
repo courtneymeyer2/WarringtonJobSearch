@@ -48,8 +48,7 @@ public class StudentAccount extends javax.swing.JFrame {
             t.setSelectedIndex(0);
         }
         t.setEditable(false);
-            
-        
+  
         if(student instanceof Undergraduate)
         {
             ug.setText(student.getGPA() +"");
@@ -59,7 +58,6 @@ public class StudentAccount extends javax.swing.JFrame {
             gg.setText(((Graduate)student).getGPA()+"");
             gug.setText(((Graduate)student).getUndergradGPA()+"");
             ud.setText(((Graduate)student).getUndergradMajor());
-         //  System.out.println(((Graduate)student).getUndergradMajor());
         }
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         applicants = JobSearchSystem.getApplicants(student);
@@ -77,10 +75,8 @@ public class StudentAccount extends javax.swing.JFrame {
             }
         }
             jTable2.setModel(model); 
-           
-           
+                     
         DefaultTableModel model2 = (DefaultTableModel) jTable3.getModel();
-      // LinkedList <Integer> jobIDS = new LinkedList <Integer>();
        
         for(int i = 0; i < student.getAddedJobs().size(); i++)
         {
@@ -610,17 +606,16 @@ public class StudentAccount extends javax.swing.JFrame {
         else
         {
             StudentJobGUI sjg;
-            try {
+            try 
+            {
                 sjg = new StudentJobGUI(applicants.get(index).getJob(), student, 1);
                 sjg.setVisible(true);
                 this.dispose();
-            } catch (ParseException ex) {
+            } catch (ParseException ex) 
+            {
                Logger.getLogger(StudentAccount.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-       }
-               
-
+       }            
     }//GEN-LAST:event_jobDetailActionPerformed
 
     private void interviewTimesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interviewTimesActionPerformed
@@ -631,19 +626,15 @@ public class StudentAccount extends javax.swing.JFrame {
                }
                else
                {
-                   // LinkedList <Interview> interviews = new LinkedList <Interview>();
                     if(applicants.get(index).getInterview() == null)
                     {
-                          if(applicants.get(index).getStatus().equals("Interview Requested"))
+                        if(applicants.get(index).getStatus().equals("Interview Requested"))
                         {
-                       // interviews = applicants.get(index).getJob().getInterviewList();
-
                         SelectInterviewTimeGUI sit = new SelectInterviewTimeGUI(applicants.get(index), applicants.get(index).getJob());
                         sit.setVisible(true);
                         this.dispose();
-
                         }
-                    else
+                        else
                         {
                         JOptionPane.showMessageDialog(null,"An interview has not been requested");
                         }
@@ -651,11 +642,8 @@ public class StudentAccount extends javax.swing.JFrame {
                     else
                     {
                         JOptionPane.showMessageDialog(null, "An interview time has already been selected");
-                    }
-             
-               }
-              
-
+                    }            
+               } 
     }//GEN-LAST:event_interviewTimesActionPerformed
 
     private void intJobDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_intJobDetailActionPerformed
@@ -668,44 +656,40 @@ public class StudentAccount extends javax.swing.JFrame {
        {
             Job j = student.getAddedJobs().get(index);
             StudentJobGUI sjg;
-           try {
-               sjg = new StudentJobGUI(j, student, 1);
+            try 
+            {
+                sjg = new StudentJobGUI(j, student, 1);
                 sjg.setVisible(true);
-            this.dispose();
-           } catch (ParseException ex) {
+                this.dispose();
+           } catch (ParseException ex) 
+           {
                Logger.getLogger(StudentAccount.class.getName()).log(Level.SEVERE, null, ex);
-           }
-            // StudentAccount sa = new StudentAccount(student);
-           
-       }
-      
-
+           }       
+       }      
     }//GEN-LAST:event_intJobDetailActionPerformed
 
     private void applyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyActionPerformed
-       int index = jTable3.getSelectedRow();
-       if(index == -1)
-       {
-           JOptionPane.showMessageDialog(null, "You must select a job");
-       }
-       else
-       {
+        int index = jTable3.getSelectedRow();
+        if(index == -1)
+        {
+            JOptionPane.showMessageDialog(null, "You must select a job");
+        }
+        else
+        {
             Job j = student.getAddedJobs().get(index);
             JobSearchSystem.applytoJob(new Application(student, j, "Pending"));
             JOptionPane.showMessageDialog(null, "Applied Successfully");
             StudentAccount sa;
-           try {
-               sa = new StudentAccount(student);
-               sa.setVisible(true);
-            this.dispose();
-           } catch (ParseException ex) {
-               Logger.getLogger(StudentAccount.class.getName()).log(Level.SEVERE, null, ex);
-           }
-            
-       }
-       
-               
-
+            try 
+            {
+                sa = new StudentAccount(student);
+                sa.setVisible(true);
+                this.dispose();
+            } catch (ParseException ex)
+            {
+                Logger.getLogger(StudentAccount.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }                     
     }//GEN-LAST:event_applyActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -718,7 +702,7 @@ public class StudentAccount extends javax.swing.JFrame {
         int index = jTable2.getSelectedRow();
         if(index == -1)
         {
-           JOptionPane.showMessageDialog(null, "You must select a job");
+            JOptionPane.showMessageDialog(null, "You must select a job");
         }
         else if(applicants.get(index).getInterview() == null)
         {
@@ -731,15 +715,13 @@ public class StudentAccount extends javax.swing.JFrame {
         else
         {
             JOptionPane.showMessageDialog(null, "Feedback has not been created");
-        }
-        
+        }        
     }//GEN-LAST:event_viewFeedbackActionPerformed
 
     private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
         // TODO add your handling code here:
-       PrintWriter output = null ;
+        PrintWriter output = null ;
        
-   
         try 
         {	
             output = new PrintWriter(student.getName() +"'s Job List.txt");
@@ -811,9 +793,7 @@ public class StudentAccount extends javax.swing.JFrame {
             }
         });
     }
-    private File f;
-    private Student student;
-    private LinkedList <Application> applicants;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Update;
     private javax.swing.JButton apply;
@@ -858,4 +838,7 @@ public class StudentAccount extends javax.swing.JFrame {
     private javax.swing.JLabel ug;
     private javax.swing.JButton viewFeedback;
     // End of variables declaration//GEN-END:variables
+    private File f;
+    private Student student;
+    private LinkedList <Application> applicants;
 }
