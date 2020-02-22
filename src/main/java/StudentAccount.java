@@ -742,20 +742,20 @@ public class StudentAccount extends javax.swing.JFrame {
    
         try 
         {	
-            output = new PrintWriter("ExportedJobs.txt");
-            String header = String.format("%-8s%-30s%-30s%-15s%-20s%-20s%-50s", "JobID", "JobTitle", "Company", "Deadline","Status","Interview","Feedback");
+            output = new PrintWriter(student.getName() +"'s Job List.txt");
+            String header = String.format("%-8s%-40s%-40s%-40s%-40s%-40s%-50s", "JobID", "JobTitle", "Company", "Deadline","Status","Interview","Feedback");
             output.println(header);    
             
             for(int i=0; i<jTable2.getRowCount();i++)
             {
                 if(applicants.get(i)!=null && applicants.get(i).getInterview() !=null)
                 {
-                    String str = String.format("%-20s%-20s%-50s",applicants.get(i).getStatus(),applicants.get(i).getInterview().getDate(),applicants.get(i).getInterview().getFeedback());
+                    String str = String.format("%-40s%-40s%-50s",applicants.get(i).getStatus(),applicants.get(i).getInterview().getDate(),applicants.get(i).getInterview().getFeedback());
                     output.println(applicants.get(i).getJob().toString()+ str); 
                 } 
                 else
                 {
-                    String str = String.format("%-20s%-20s%-50s",applicants.get(i).getStatus(),"" ,"");
+                    String str = String.format("%-40s%-40s%-50s",applicants.get(i).getStatus(),"" ,"");
                     output.println(applicants.get(i).getJob().toString()+ str); 
                 }
             }
