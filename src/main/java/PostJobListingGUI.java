@@ -275,7 +275,9 @@ public class PostJobListingGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_typeActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        CompanyPageGUI cpg = new CompanyPageGUI(company);
+        cpg.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void titleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleActionPerformed
