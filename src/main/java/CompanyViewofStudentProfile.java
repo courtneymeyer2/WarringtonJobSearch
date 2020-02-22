@@ -57,6 +57,11 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
             underDegree.setText(((Graduate)student).getUndergradMajor());
             System.out.println(((Graduate)student).getUndergradMajor());
         }
+        
+        if(student instanceof iRecommend)
+        {
+            recom.setText(((iRecommend) student).getRecommendation());
+        }           
     }
 
     /**
@@ -97,6 +102,8 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
         gradUnderGpa = new javax.swing.JLabel();
         underDegree = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        recom = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -313,7 +320,7 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
                     .addComponent(gradGPA))
@@ -336,6 +343,12 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
             }
         });
 
+        recom.setColumns(20);
+        recom.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        recom.setRows(5);
+        recom.setBorder(null);
+        jScrollPane1.setViewportView(recom);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -349,11 +362,15 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
                         .addGap(321, 321, 321)
                         .addComponent(profileTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,7 +385,9 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(249, 249, 249))
+                .addGap(77, 77, 77)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -387,35 +406,34 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        CompanyJobGUI cjg;
+        try
+        {
+            cjg = new CompanyJobGUI(job, company);
+            cjg.setVisible(true);
+            this.dispose();
+        } catch (ParseException ex)
+        {
+            Logger.getLogger(CompanyViewofStudentProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_backButtonActionPerformed
+
     private void positionTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positionTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_positionTypeActionPerformed
 
     private void downloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadActionPerformed
 
-        try 
+        try
         {
             Desktop.getDesktop().open(student.getResume());
-        } catch (IOException ex) 
+        } catch (IOException ex)
         {
             Logger.getLogger(CompanyViewofStudentProfile.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_downloadActionPerformed
-
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        CompanyJobGUI cjg;
-        try 
-        {
-            cjg = new CompanyJobGUI(job, company);
-            cjg.setVisible(true);
-            this.dispose();
-        } catch (ParseException ex) 
-        {
-            Logger.getLogger(CompanyViewofStudentProfile.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -474,10 +492,12 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel major;
     private javax.swing.JLabel name;
     private javax.swing.JComboBox<String> positionType;
     private javax.swing.JLabel profileTitle;
+    private javax.swing.JTextArea recom;
     private javax.swing.JLabel resume;
     private javax.swing.JLabel ufID;
     private javax.swing.JLabel underDegree;

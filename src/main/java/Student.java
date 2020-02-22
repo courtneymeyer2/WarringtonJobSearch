@@ -9,13 +9,13 @@ import java.util.LinkedList;
  */
 public class Student implements Serializable{
     private int UFId;
-    private String stuName;
+    protected String stuName;
     private String stuEmail;
     private String major;
     private int graduatingYear;
     private String positionType;
     private File resume;
-    private double gpa;
+    protected double gpa;
     private String stuPassword;
     private LinkedList<Job> addedJobs = new LinkedList<Job>();
     

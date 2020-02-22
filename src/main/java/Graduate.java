@@ -5,7 +5,7 @@ import java.io.File;
  *
  * @author Liwen
  */
-public class Graduate extends Student {
+public class Graduate extends Student implements iRecommend{
    private String undergradmajor;
    private double undergradGPA;
    
@@ -20,4 +20,11 @@ public class Graduate extends Student {
    }
    
    public Graduate(){}
+   
+   public String getRecommendation(){
+        String str = "";
+        if((gpa >= 3.9)&&(undergradGPA >= 3.9))
+            str = stuName + " is a graduated student with GPA more than 3.9. We recommend " + stuName + " to you!";
+        return str;
+   }
 }

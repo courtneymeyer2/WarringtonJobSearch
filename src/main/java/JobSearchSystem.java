@@ -186,7 +186,7 @@ public class JobSearchSystem implements Serializable{
         }
         return false;
     }
-//    
+   
     public static boolean checkInterviewTimes(Job job, Interview interview) throws ParseException
     {
         String date;
@@ -347,8 +347,9 @@ public class JobSearchSystem implements Serializable{
             for (int i=0; i < allJobs.size(); i++)
             {
                 if (allJobs.get(i).getDegreeRequired().equals("Undergraduate") || allJobs.get(i).getDegreeRequired().equals("Both Undergraduate and Graduate"))
-                { jobs.add(allJobs.get(i));
-                System.out.println("works");
+                { 
+                    jobs.add(allJobs.get(i));
+                    System.out.println("works");
                 }
             }               
         } 
