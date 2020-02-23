@@ -59,6 +59,7 @@ public class Student implements Serializable{
     
     public String getJobIDs()
     {
+       // System.out.println("addedjobs" + addedJobs.size());
         if(addedJobs.size() == 0)
         {
             return "No jobs added";

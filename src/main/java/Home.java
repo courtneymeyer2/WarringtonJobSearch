@@ -352,6 +352,7 @@ public class Home extends javax.swing.JFrame {
                     if(cInfo.length == 11)
                     {
                         adds = cInfo[10].split(" ");
+                       // System.out.println("yesy" +adds.length);
                         for(int j =0; j < adds.length; j++)
                         {
                         Job jj = JobSearchSystem.getJobById(Integer.parseInt(adds[j]));
@@ -368,9 +369,9 @@ public class Home extends javax.swing.JFrame {
                     if(cInfo.length == 13)
                     {
                         adds = cInfo[12].split(" ");
-                        System.out.println(adds.length);
                         for(int j =0; j < adds.length; j++)
                         {
+                           // System.out.println(j+ " " +adds[j]);
                             Job jj = JobSearchSystem.getJobById(Integer.parseInt(adds[j]));
                             g.addJob(jj);
                         }

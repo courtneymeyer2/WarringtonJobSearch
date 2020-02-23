@@ -31,7 +31,7 @@ public class CompanyPageGUI extends javax.swing.JFrame {
        this.company = company;
        jobListLabel.setText(company.getCompanyName() + "'s Job List");
        jobs = company.getJobs();
-       System.out.println(jobs.size());
+       //System.out.println(jobs.size());
        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
        
        for(int i = 0; i < jobs.size(); i++)
@@ -203,11 +203,11 @@ public class CompanyPageGUI extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
         int index = jTable1.getSelectedRow();
-        System.out.println(index);
+        //System.out.println(index);
         TableModel model2 = jTable1.getModel();
         int jobID = Integer.parseInt(model2.getValueAt(index,0).toString());
-        System.out.println("jobid" +jobID);
-        System.out.println("size"+jobs.size());
+        //System.out.println("jobid" +jobID);
+        //System.out.println("size"+jobs.size());
         for(int i = 0; i < jobs.size(); i++)
         {
             if(jobs.get(i).getJobID() == jobID)

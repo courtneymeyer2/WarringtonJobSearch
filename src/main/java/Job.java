@@ -33,7 +33,7 @@ public class Job implements Serializable{
     public String toString()
     {
         String company = JobSearchSystem.getCompanyByJob(this).getCompanyName();        
-        String str = String.format("%-8d%-30s%-30s%-30s", jobID, jobTitle, company, deadline);
+        String str = String.format("%-8d%-34s%-30s%-30s", jobID, jobTitle, company, deadline);
         return str;
     }
     
@@ -150,16 +150,16 @@ public class Job implements Serializable{
         Cal.set(Calendar.HOUR, localDateTime.getHour());
         Cal.set(Calendar.MINUTE, localDateTime.getMinute());
         Cal.set(Calendar.SECOND, localDateTime.getSecond());
-        System.out.println(Cal.getTime());
+        //System.out.println(Cal.getTime());
         Calendar cal2 = Calendar.getInstance();
-        System.out.println(LocalDateTime.now());
+        //System.out.println(LocalDateTime.now());
         Calendar calendar = Calendar.getInstance();
         calendar.clear();
         calendar.set(localDateTime.getYear(), localDateTime.getMonthValue()-1, localDateTime.getDayOfMonth()+1, localDateTime.getHour(), localDateTime.getMinute(), localDateTime.getSecond());
 
         if(Cal.getTime().equals(calendar.getTime()))
         {
-            System.out.println("test");
+           // System.out.println("test");
             return true;
         }
         

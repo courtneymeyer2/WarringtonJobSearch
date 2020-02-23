@@ -47,7 +47,7 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         {
             try
             {
-                System.out.println("status" +applicants.get(i).getStatus());
+               // System.out.println("status" +applicants.get(i).getStatus());
                 model.addRow(new Object[]{"" +applicants.get(i).getStudent().getName(), "" +applicants.get(i).getStatus(), "" +applicants.get(i).getInterview().getDate(), "" + applicants.get(i).getInterview().getFeedback()});
             }
             catch(NullPointerException e)
@@ -490,8 +490,8 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         }
         else
         {
-            System.out.println("num of interviews" +numOfInterviews);
-            System.out.println("already made" +alreadyMadeInterviews);
+            //System.out.println("num of interviews" +numOfInterviews);
+            //System.out.println("already made" +alreadyMadeInterviews);
 
             CreateInterviewTimesGUI citg = new CreateInterviewTimesGUI(company, job, numOfInterviews);
             citg.setVisible(true);

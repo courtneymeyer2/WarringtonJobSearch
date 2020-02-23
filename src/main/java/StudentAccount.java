@@ -741,7 +741,7 @@ public class StudentAccount extends javax.swing.JFrame {
         try 
         {	
             output = new PrintWriter(student.getName() +"'s Job List.txt");
-            String header = String.format("%-8s%-30s%-30s%-30s%-30s%-30s%-30s", "JobID", "JobTitle", "Company", "Deadline","Status","Interview","Feedback");
+            String header = String.format("%-8s%-34s%-30s%-30s%-30s%-30s%-30s", "JobID", "JobTitle", "Company", "Deadline","Status","Interview","Feedback");
             output.println(header);    
             
             for(int i=0; i<jTable2.getRowCount();i++)

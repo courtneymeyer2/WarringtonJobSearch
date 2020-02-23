@@ -294,7 +294,7 @@ public class PostJobListingGUI extends javax.swing.JFrame {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Integer.parseInt(year.getSelectedItem().toString()), (month.getSelectedIndex()), Integer.parseInt(day.getSelectedItem().toString()));
         DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
-        System.out.print(dateFormat2.format(calendar.getTime())); // will print like 2014-02-20 
+       // System.out.print(dateFormat2.format(calendar.getTime())); // will print like 2014-02-20 
         String date = dateFormat2.format(calendar.getTime());
 
         String degreeType = degreetype.getSelectedItem().toString();

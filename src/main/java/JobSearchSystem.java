@@ -216,7 +216,7 @@ public class JobSearchSystem implements Serializable{
                       
             if(interviewCal.before(cal) && interviewCal2.after(cal))
             {
-                System.out.println("1");
+               // System.out.println("1");
                 return false;         
             } 
             else if(interviewCal.after(cal) && interviewCal.before(cal2))
@@ -252,7 +252,7 @@ public class JobSearchSystem implements Serializable{
                     Cal.set(Calendar.HOUR, localDateTime.getHour());
                     Cal.set(Calendar.MINUTE, localDateTime.getMinute());
                     Cal.set(Calendar.SECOND, localDateTime.getSecond());
-                    System.out.println(Cal.getTime());
+                  //  System.out.println(Cal.getTime());
                     
               if(interviewCal.before(Cal))
             {
@@ -337,7 +337,7 @@ public class JobSearchSystem implements Serializable{
    
      public static LinkedList <Job> filterJobs(String jobTitle, String companyName, String location, String positionType, Student student)
     {
-        System.out.println(jobTitle+ companyName+ location+ positionType);
+        //System.out.println(jobTitle+ companyName+ location+ positionType);
         LinkedList<Job> j = new LinkedList<>();
         LinkedList<Job> allJobs = getAllJobs();
         LinkedList<Job> jobs = new LinkedList<>();
@@ -349,7 +349,7 @@ public class JobSearchSystem implements Serializable{
                 if (allJobs.get(i).getDegreeRequired().equals("Undergraduate") || allJobs.get(i).getDegreeRequired().equals("Both Undergraduate and Graduate"))
                 { 
                     jobs.add(allJobs.get(i));
-                    System.out.println("works");
+                   // System.out.println("works");
                 }
             }               
         } 
@@ -371,7 +371,7 @@ public class JobSearchSystem implements Serializable{
             if(b1 && b2 && b3 && b4)
             {
                 j.add(jobs.get(i));
-                System.out.println(i);
+                //System.out.println(i);
             }
             
         }

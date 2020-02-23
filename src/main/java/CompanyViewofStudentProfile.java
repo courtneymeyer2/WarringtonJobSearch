@@ -55,7 +55,7 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
             gradGPA.setText(((Graduate)student).getGPA()+"");
             gradUnderGpa.setText(((Graduate)student).getUndergradGPA()+"");
             underDegree.setText(((Graduate)student).getUndergradMajor());
-            System.out.println(((Graduate)student).getUndergradMajor());
+            //System.out.println(((Graduate)student).getUndergradMajor());
         }
         
         if(student instanceof iRecommend)

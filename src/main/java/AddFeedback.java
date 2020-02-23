@@ -230,7 +230,7 @@ public class AddFeedback extends javax.swing.JFrame {
             else
             {
                 applicant.setStatus(status.getSelectedItem().toString());
-                System.out.println(status.getSelectedItem().toString());
+                //System.out.println(status.getSelectedItem().toString());
                 JOptionPane.showMessageDialog(null, "Status Changed");
                 CompanyJobGUI cjg;
                 try 
@@ -246,9 +246,9 @@ public class AddFeedback extends javax.swing.JFrame {
         }
         else
         {
-            System.out.println("testing");
+            //System.out.println("testing");
             applicant.setStatus(status.getSelectedItem().toString());
-            System.out.println(status.getSelectedItem().toString());
+           // System.out.println(status.getSelectedItem().toString());
             JOptionPane.showMessageDialog(null, "Status Changed");
             CompanyJobGUI cjg;
             try 
