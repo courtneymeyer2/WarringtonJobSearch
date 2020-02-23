@@ -454,7 +454,11 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         }
         else if(applicants.get(index).getStatus().equals("Offer") ||applicants.get(index).getStatus().equals("Rejected"))
         {
+<<<<<<< HEAD
             AddFeedback af = new AddFeedback(applicants.get(index), company, job,0);
+=======
+            AddFeedback af = new AddFeedback(applicants.get(index), company, job, 0);
+>>>>>>> 6c695613bba072ef796a837128de154507d47999
             af.setVisible(true);
             this.dispose();
         }

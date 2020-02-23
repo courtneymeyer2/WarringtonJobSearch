@@ -32,13 +32,14 @@ public class AddFeedback extends javax.swing.JFrame {
         this.job = job;
         name.setText(applicant.getStudent().getName());
         status.setSelectedIndex(JobSearchSystem.statusIndex(applicant));
-         try
+        try
            {
             feedback.setText(applicant.getInterview().getFeedback());
            }
-         catch(NullPointerException e)
-         {
+        catch(NullPointerException e)
+        {
              feedback.setText("");
+<<<<<<< HEAD
          }
          if (index == 1)
 
@@ -46,6 +47,12 @@ public class AddFeedback extends javax.swing.JFrame {
 
         if (index == 0)
 
+=======
+        }
+        if (index == 1)
+            add.setEnabled(false);
+        if (index == 0)
+>>>>>>> 6c695613bba072ef796a837128de154507d47999
             selectButton.setEnabled(false);
     }
  
@@ -348,4 +355,5 @@ public class AddFeedback extends javax.swing.JFrame {
     private Job job;
     private Application applicant;
     private Company company;
+    private int index;
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /Users/joshualee/Desktop/77/WarringtonJobSearch/src/main/java/Application.java
 /Users/joshualee/Desktop/77/WarringtonJobSearch/src/main/java/CreateInterviewTimesGUI.java
 /Users/joshualee/Desktop/77/WarringtonJobSearch/src/main/java/Student.java
@@ -21,3 +22,28 @@
 /Users/joshualee/Desktop/77/WarringtonJobSearch/src/main/java/JobSearchSystem.java
 /Users/joshualee/Desktop/77/WarringtonJobSearch/src/main/java/Graduate.java
 /Users/joshualee/Desktop/77/WarringtonJobSearch/src/main/java/Report.java
+=======
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\RegisterNewCompany.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\Student.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\StudentJobGUI.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\AddFeedback.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\CompanyViewofStudentProfile.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\CreateInterviewTimesGUI.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\CompanyPageGUI.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\Application.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\RegisterStudent.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\Interview.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\Undergraduate.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\Company.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\JobSearchSystem.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\CompanyJobGUI.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\Report.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\Graduate.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\Job.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\PostJobListingGUI.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\StudentAccount.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\StudentSearchJobGUI.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\Home.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\iRecommend.java
+C:\Users\Leewy\OneDrive\Desktop\WarringtonJobSearchSystem\WarringtonJobSearch\src\main\java\SelectInterviewTimeGUI.java
+>>>>>>> 6c695613bba072ef796a837128de154507d47999

@@ -110,7 +110,7 @@ public class PostJobListingGUI extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         jLabel8.setText("Position Type");
 
-        type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Full-time", "Internship", " ", " " }));
+        type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Full-time", "Internship" }));
         type.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 typeActionPerformed(evt);
