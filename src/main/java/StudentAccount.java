@@ -716,13 +716,9 @@ public class StudentAccount extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"An interview has not been created" );
 
         }
-<<<<<<< HEAD
 
         else if(!(applicants.get(index).getInterview().getFeedback().equals("")) &&(applicants.get(index).getStatus().equals("Offer") ||applicants.get(index).getStatus().equals("Rejected")) )
 
-=======
-        else if(!(applicants.get(index).getInterview().getFeedback().equals("")) &&(applicants.get(index).getStatus().equals("Offer") ||applicants.get(index).getStatus().equals("Rejected")) )
->>>>>>> 6c695613bba072ef796a837128de154507d47999
         {
 
             JOptionPane.showMessageDialog(null,applicants.get(index).getInterview().getFeedback());

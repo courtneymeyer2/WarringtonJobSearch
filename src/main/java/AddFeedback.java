@@ -22,6 +22,7 @@ public class AddFeedback extends javax.swing.JFrame {
      * Creates new form AddFeedback
      */
     public AddFeedback() {
+        
         initComponents();
     }
 
@@ -39,22 +40,21 @@ public class AddFeedback extends javax.swing.JFrame {
         catch(NullPointerException e)
         {
              feedback.setText("");
-<<<<<<< HEAD
+
          }
          if (index == 1)
 
             add.setEnabled(false);
 
         if (index == 0)
+          selectButton.setEnabled(false);
 
-=======
         }
-        if (index == 1)
-            add.setEnabled(false);
-        if (index == 0)
->>>>>>> 6c695613bba072ef796a837128de154507d47999
-            selectButton.setEnabled(false);
-    }
+     
+     
+
+           
+ 
  
 
     /**
@@ -357,3 +357,4 @@ public class AddFeedback extends javax.swing.JFrame {
     private Company company;
     private int index;
 }
+
