@@ -424,7 +424,7 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         else
         {
             Student student = applicants.get(index).getStudent();
-            AddFeedback af = new AddFeedback(applicants.get(index), company, job);
+            AddFeedback af = new AddFeedback(applicants.get(index), company, job, 1);
             af.setVisible(true);
             this.dispose();
         }
@@ -454,7 +454,7 @@ public class CompanyJobGUI extends javax.swing.JFrame {
         }
         else if(applicants.get(index).getStatus().equals("Offer") ||applicants.get(index).getStatus().equals("Rejected"))
         {
-            AddFeedback af = new AddFeedback(applicants.get(index), company, job);
+            AddFeedback af = new AddFeedback(applicants.get(index), company, job, 0);
             af.setVisible(true);
             this.dispose();
         }

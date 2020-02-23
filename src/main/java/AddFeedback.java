@@ -25,21 +25,25 @@ public class AddFeedback extends javax.swing.JFrame {
         initComponents();
     }
 
-    public AddFeedback(Application applicant, Company company, Job job) {
+    public AddFeedback(Application applicant, Company company, Job job, int index) {
         this();
         this.applicant = applicant;
         this.company = company;
         this.job = job;
         name.setText(applicant.getStudent().getName());
         status.setSelectedIndex(JobSearchSystem.statusIndex(applicant));
-         try
+        try
            {
             feedback.setText(applicant.getInterview().getFeedback());
            }
-         catch(NullPointerException e)
-         {
+        catch(NullPointerException e)
+        {
              feedback.setText("");
-         }
+        }
+        if (index == 1)
+            add.setEnabled(false);
+        if (index == 0)
+            selectButton.setEnabled(false);
     }
  
 
@@ -341,4 +345,5 @@ public class AddFeedback extends javax.swing.JFrame {
     private Job job;
     private Application applicant;
     private Company company;
+    private int index;
 }
