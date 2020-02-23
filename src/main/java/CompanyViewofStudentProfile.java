@@ -343,6 +343,7 @@ public class CompanyViewofStudentProfile extends javax.swing.JFrame {
             }
         });
 
+        recom.setEditable(false);
         recom.setColumns(20);
         recom.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
         recom.setRows(5);
