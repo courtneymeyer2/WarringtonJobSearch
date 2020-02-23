@@ -700,22 +700,38 @@ public class StudentAccount extends javax.swing.JFrame {
 
     private void viewFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewFeedbackActionPerformed
         int index = jTable2.getSelectedRow();
+
         if(index == -1)
+
         {
+
             JOptionPane.showMessageDialog(null, "You must select a job");
+
         }
+
         else if(applicants.get(index).getInterview() == null)
+
         {
+
             JOptionPane.showMessageDialog(null,"An interview has not been created" );
+
         }
-        else if(applicants.get(index).getStatus().equals("Offer") ||applicants.get(index).getStatus().equals("Rejected") )
+
+        else if(!(applicants.get(index).getInterview().getFeedback().equals("")) &&(applicants.get(index).getStatus().equals("Offer") ||applicants.get(index).getStatus().equals("Rejected")) )
+
         {
+
             JOptionPane.showMessageDialog(null,applicants.get(index).getInterview().getFeedback());
+
         }
+
         else
+
         {
+
             JOptionPane.showMessageDialog(null, "Feedback has not been created");
-        }        
+
+        }      
     }//GEN-LAST:event_viewFeedbackActionPerformed
 
     private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed

@@ -1,2 +1,2 @@
 U,31958810,Courtney Meyer,courtneymeyer62@gmail.com,Information Systems,2020,Internship,Courtney Meyer Resume January 2020.pdf,3.8,testPassword5
-G,31958811,Joshua Lee,joshualee@gmail.com,Finance,2020,Full-Time,Resume July 2018.docx,3.5,testPassword5,Information Systems,3.7,1 2
+G,31958811,Joshua Lee,joshualee@gmail.com,Finance,2020,Full-Time,Resume July 2018.docx,3.9,testPassword5,Information Systems,3.9,1 2

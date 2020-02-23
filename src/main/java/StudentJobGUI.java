@@ -153,6 +153,7 @@ public class StudentJobGUI extends javax.swing.JFrame {
         location1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         location1.setText("Description:");
 
+        Description.setEditable(false);
         Description.setColumns(20);
         Description.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         Description.setLineWrap(true);
@@ -163,6 +164,7 @@ public class StudentJobGUI extends javax.swing.JFrame {
         location2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         location2.setText("Qualifications:");
 
+        Qualifications.setEditable(false);
         Qualifications.setColumns(20);
         Qualifications.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         Qualifications.setLineWrap(true);
@@ -173,6 +175,7 @@ public class StudentJobGUI extends javax.swing.JFrame {
         location3.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         location3.setText("Requirements:");
 
+        Requirements.setEditable(false);
         Requirements.setColumns(20);
         Requirements.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 11)); // NOI18N
         Requirements.setLineWrap(true);
@@ -261,8 +264,7 @@ public class StudentJobGUI extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(location1)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(27, 27, 27)
                 .addComponent(degree)
                 .addGap(18, 18, 18)
@@ -277,7 +279,7 @@ public class StudentJobGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(location3))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

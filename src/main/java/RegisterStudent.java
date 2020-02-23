@@ -444,6 +444,9 @@ public class RegisterStudent extends javax.swing.JFrame {
         catch(NullPointerException ex){
             JOptionPane.showMessageDialog(null, "Incomplete information!");
         }
+        catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Incomplete information!");
+        }
     }//GEN-LAST:event_registerButtonActionPerformed
 
     private void gradundergraddegreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gradundergraddegreeActionPerformed

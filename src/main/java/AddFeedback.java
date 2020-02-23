@@ -25,7 +25,7 @@ public class AddFeedback extends javax.swing.JFrame {
         initComponents();
     }
 
-    public AddFeedback(Application applicant, Company company, Job job) {
+    public AddFeedback(Application applicant, Company company, Job job, int index) {
         this();
         this.applicant = applicant;
         this.company = company;
@@ -40,6 +40,13 @@ public class AddFeedback extends javax.swing.JFrame {
          {
              feedback.setText("");
          }
+         if (index == 1)
+
+            add.setEnabled(false);
+
+        if (index == 0)
+
+            selectButton.setEnabled(false);
     }
  
 
